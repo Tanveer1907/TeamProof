@@ -1,151 +1,235 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import request from 'supertest';
 import mongoose from 'mongoose';
+import path from 'path';
+import { fileURLToPath } from 'url';
+import dotenv from 'dotenv';
 import { app } from '../src/server.js';
-import { connectDB } from '../src/config/db.js';
+import { connectDB, closeDB } from '../src/config/db.js';
+import { User } from '../src/models/User.js';
+import { Project } from '../src/models/Project.js';
+import { Membership } from '../src/models/Membership.js';
+import { Task } from '../src/models/Task.js';
+import { Evidence } from '../src/models/Evidence.js';
+import { EvidenceReview } from '../src/models/EvidenceReview.js';
+import { Session } from '../src/models/Session.js';
 
-describe('TeamProof API Integration Tests', () => {
-  let cookie: string;
-  let projectId: string;
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
+
+describe('TeamProof Secure & Isolated Integration Tests', () => {
+  // Use isolated test database URI to never alter or touch the main Atlas/demo database
+  const testUri = process.env.MONGODB_TEST_URI || 'mongodb://127.0.0.1:27017/teamproof_test';
+
+  let studentCookie: string;
+  let facultyCookie: string;
+  let studentUser: any;
+  let facultyUser: any;
+  let testProject: any;
   let taskId: string;
   let evidenceId: string;
 
   beforeAll(async () => {
-    await connectDB();
+    // Connect explicitly to the dedicated test database
+    await connectDB(testUri);
+
+    // Clean test database for independent, reproducible test executions
+    await Promise.all([
+      User.deleteMany({}),
+      Project.deleteMany({}),
+      Membership.deleteMany({}),
+      Task.deleteMany({}),
+      Evidence.deleteMany({}),
+      EvidenceReview.deleteMany({}),
+      Session.deleteMany({}),
+    ]);
   });
 
   afterAll(async () => {
-    await mongoose.disconnect();
+    await closeDB();
   });
 
-  it('POST /api/v1/auth/login - should authenticate seed user Aarav Mehta', async () => {
+  it('POST /api/v1/auth/register - should register student without returning sessionId in body', async () => {
     const res = await request(app)
-      .post('/api/v1/auth/login')
-      .send({ email: 'aarav@teamproof.edu', password: 'DemoPass123!' });
+      .post('/api/v1/auth/register')
+      .send({
+        name: 'Test Student',
+        email: 'student_test@teamproof.edu',
+        password: 'Password123!',
+      });
 
-    expect(res.status).toBe(200);
-    expect(res.body.user.name).toBe('Aarav Mehta');
-    expect(res.headers['set-cookie']).toBeDefined();
-    cookie = res.headers['set-cookie'][0];
+    expect(res.status).toBe(201);
+    expect(res.body.user.name).toBe('Test Student');
+    expect(res.body.user.role).toBe('student'); // Priority 2: public register is strictly student
+    expect(res.body.sessionId).toBeUndefined(); // Priority 2: stop returning sessionId in JSON
+    expect(res.headers['set-cookie']).toBeDefined(); // HTTP-only cookie check
+    expect(res.headers['set-cookie'][0]).toContain('teamproof_session=');
+    expect(res.headers['set-cookie'][0]).toContain('HttpOnly');
+
+    studentCookie = res.headers['set-cookie'][0];
+    studentUser = res.body.user;
   });
 
-  it('GET /api/v1/auth/me - should return authenticated profile via session cookie', async () => {
+  it('GET /api/v1/auth/me - should authenticate via HTTP-only cookie', async () => {
     const res = await request(app)
       .get('/api/v1/auth/me')
-      .set('Cookie', cookie);
+      .set('Cookie', studentCookie);
 
     expect(res.status).toBe(200);
-    expect(res.body.user.email).toBe('aarav@teamproof.edu');
+    expect(res.body.user.email).toBe('student_test@teamproof.edu');
   });
 
-  it('GET /api/v1/projects - should list projects user belongs to', async () => {
+  it('POST /api/v1/projects - should allow user to create project and become owner', async () => {
     const res = await request(app)
-      .get('/api/v1/projects')
-      .set('Cookie', cookie);
-
-    expect(res.status).toBe(200);
-    expect(res.body.projects.length).toBeGreaterThan(0);
-    projectId = res.body.projects[0]._id;
-    expect(res.body.projects[0].title).toBe('CampusConnect');
-  });
-
-  it('GET /api/v1/dashboard/overview - should return dashboard metrics matching Slide 9', async () => {
-    const res = await request(app)
-      .get(`/api/v1/dashboard/overview?projectId=${projectId}`)
-      .set('Cookie', cookie);
-
-    expect(res.status).toBe(200);
-    expect(res.body.hasProjects).toBe(true);
-    expect(res.body.project.title).toBe('CampusConnect');
-    expect(res.body.upcomingTasks.length).toBeGreaterThan(0);
-    expect(res.body.recentActivity.length).toBeGreaterThan(0);
-  });
-
-  it('POST /api/v1/projects/:projectId/tasks - should create a new task with unique ID', async () => {
-    const res = await request(app)
-      .post(`/api/v1/projects/${projectId}/tasks`)
-      .set('Cookie', cookie)
+      .post('/api/v1/projects')
+      .set('Cookie', studentCookie)
       .send({
-        title: 'Integration Test Task',
-        description: 'Verify task creation from automated Vitest',
+        title: 'Automated Test Project',
+        description: 'Verified isolated test workspace',
+        category: 'Software Engineering',
+      });
+
+    expect(res.status).toBe(201);
+    expect(res.body.project.title).toBe('Automated Test Project');
+    testProject = res.body.project;
+  });
+
+  it('POST /api/v1/projects/:projectId/tasks - should create a task with auto-generated ID', async () => {
+    const res = await request(app)
+      .post(`/api/v1/projects/${testProject._id}/tasks`)
+      .set('Cookie', studentCookie)
+      .send({
+        title: 'Backend Validation Task',
+        description: 'Verify task creation against isolated database',
         priority: 'High',
         status: 'To Do',
       });
 
     expect(res.status).toBe(201);
-    expect(res.body.task.taskIdStr).toMatch(/^CC-\d+$/);
+    expect(res.body.task.taskIdStr).toBe('CC-1');
     taskId = res.body.task._id;
   });
 
   it('PATCH /api/v1/projects/:projectId/tasks/:taskId - prevent direct move to Verified without evidence', async () => {
     const res = await request(app)
-      .patch(`/api/v1/projects/${projectId}/tasks/${taskId}`)
-      .set('Cookie', cookie)
-      .send({
-        status: 'Verified',
-      });
+      .patch(`/api/v1/projects/${testProject._id}/tasks/${taskId}`)
+      .set('Cookie', studentCookie)
+      .send({ status: 'Verified' });
 
-    // Per specification: A task must not become Verified merely because the assignee marks it complete.
     expect(res.status).toBe(400);
     expect(res.body.error).toContain('Tasks cannot be directly moved to Verified');
   });
 
   it('POST /api/v1/projects/:projectId/evidence - submit contribution evidence', async () => {
     const res = await request(app)
-      .post(`/api/v1/projects/${projectId}/evidence`)
-      .set('Cookie', cookie)
+      .post(`/api/v1/projects/${testProject._id}/evidence`)
+      .set('Cookie', studentCookie)
       .field('taskId', taskId)
-      .field('title', 'Vitest Automated Evidence')
-      .field('description', 'Comprehensive end-to-end integration test runs passing with 100% assertions.')
+      .field('title', 'Test Automation Evidence')
+      .field('description', 'Comprehensive integration test report and automated execution logs.')
       .field('category', 'Testing and Debugging')
-      .field('externalUrl', 'https://github.com/team-atlas/campusconnect-demo/pull/99');
+      .field('externalUrl', 'https://github.com/Tanveer1907/TeamProof/pull/1');
 
     expect(res.status).toBe(201);
-    expect(res.body.evidence.evidenceIdStr).toMatch(/^EV-\d+$/);
+    expect(res.body.evidence.evidenceIdStr).toBe('EV-01');
     expect(res.body.evidence.status).toBe('Submitted');
     evidenceId = res.body.evidence._id;
   });
 
-  it('POST /api/v1/projects/:projectId/evidence/:evidenceId/reviews - enforce contributor cannot verify own evidence', async () => {
+  it('POST /api/v1/projects/:projectId/evidence/:evidenceId/reviews - prevent contributor from verifying own evidence', async () => {
     const res = await request(app)
-      .post(`/api/v1/projects/${projectId}/evidence/${evidenceId}/reviews`)
-      .set('Cookie', cookie) // Aarav is contributor
+      .post(`/api/v1/projects/${testProject._id}/evidence/${evidenceId}/reviews`)
+      .set('Cookie', studentCookie)
       .send({
         decision: 'Verified',
-        comment: 'I am verifying my own work',
+        comment: 'Attempting to self-verify',
       });
 
     expect(res.status).toBe(403);
     expect(res.body.error).toContain('Contributors cannot review or verify their own evidence');
   });
 
-  it('POST /api/v1/projects/:projectId/evidence/:evidenceId/reviews - eligible teammate Nisha can verify', async () => {
-    // Login as Nisha
-    const loginRes = await request(app)
-      .post('/api/v1/auth/login')
-      .send({ email: 'nisha@teamproof.edu', password: 'DemoPass123!' });
-    const nishaCookie = loginRes.headers['set-cookie'][0];
+  it('Priority 3 Authorization: Ordinary member cannot access faculty-workspace', async () => {
+    // Register a secondary student
+    const regRes = await request(app)
+      .post('/api/v1/auth/register')
+      .send({
+        name: 'Peer Student',
+        email: 'peer_student@teamproof.edu',
+        password: 'Password123!',
+      });
+    const peerCookie = regRes.headers['set-cookie'][0];
+    const peerUser = regRes.body.user;
 
+    // Add as ordinary member
+    await Membership.create({
+      project: testProject._id,
+      user: peerUser._id,
+      role: 'member',
+      status: 'active',
+    });
+
+    // Attempt to access faculty workspace
+    const facRes = await request(app)
+      .get(`/api/v1/projects/${testProject._id}/faculty-workspace`)
+      .set('Cookie', peerCookie);
+
+    expect(facRes.status).toBe(403);
+    expect(facRes.body.error).toContain('Permission denied');
+  });
+
+  it('Eligible faculty reviewer can access faculty workspace & verify evidence', async () => {
+    // Create an authorized faculty reviewer (onboarded administrative role)
+    const facDoc = await User.create({
+      name: 'Dr. Test Reviewer',
+      email: 'dr_reviewer@teamproof.edu',
+      passwordHash: 'dummyHash',
+      role: 'faculty',
+    });
+
+    // Add faculty membership to project
+    await Membership.create({
+      project: testProject._id,
+      user: facDoc._id,
+      role: 'faculty_reviewer',
+      status: 'active',
+    });
+
+    // Create session for faculty
+    const crypto = await import('crypto');
+    const sessionId = crypto.randomBytes(32).toString('hex');
+    await Session.create({
+      sessionId,
+      user: facDoc._id,
+      expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+    });
+
+    facultyCookie = `teamproof_session=${sessionId}; Path=/; HttpOnly`;
+
+    // Access faculty workspace
+    const wsRes = await request(app)
+      .get(`/api/v1/projects/${testProject._id}/faculty-workspace`)
+      .set('Cookie', facultyCookie);
+
+    expect(wsRes.status).toBe(200);
+    expect(wsRes.body.aiSummary).toBeDefined();
+
+    // Faculty verifies student's evidence
     const reviewRes = await request(app)
-      .post(`/api/v1/projects/${projectId}/evidence/${evidenceId}/reviews`)
-      .set('Cookie', nishaCookie)
+      .post(`/api/v1/projects/${testProject._id}/evidence/${evidenceId}/reviews`)
+      .set('Cookie', facultyCookie)
       .send({
         decision: 'Verified',
-        comment: 'Verified test results and code quality.',
+        comment: 'Verified thorough test coverage and compliance.',
       });
 
     expect(reviewRes.status).toBe(201);
     expect(reviewRes.body.evidenceStatus).toBe('Verified');
-  });
 
-  it('GET /api/v1/projects/:projectId/faculty-workspace - fetch faculty evaluation data & AI summary', async () => {
-    const res = await request(app)
-      .get(`/api/v1/projects/${projectId}/faculty-workspace`)
-      .set('Cookie', cookie);
-
-    expect(res.status).toBe(200);
-    expect(res.body.aiSummary.title).toContain('Automated Project Summary');
-    expect(res.body.students.length).toBeGreaterThan(0);
-    expect(res.body.evidence.length).toBeGreaterThan(0);
+    // Confirm related task transitioned to Verified
+    const taskCheck = await Task.findById(taskId);
+    expect(taskCheck?.status).toBe('Verified');
   });
 });

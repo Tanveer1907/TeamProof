@@ -87,5 +87,10 @@ projectRouter.get('/:projectId/activity', requireAuth, requireProjectMember(), l
 projectRouter.get('/:projectId/github/activity', requireAuth, requireProjectMember(), listGitHubActivity);
 projectRouter.get('/:projectId/github/status', requireAuth, requireProjectMember(), getGitHubStatus);
 
-// Faculty Workspace
-projectRouter.get('/:projectId/faculty-workspace', requireAuth, requireProjectMember(['owner', 'faculty_reviewer', 'member']), getFacultyWorkspace);
+// Faculty Workspace: Strictly restricted to 'faculty_reviewer' and 'owner'. Ordinary members cannot access.
+projectRouter.get(
+  '/:projectId/faculty-workspace',
+  requireAuth,
+  requireProjectMember(['faculty_reviewer', 'owner']),
+  getFacultyWorkspace
+);

@@ -6,6 +6,8 @@ import { Session } from '../models/Session.js';
 import { registerSchema, loginSchema } from '../validators/schemas.js';
 import { AuthenticatedRequest } from '../middleware/auth.js';
 
+const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
 export async function register(req: AuthenticatedRequest, res: Response): Promise<void> {
   try {
     const parse = registerSchema.safeParse(req.body);
@@ -14,7 +16,7 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
       return;
     }
 
-    const { name, email, password, role } = parse.data;
+    const { name, email, password } = parse.data;
 
     const existing = await User.findOne({ email });
     if (existing) {
@@ -23,17 +25,18 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
     }
 
     const passwordHash = await argon2.hash(password);
+    // Public registrations are strictly created as 'student' to prevent privilege escalation
     const user = await User.create({
       name,
       email,
       passwordHash,
-      role,
+      role: 'student',
       avatar: name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase(),
     });
 
     // Create session
     const sessionId = crypto.randomBytes(32).toString('hex');
-    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000); // 7 days
+    const expiresAt = new Date(Date.now() + SESSION_TTL_MS);
 
     await Session.create({
       sessionId,
@@ -41,11 +44,13 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
       expiresAt,
     });
 
+    // Set secure HTTP-only cookie; never return sessionId in response body
     res.cookie('teamproof_session', sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       expires: expiresAt,
+      path: '/',
     });
 
     res.status(201).json({
@@ -57,7 +62,6 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
         role: user.role,
         avatar: user.avatar,
       },
-      sessionId,
     });
   } catch (err: any) {
     console.error('Register error:', err);
@@ -87,8 +91,9 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
       return;
     }
 
+    // Invalidate prior sessions for security hygiene if desired, or issue new session
     const sessionId = crypto.randomBytes(32).toString('hex');
-    const expiresAt = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000);
+    const expiresAt = new Date(Date.now() + SESSION_TTL_MS);
 
     await Session.create({
       sessionId,
@@ -96,11 +101,13 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
       expiresAt,
     });
 
+    // Set secure HTTP-only cookie; never return sessionId in response body
     res.cookie('teamproof_session', sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'lax',
       expires: expiresAt,
+      path: '/',
     });
 
     res.json({
@@ -112,7 +119,6 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
         role: user.role,
         avatar: user.avatar,
       },
-      sessionId,
     });
   } catch (err) {
     console.error('Login error:', err);
@@ -122,11 +128,11 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
 
 export async function logout(req: AuthenticatedRequest, res: Response): Promise<void> {
   try {
-    const sessionId = req.sessionId || req.cookies?.teamproof_session;
+    const sessionId = req.cookies?.teamproof_session;
     if (sessionId) {
       await Session.deleteOne({ sessionId });
     }
-    res.clearCookie('teamproof_session');
+    res.clearCookie('teamproof_session', { path: '/' });
     res.json({ message: 'Logged out successfully' });
   } catch (err) {
     res.status(500).json({ error: 'Failed to log out' });

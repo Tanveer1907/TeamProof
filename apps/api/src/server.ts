@@ -10,10 +10,12 @@ import { projectRouter } from './routes/projectRoutes.js';
 import { getDashboardOverview } from './controllers/dashboardController.js';
 import { requireAuth } from './middleware/auth.js';
 
-dotenv.config();
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
+
+// Standardized monorepo dotenv loading: root .env prioritized, fallback to local apps/api/.env
+dotenv.config({ path: path.resolve(__dirname, '../../../.env') });
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 
 const app = express();
 const PORT = process.env.PORT || 5001;
@@ -52,7 +54,7 @@ app.get('/api/v1/dashboard/overview', requireAuth, getDashboardOverview);
 
 // Error handling middleware
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
-  console.error('[API Error]:', err);
+  console.error('[API Error]:', err?.message || err);
   const status = err.status || 500;
   res.status(status).json({ error: err.message || 'Internal Server Error' });
 });

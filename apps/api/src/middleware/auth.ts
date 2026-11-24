@@ -9,9 +9,13 @@ export interface AuthenticatedRequest extends Request {
   projectMembership?: any;
 }
 
+/**
+ * Enforces authentication strictly based on secure HTTP-only cookies.
+ * Removed legacy header fallback to eliminate token theft vectors.
+ */
 export async function requireAuth(req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> {
   try {
-    const sessionId = req.cookies?.teamproof_session || req.headers['x-session-id'];
+    const sessionId = req.cookies?.teamproof_session;
     if (!sessionId) {
       res.status(401).json({ error: 'Authentication required. Please log in.' });
       return;
@@ -20,7 +24,7 @@ export async function requireAuth(req: AuthenticatedRequest, res: Response, next
     const session = await Session.findOne({ sessionId });
     if (!session || session.expiresAt < new Date()) {
       if (session) await Session.deleteOne({ _id: session._id });
-      res.clearCookie('teamproof_session');
+      res.clearCookie('teamproof_session', { path: '/' });
       res.status(401).json({ error: 'Session expired or invalid. Please log in again.' });
       return;
     }
@@ -32,7 +36,7 @@ export async function requireAuth(req: AuthenticatedRequest, res: Response, next
     }
 
     req.user = user;
-    req.sessionId = sessionId as string;
+    req.sessionId = sessionId;
     next();
   } catch (err) {
     console.error('requireAuth error:', err);
@@ -40,6 +44,9 @@ export async function requireAuth(req: AuthenticatedRequest, res: Response, next
   }
 }
 
+/**
+ * Enforces project-level authorization based on active project memberships and permitted roles.
+ */
 export function requireProjectMember(allowedRoles?: string[]) {
   return async (req: AuthenticatedRequest, res: Response, next: NextFunction): Promise<void> => {
     try {

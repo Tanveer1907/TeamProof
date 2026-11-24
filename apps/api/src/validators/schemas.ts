@@ -1,10 +1,11 @@
 import { z } from 'zod';
 
+// Public registration: strictly restricted to 'student'.
+// Privileged roles ('project_owner', 'faculty') can only be granted via authorized administrative onboarding.
 export const registerSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
   email: z.string().email('Invalid email address'),
   password: z.string().min(6, 'Password must be at least 6 characters'),
-  role: z.enum(['student', 'project_owner', 'faculty']).default('student'),
 });
 
 export const loginSchema = z.object({

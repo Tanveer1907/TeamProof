@@ -9,13 +9,16 @@ build/
 out/
 .vite/
 
-# Environment files
+# Environment files - strictly ignore all actual secret files
 .env
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env.example
+.env*.local
+.env.development
+.env.test
+.env.production
+apps/*/.env
+
+# Explicitly ensure .env.example is tracked
+!.env.example
 
 # Logs
 npm-debug.log*
