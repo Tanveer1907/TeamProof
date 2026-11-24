@@ -13,6 +13,22 @@ export interface IUser {
 
 export type ProjectRole = 'owner' | 'member' | 'faculty_reviewer';
 
+export interface IGitHubConnection {
+  installationId?: number;
+  repositoryId?: number;
+  owner?: string;
+  name?: string;
+  fullName?: string;
+  htmlUrl?: string;
+  defaultBranch?: string;
+  connectedAt?: string;
+}
+
+export interface IContributorMapping {
+  githubUsername: string;
+  user: IUser | string;
+}
+
 export interface IProject {
   _id: string;
   title: string;
@@ -22,6 +38,8 @@ export interface IProject {
   startDate?: string;
   endDate?: string;
   status: 'active' | 'completed' | 'archived';
+  githubConnection?: IGitHubConnection;
+  githubContributorMappings?: IContributorMapping[];
   createdAt: string;
   updatedAt: string;
 }
@@ -116,12 +134,20 @@ export interface IActivity {
 export interface IGitHubActivity {
   _id: string;
   project: string;
-  contributor: IUser;
+  contributor?: IUser;
+  githubUsername?: string;
+  githubAuthorName?: string;
+  githubAuthorAvatar?: string;
   activityType: 'pull_request' | 'commit' | 'issue';
   title: string;
+  description?: string;
   repository: string;
+  externalId?: string;
   externalUrl?: string;
   refNumber?: string; // e.g. PR #18, Commit a4f8c12
+  branch?: string;
+  state?: string;
+  deliveryId?: string;
   relatedTask?: ITask;
   relatedEvidence?: IEvidence;
   occurredAt: string;

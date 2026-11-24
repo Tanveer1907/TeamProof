@@ -8,6 +8,7 @@ import { connectDB } from './config/db.js';
 import { authRouter } from './routes/authRoutes.js';
 import { projectRouter } from './routes/projectRoutes.js';
 import { notificationRouter } from './routes/notificationRoutes.js';
+import { githubRouter } from './routes/githubRoutes.js';
 import { getDashboardOverview } from './controllers/dashboardController.js';
 import { requireAuth } from './middleware/auth.js';
 
@@ -36,8 +37,21 @@ app.use(
   })
 );
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(
+  express.json({
+    verify: (req: any, _res, buf) => {
+      req.rawBody = buf;
+    },
+  })
+);
+app.use(
+  express.urlencoded({
+    extended: true,
+    verify: (req: any, _res, buf) => {
+      req.rawBody = buf;
+    },
+  })
+);
 app.use(cookieParser());
 
 // Static uploads directory
@@ -52,6 +66,7 @@ app.get('/api/health', (req, res) => {
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/projects', projectRouter);
 app.use('/api/v1/notifications', notificationRouter);
+app.use('/api/v1/github', githubRouter);
 app.get('/api/v1/dashboard/overview', requireAuth, getDashboardOverview);
 
 // Error handling middleware

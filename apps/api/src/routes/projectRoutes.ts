@@ -20,7 +20,15 @@ import {
   getPendingReviews,
 } from '../controllers/evidenceController.js';
 import { listActivities } from '../controllers/activityController.js';
-import { listGitHubActivity, getGitHubStatus } from '../controllers/githubController.js';
+import {
+  listGitHubActivity,
+  getGitHubStatus,
+  listAvailableRepositories,
+  connectRepository,
+  disconnectRepository,
+  mapContributor,
+  linkActivityToTaskOrEvidence,
+} from '../controllers/githubController.js';
 import { getFacultyWorkspace } from '../controllers/facultyController.js';
 
 const storage = multer.diskStorage({
@@ -84,8 +92,38 @@ projectRouter.get('/:projectId/reviews/pending', requireAuth, requireProjectMemb
 projectRouter.get('/:projectId/activity', requireAuth, requireProjectMember(), listActivities);
 
 // GitHub
-projectRouter.get('/:projectId/github/activity', requireAuth, requireProjectMember(), listGitHubActivity);
 projectRouter.get('/:projectId/github/status', requireAuth, requireProjectMember(), getGitHubStatus);
+projectRouter.get(
+  '/:projectId/github/repositories',
+  requireAuth,
+  requireProjectMember(['owner', 'faculty_reviewer']),
+  listAvailableRepositories
+);
+projectRouter.post(
+  '/:projectId/github/connect',
+  requireAuth,
+  requireProjectMember(['owner', 'faculty_reviewer']),
+  connectRepository
+);
+projectRouter.post(
+  '/:projectId/github/disconnect',
+  requireAuth,
+  requireProjectMember(['owner', 'faculty_reviewer']),
+  disconnectRepository
+);
+projectRouter.get('/:projectId/github/activity', requireAuth, requireProjectMember(), listGitHubActivity);
+projectRouter.post(
+  '/:projectId/github/map-contributor',
+  requireAuth,
+  requireProjectMember(['owner', 'faculty_reviewer']),
+  mapContributor
+);
+projectRouter.post(
+  '/:projectId/github/activities/:activityId/link',
+  requireAuth,
+  requireProjectMember(),
+  linkActivityToTaskOrEvidence
+);
 
 // Faculty Workspace: Strictly restricted to 'faculty_reviewer' and 'owner'. Ordinary members cannot access.
 projectRouter.get(
