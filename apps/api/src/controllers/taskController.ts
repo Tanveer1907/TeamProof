@@ -1,6 +1,7 @@
 import { Response } from 'express';
 import { Task } from '../models/Task.js';
 import { Activity } from '../models/Activity.js';
+import { Notification } from '../models/Notification.js';
 import { AuthenticatedRequest } from '../middleware/auth.js';
 import { createTaskSchema, updateTaskSchema } from '../validators/schemas.js';
 
@@ -62,6 +63,18 @@ export async function createTask(req: AuthenticatedRequest, res: Response): Prom
       description: `${req.user!.name} created task ${taskIdStr}: ${title}`,
       relatedTask: task._id,
     });
+
+    if (assignee && assignee !== req.user!._id.toString()) {
+      await Notification.create({
+        recipient: assignee,
+        title: `Task Assigned: ${taskIdStr}`,
+        description: `${req.user!.name} assigned task "${title}" to you.`,
+        type: 'task_assigned',
+        relatedProject: projectId,
+        relatedTask: task._id,
+        linkUrl: `/tasks`,
+      });
+    }
 
     res.status(201).json({ task: populatedTask });
   } catch (err) {

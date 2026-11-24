@@ -6,6 +6,7 @@ export interface IUserDoc extends Document {
   passwordHash: string;
   avatar?: string;
   role: 'student' | 'project_owner' | 'faculty';
+  bio?: string;
   emailVerified: boolean;
   createdAt: Date;
   updatedAt: Date;
@@ -18,6 +19,7 @@ const UserSchema = new Schema<IUserDoc>(
     passwordHash: { type: String, required: true },
     avatar: { type: String },
     role: { type: String, enum: ['student', 'project_owner', 'faculty'], default: 'student' },
+    bio: { type: String, default: '', trim: true, maxlength: 500 },
     emailVerified: { type: Boolean, default: true },
   },
   { timestamps: true }

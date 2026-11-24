@@ -3,7 +3,7 @@ import crypto from 'crypto';
 import argon2 from 'argon2';
 import { User } from '../models/User.js';
 import { Session } from '../models/Session.js';
-import { registerSchema, loginSchema } from '../validators/schemas.js';
+import { registerSchema, loginSchema, updateProfileSchema, changePasswordSchema } from '../validators/schemas.js';
 import { AuthenticatedRequest } from '../middleware/auth.js';
 
 const SESSION_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
@@ -34,7 +34,6 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
       avatar: name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase(),
     });
 
-    // Create session
     const sessionId = crypto.randomBytes(32).toString('hex');
     const expiresAt = new Date(Date.now() + SESSION_TTL_MS);
 
@@ -44,7 +43,6 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
       expiresAt,
     });
 
-    // Set secure HTTP-only cookie; never return sessionId in response body
     res.cookie('teamproof_session', sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -61,6 +59,7 @@ export async function register(req: AuthenticatedRequest, res: Response): Promis
         email: user.email,
         role: user.role,
         avatar: user.avatar,
+        bio: user.bio,
       },
     });
   } catch (err: any) {
@@ -91,7 +90,6 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
       return;
     }
 
-    // Invalidate prior sessions for security hygiene if desired, or issue new session
     const sessionId = crypto.randomBytes(32).toString('hex');
     const expiresAt = new Date(Date.now() + SESSION_TTL_MS);
 
@@ -101,7 +99,6 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
       expiresAt,
     });
 
-    // Set secure HTTP-only cookie; never return sessionId in response body
     res.cookie('teamproof_session', sessionId, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
@@ -118,6 +115,7 @@ export async function login(req: AuthenticatedRequest, res: Response): Promise<v
         email: user.email,
         role: user.role,
         avatar: user.avatar,
+        bio: user.bio,
       },
     });
   } catch (err) {
@@ -152,6 +150,87 @@ export async function me(req: AuthenticatedRequest, res: Response): Promise<void
       email: req.user.email,
       role: req.user.role,
       avatar: req.user.avatar,
+      bio: req.user.bio || '',
+      createdAt: req.user.createdAt,
     },
   });
+}
+
+export async function updateProfile(req: AuthenticatedRequest, res: Response): Promise<void> {
+  try {
+    if (!req.user) {
+      res.status(401).json({ error: 'Not authenticated' });
+      return;
+    }
+
+    const parse = updateProfileSchema.safeParse(req.body);
+    if (!parse.success) {
+      res.status(400).json({ error: parse.error.errors[0].message });
+      return;
+    }
+
+    const { name, bio } = parse.data;
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      res.status(404).json({ error: 'User not found' });
+      return;
+    }
+
+    user.name = name;
+    if (bio !== undefined) user.bio = bio;
+    user.avatar = name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+
+    await user.save();
+
+    res.json({
+      message: 'Profile updated successfully',
+      user: {
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        avatar: user.avatar,
+        bio: user.bio,
+      },
+    });
+  } catch (err) {
+    console.error('updateProfile error:', err);
+    res.status(500).json({ error: 'Failed to update profile' });
+  }
+}
+
+export async function changePassword(req: AuthenticatedRequest, res: Response): Promise<void> {
+  try {
+    if (!req.user) {
+      res.status(401).json({ error: 'Not authenticated' });
+      return;
+    }
+
+    const parse = changePasswordSchema.safeParse(req.body);
+    if (!parse.success) {
+      res.status(400).json({ error: parse.error.errors[0].message });
+      return;
+    }
+
+    const { currentPassword, newPassword } = parse.data;
+    const user = await User.findById(req.user._id);
+    if (!user) {
+      res.status(404).json({ error: 'User not found' });
+      return;
+    }
+
+    const validCurrent = await argon2.verify(user.passwordHash, currentPassword);
+    if (!validCurrent) {
+      res.status(400).json({ error: 'Incorrect current password' });
+      return;
+    }
+
+    user.passwordHash = await argon2.hash(newPassword);
+    await user.save();
+
+    res.json({ message: 'Password changed successfully' });
+  } catch (err) {
+    console.error('changePassword error:', err);
+    res.status(500).json({ error: 'Failed to change password' });
+  }
 }

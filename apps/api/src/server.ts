@@ -7,6 +7,7 @@ import dotenv from 'dotenv';
 import { connectDB } from './config/db.js';
 import { authRouter } from './routes/authRoutes.js';
 import { projectRouter } from './routes/projectRoutes.js';
+import { notificationRouter } from './routes/notificationRoutes.js';
 import { getDashboardOverview } from './controllers/dashboardController.js';
 import { requireAuth } from './middleware/auth.js';
 
@@ -50,6 +51,7 @@ app.get('/api/health', (req, res) => {
 // API Routes
 app.use('/api/v1/auth', authRouter);
 app.use('/api/v1/projects', projectRouter);
+app.use('/api/v1/notifications', notificationRouter);
 app.get('/api/v1/dashboard/overview', requireAuth, getDashboardOverview);
 
 // Error handling middleware

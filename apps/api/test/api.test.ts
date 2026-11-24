@@ -232,4 +232,62 @@ describe('TeamProof Secure & Isolated Integration Tests', () => {
     const taskCheck = await Task.findById(taskId);
     expect(taskCheck?.status).toBe('Verified');
   });
+
+  it('PATCH /api/v1/auth/profile - should update user name and bio', async () => {
+    const res = await request(app)
+      .patch('/api/v1/auth/profile')
+      .set('Cookie', studentCookie)
+      .send({
+        name: 'Aarav Updated',
+        bio: 'CS Student specializing in backend distributed systems.',
+      });
+
+    expect(res.status).toBe(200);
+    expect(res.body.user.name).toBe('Aarav Updated');
+    expect(res.body.user.bio).toBe('CS Student specializing in backend distributed systems.');
+  });
+
+  it('POST /api/v1/auth/change-password - should reject invalid current password and accept valid password', async () => {
+    // 1. Invalid current password
+    const failRes = await request(app)
+      .post('/api/v1/auth/change-password')
+      .set('Cookie', studentCookie)
+      .send({
+        currentPassword: 'WrongPassword!',
+        newPassword: 'NewPassword123!',
+      });
+
+    expect(failRes.status).toBe(400);
+    expect(failRes.body.error).toContain('Incorrect current password');
+
+    // 2. Valid current password
+    const okRes = await request(app)
+      .post('/api/v1/auth/change-password')
+      .set('Cookie', studentCookie)
+      .send({
+        currentPassword: 'Password123!',
+        newPassword: 'NewPassword123!',
+      });
+
+    expect(okRes.status).toBe(200);
+    expect(okRes.body.message).toContain('Password changed successfully');
+  });
+
+  it('GET /api/v1/notifications - should retrieve notifications and allow marking as read', async () => {
+    // 1. Fetch notifications
+    const listRes = await request(app)
+      .get('/api/v1/notifications')
+      .set('Cookie', studentCookie);
+
+    expect(listRes.status).toBe(200);
+    expect(Array.isArray(listRes.body.notifications)).toBe(true);
+
+    // 2. Mark all as read
+    const markAllRes = await request(app)
+      .patch('/api/v1/notifications/read-all')
+      .set('Cookie', studentCookie);
+
+    expect(markAllRes.status).toBe(200);
+    expect(markAllRes.body.message).toContain('All notifications marked as read');
+  });
 });

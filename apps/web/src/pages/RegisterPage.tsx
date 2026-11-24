@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, Link } from 'react-router-dom';
 import { ShieldCheck, AlertCircle, ArrowRight } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
+import { ThemeToggle } from '../components/ThemeToggle';
 
 export const RegisterPage: React.FC = () => {
   const { register } = useAuth();
@@ -10,7 +11,6 @@ export const RegisterPage: React.FC = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [role, setRole] = useState('student');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -20,7 +20,7 @@ export const RegisterPage: React.FC = () => {
     setLoading(true);
 
     try {
-      await register(name, email, password, role);
+      await register(name, email, password);
       navigate('/dashboard');
     } catch (err: any) {
       setError(err.message || 'Registration failed');
@@ -30,76 +30,78 @@ export const RegisterPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F8FC] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#F7F8FC] dark:bg-[#0E1117] flex flex-col justify-center py-12 sm:px-6 lg:px-8 transition-colors relative">
+      {/* Top Bar with Home link and Theme switch */}
+      <div className="absolute top-6 left-6 right-6 flex items-center justify-between max-w-5xl mx-auto">
+        <Link to="/" className="flex items-center gap-2 text-xs font-semibold text-[#62677A] dark:text-[#8E94A5] hover:text-[#7654DC] dark:hover:text-[#9B7DFF] transition">
+          <ShieldCheck className="w-5 h-5 text-[#7654DC]" />
+          <span>Back to Home</span>
+        </Link>
+        <ThemeToggle />
+      </div>
+
       <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <div className="w-12 h-12 rounded-2xl bg-[#7654DC] mx-auto flex items-center justify-center text-white shadow-md">
-          <ShieldCheck className="w-7 h-7" />
-        </div>
-        <h2 className="mt-4 text-2xl font-bold tracking-tight text-[#242438]">
+        <Link to="/" className="inline-block">
+          <div className="w-12 h-12 rounded-2xl bg-[#7654DC] mx-auto flex items-center justify-center text-white shadow-md">
+            <ShieldCheck className="w-7 h-7" />
+          </div>
+        </Link>
+        <h2 className="mt-4 text-2xl font-bold tracking-tight text-[#242438] dark:text-[#F0F6FC]">
           Register for TeamProof
         </h2>
-        <p className="mt-1 text-xs text-[#62677A]">
-          Join your university project team and record evidence
+        <p className="mt-1 text-xs text-[#62677A] dark:text-[#8E94A5]">
+          Join your academic team workspace and record verified evidence
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white py-8 px-6 shadow-sm border border-[#E1E4EC] rounded-2xl sm:px-10">
+        <div className="bg-white dark:bg-[#161B22] py-8 px-6 shadow-sm border border-[#E1E4EC] dark:border-[#30363D] rounded-2xl sm:px-10 transition-colors">
           {error && (
-            <div className="mb-4 p-3 rounded-lg bg-red-50 text-[#D94B4B] text-xs flex items-center gap-2">
+            <div className="mb-4 p-3 rounded-lg bg-red-50 dark:bg-red-950/30 text-[#D94B4B] text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{error}</span>
             </div>
           )}
 
-          <form className="space-y-4" onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-[#242438] mb-1">Full Name</label>
+              <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Full Name</label>
               <input
                 type="text"
                 required
-                placeholder="e.g. Tanveer Singh"
+                placeholder="e.g. Aarav Mehta"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] focus:outline-none focus:border-[#7654DC]"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#242438] mb-1">University Email</label>
+              <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">University Email</label>
               <input
                 type="email"
                 required
-                placeholder="tanveer@chitkara.edu.in"
+                placeholder="student@university.edu"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] focus:outline-none focus:border-[#7654DC]"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#242438] mb-1">Password</label>
+              <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Password</label>
               <input
                 type="password"
                 required
                 placeholder="At least 6 characters"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] focus:outline-none focus:border-[#7654DC]"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
               />
             </div>
 
-            <div>
-              <label className="block text-xs font-semibold text-[#242438] mb-1">Academic Role</label>
-              <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] focus:outline-none focus:border-[#7654DC] bg-white text-[#242438]"
-              >
-                <option value="student">Student / Team Contributor</option>
-                <option value="project_owner">Student Project Owner</option>
-                <option value="faculty">Faculty Member / Reviewer</option>
-              </select>
+            <div className="p-3 bg-[#F7F8FC] dark:bg-[#21262D] rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-[11px] text-[#62677A] dark:text-[#8E94A5]">
+              New registrations join as Student Contributors. Faculty reviewers are provisioned through institution onboarding.
             </div>
 
             <button
@@ -112,9 +114,9 @@ export const RegisterPage: React.FC = () => {
             </button>
           </form>
 
-          <div className="mt-5 text-center text-xs text-[#62677A]">
+          <div className="mt-5 text-center text-xs text-[#62677A] dark:text-[#8E94A5]">
             Already have an account?{' '}
-            <NavLink to="/login" className="font-semibold text-[#7654DC] hover:underline">
+            <NavLink to="/login" className="font-semibold text-[#7654DC] dark:text-[#9B7DFF] hover:underline">
               Sign in
             </NavLink>
           </div>
@@ -123,3 +125,4 @@ export const RegisterPage: React.FC = () => {
     </div>
   );
 };
+export default RegisterPage;

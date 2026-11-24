@@ -3,6 +3,7 @@ import { Evidence } from '../models/Evidence.js';
 import { EvidenceReview } from '../models/EvidenceReview.js';
 import { Task } from '../models/Task.js';
 import { Activity } from '../models/Activity.js';
+import { Notification } from '../models/Notification.js';
 import { AuthenticatedRequest } from '../middleware/auth.js';
 import { createEvidenceSchema, createReviewSchema } from '../validators/schemas.js';
 
@@ -94,6 +95,19 @@ export async function createEvidence(req: AuthenticatedRequest, res: Response): 
       relatedTask: taskId || undefined,
     });
 
+    if (requestedReviewerId && requestedReviewerId !== req.user!._id.toString()) {
+      await Notification.create({
+        recipient: requestedReviewerId,
+        title: `Review Requested: ${evidenceIdStr}`,
+        description: `${req.user!.name} requested your review on evidence "${title}".`,
+        type: 'review_request',
+        relatedProject: projectId,
+        relatedEvidence: evidence._id,
+        relatedTask: taskId || undefined,
+        linkUrl: `/evidence`,
+      });
+    }
+
     const populated = await Evidence.findById(evidence._id)
       .populate('contributor', 'name email avatar role')
       .populate('task', 'taskIdStr title status')
@@ -176,6 +190,18 @@ export async function reviewEvidence(req: AuthenticatedRequest, res: Response): 
       description: `${req.user!.name} ${decision === 'Verified' ? 'verified' : 'requested changes on'} evidence ${evidence.evidenceIdStr}.`,
       relatedEvidence: evidence._id,
       relatedTask: evidence.task,
+    });
+
+    // Notify the contributor about the review verdict
+    await Notification.create({
+      recipient: evidence.contributor,
+      title: decision === 'Verified' ? `Evidence Verified: ${evidence.evidenceIdStr}` : `Changes Requested: ${evidence.evidenceIdStr}`,
+      description: `${req.user!.name} marked your submission as ${decision}: "${comment}".`,
+      type: decision === 'Verified' ? 'evidence_verified' : 'evidence_changes_requested',
+      relatedProject: projectId,
+      relatedEvidence: evidence._id,
+      relatedTask: evidence.task,
+      linkUrl: `/evidence`,
     });
 
     const populatedReview = await EvidenceReview.findById(review._id).populate('reviewer', 'name email avatar role');

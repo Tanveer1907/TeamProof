@@ -6,6 +6,7 @@ export interface IUser {
   email: string;
   avatar?: string;
   role: UserRole;
+  bio?: string;
   emailVerified: boolean;
   createdAt: string;
 }
@@ -125,4 +126,30 @@ export interface IGitHubActivity {
   relatedEvidence?: IEvidence;
   occurredAt: string;
   isDemoData: boolean;
+}
+
+export type NotificationType =
+  | 'task_assigned'
+  | 'task_due_soon'
+  | 'task_overdue'
+  | 'evidence_submitted'
+  | 'evidence_verified'
+  | 'evidence_changes_requested'
+  | 'review_request'
+  | 'milestone_approaching'
+  | 'project_update';
+
+export interface INotification {
+  _id: string;
+  recipient: string;
+  title: string;
+  description: string;
+  type: NotificationType;
+  relatedProject?: string;
+  relatedTask?: string;
+  relatedEvidence?: string;
+  read: boolean;
+  linkUrl?: string;
+  createdAt: string;
+  updatedAt: string;
 }

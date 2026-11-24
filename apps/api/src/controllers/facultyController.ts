@@ -59,7 +59,7 @@ export async function getFacultyWorkspace(req: AuthenticatedRequest, res: Respon
       project,
       evaluationTitle: 'Evaluation 1 • Project review',
       course: 'Back End Engineering-II',
-      teamName: 'Team Atlas',
+      teamName: project.title || 'Project Team',
       students,
       evidence: evidenceList,
       tasks,
