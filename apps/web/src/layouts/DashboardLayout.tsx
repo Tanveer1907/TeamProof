@@ -48,7 +48,7 @@ export const DashboardLayout: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen flex bg-[#F7F8FC]">
+    <div className="h-screen flex bg-[#F7F8FC] overflow-hidden">
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
         <div
@@ -57,10 +57,10 @@ export const DashboardLayout: React.FC = () => {
         />
       )}
 
-      {/* LEFT SIDEBAR (Matching CE-1 Slides) */}
+      {/* LEFT SIDEBAR (Fixed in viewport, fully visible without scrolling) */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-[#E1E4EC] flex flex-col justify-between transition-transform duration-200 lg:static lg:translate-x-0 ${
-          mobileMenuOpen ? 'translate-x-0' : '-translate-x-0 -translate-x-full lg:translate-x-0'
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white border-r border-[#E1E4EC] flex flex-col justify-between shrink-0 h-full transition-transform duration-200 lg:static lg:translate-x-0 ${
+          mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         <div>
@@ -138,10 +138,10 @@ export const DashboardLayout: React.FC = () => {
         </div>
       </aside>
 
-      {/* MAIN CONTENT AREA */}
-      <div className="flex-1 flex flex-col min-w-0">
+      {/* MAIN CONTENT AREA (Independently scrolls) */}
+      <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         {/* Top Navbar */}
-        <header className="h-16 bg-white border-b border-[#E1E4EC] px-6 flex items-center justify-between sticky top-0 z-30">
+        <header className="h-16 bg-white border-b border-[#E1E4EC] px-6 flex items-center justify-between shrink-0 z-30">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -178,9 +178,11 @@ export const DashboardLayout: React.FC = () => {
           </div>
         </header>
 
-        {/* Page Content View */}
-        <main className="flex-1 p-6 md:p-8 max-w-7xl w-full mx-auto">
-          <Outlet />
+        {/* Page Content View - Scrollable */}
+        <main className="flex-1 overflow-y-auto p-6 md:p-8">
+          <div className="max-w-7xl w-full mx-auto">
+            <Outlet />
+          </div>
         </main>
       </div>
     </div>
