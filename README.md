@@ -32,8 +32,8 @@ The user interface matches the proposed designs from the **TeamProof CE-1 Presen
 
 ## 3. Technology Stack
 
-- **Frontend:** React 18, TypeScript, Vite, Tailwind CSS, TanStack Query, React Hook Form, Zod, Axios, Lucide React icons.
-- **Backend:** Node.js, Express.js (ES Modules), TypeScript, Argon2id password hashing, HTTP-only secure cookie sessions, Multer file uploads, Zod schema validation.
+- **Frontend:** React 18, JavaScript (ES6+), JSX, Vite, Tailwind CSS, TanStack Query, React Hook Form, Zod, Axios, Lucide React icons.
+- **Backend:** Node.js (v22), Express.js (ES Modules), JavaScript, Argon2id password hashing, HTTP-only secure cookie sessions, Multer file uploads, Zod schema validation.
 - **Database:** MongoDB, Mongoose 8 with strict schemas and cross-document relational references.
 - **Testing:** Vitest & Supertest integration test suite (100% passing).
 
@@ -53,7 +53,7 @@ cd TeamProof
 # Install all workspace dependencies
 npm install
 
-# Build shared types and applications
+# Build shared package and applications
 npm run build
 ```
 

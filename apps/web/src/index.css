@@ -2,13 +2,69 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --color-primary: #15966A;
+  --color-primary-hover: #117A55;
+  --color-primary-active: #0D6848;
+  --color-primary-dark: #153B2D;
+  --color-primary-light: #D8F0E3;
+  --color-primary-subtle: #EAF6EE;
+  --color-accent-gold: #D69E36;
+
+  --color-bg: #F7FAF8;
+  --color-surface: #FFFFFF;
+  --color-surface-secondary: #F2F8F4;
+  --color-surface-tertiary: #EAF2EC;
+
+  --color-text-primary: #172B21;
+  --color-text-secondary: #52665A;
+  --color-text-muted: #84948A;
+
+  --color-border: #DFE9E1;
+  --color-border-strong: #C6D6CA;
+
+  --color-success: #15966A;
+  --color-warning: #D69E36;
+  --color-danger: #DC5555;
+  --color-info: #3985CF;
+}
+
+.dark {
+  --color-primary: #35B982;
+  --color-primary-hover: #4AC993;
+  --color-primary-active: #249B6A;
+  --color-primary-dark: #B4EBD0;
+  --color-primary-light: #214B36;
+  --color-primary-subtle: #1B3829;
+  --color-accent-gold: #E7B95D;
+
+  --color-bg: #101A15;
+  --color-surface: #17251D;
+  --color-surface-secondary: #1E3025;
+  --color-surface-tertiary: #263B2E;
+
+  --color-text-primary: #E8F3EB;
+  --color-text-secondary: #B0C4B5;
+  --color-text-muted: #849A8B;
+
+  --color-border: #2D4234;
+  --color-border-strong: #425C49;
+
+  --color-success: #35B982;
+  --color-warning: #E7B95D;
+  --color-danger: #F07878;
+  --color-info: #71B2EC;
+}
+
 body {
   margin: 0;
   font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--color-bg);
+  color: var(--color-text-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* Custom scrollbars for SaaS polish */
+/* Custom scrollbars with Emerald brand tint */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -17,9 +73,12 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(142, 148, 165, 0.4);
+  background: rgba(132, 148, 138, 0.4);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(118, 84, 220, 0.6);
+  background: rgba(21, 150, 106, 0.6);
+}
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(53, 185, 130, 0.6);
 }
