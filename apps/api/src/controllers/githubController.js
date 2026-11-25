@@ -11,6 +11,7 @@ import {
   listInstallationRepositories,
   verifyWebhookSignature,
   findMappedContributor,
+  syncRepositoryActivities,
 } from '../services/githubService.js';
 
 /**
@@ -203,6 +204,14 @@ export async function connectRepository(req, res) {
 
     await project.save();
 
+    // Trigger initial sync to fetch existing commits and pull requests
+    let syncResult = { syncedCommits: 0, syncedPRs: 0 };
+    try {
+      syncResult = await syncRepositoryActivities(project);
+    } catch (syncErr) {
+      console.warn('Initial repository sync warning:', syncErr?.message || syncErr);
+    }
+
     await Activity.create({
       project: project._id,
       user: req.user?._id,
@@ -212,12 +221,42 @@ export async function connectRepository(req, res) {
 
     res.json({
       success: true,
-      message: `Repository ${fullName} connected successfully.`,
+      message: `Repository ${fullName} connected successfully. Synced ${syncResult.syncedCommits} commits and ${syncResult.syncedPRs} pull requests.`,
       connection: project.githubConnection,
+      synced: syncResult,
     });
   } catch (err) {
     console.error('Error in connectRepository:', err);
     res.status(500).json({ error: err.message || 'Failed to connect GitHub repository.' });
+  }
+}
+
+/**
+ * Synchronizes repository commits and pull requests on demand.
+ */
+export async function syncRepository(req, res) {
+  try {
+    const { projectId } = req.params;
+    const project = await Project.findById(projectId);
+    if (!project) {
+      res.status(404).json({ error: 'Project not found.' });
+      return;
+    }
+
+    if (!project.githubConnection?.fullName) {
+      res.status(400).json({ error: 'No GitHub repository connected to this project.' });
+      return;
+    }
+
+    const result = await syncRepositoryActivities(project);
+    res.json({
+      success: true,
+      message: `Synchronized ${result.syncedCommits} commits and ${result.syncedPRs} pull requests.`,
+      ...result,
+    });
+  } catch (err) {
+    console.error('Error in syncRepository:', err);
+    res.status(500).json({ error: err.message || 'Failed to sync repository.' });
   }
 }
 

@@ -169,3 +169,141 @@ export async function findMappedContributor(project, githubUsername, githubEmail
 
   return undefined;
 }
+
+/**
+ * Synchronizes genuine commits and pull requests from GitHub into TeamProof.
+ */
+export async function syncRepositoryActivities(project) {
+  const installationId = project.githubConnection?.installationId;
+  const fullName = project.githubConnection?.fullName;
+  if (!installationId || !fullName) {
+    return { syncedCommits: 0, syncedPRs: 0 };
+  }
+
+  const token = await getInstallationAccessToken(installationId);
+  const [owner, name] = fullName.split('/');
+  const { GitHubActivity } = await import('../models/GitHubActivity.js');
+
+  // 1. Fetch recent commits from GitHub
+  let syncedCommits = 0;
+  try {
+    const commitsRes = await fetch(
+      `https://api.github.com/repos/${owner}/${name}/commits?per_page=30`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'TeamProof-Platform',
+        },
+      }
+    );
+    if (commitsRes.ok) {
+      const commits = await commitsRes.json();
+      for (const commit of commits) {
+        const commitSha = commit.sha;
+        const authorLogin = commit.author?.login;
+        const authorEmail = commit.commit?.author?.email;
+        const authorName = commit.commit?.author?.name;
+        const message = commit.commit?.message;
+
+        const contributorId = await findMappedContributor(project, authorLogin, authorEmail);
+
+        await GitHubActivity.findOneAndUpdate(
+          {
+            project: project._id,
+            activityType: 'commit',
+            externalId: commitSha,
+          },
+          {
+            $setOnInsert: {
+              project: project._id,
+              activityType: 'commit',
+              externalId: commitSha,
+              repository: fullName,
+              occurredAt: new Date(commit.commit?.author?.date || Date.now()),
+              isDemoData: false,
+            },
+            $set: {
+              title: (message || 'No commit message').split('\n')[0],
+              description: message,
+              refNumber: commitSha.substring(0, 7),
+              externalUrl: commit.html_url,
+              branch: project.githubConnection?.defaultBranch || 'main',
+              githubUsername: authorLogin ? authorLogin.toLowerCase() : undefined,
+              githubAuthorName: authorName,
+              githubAuthorEmail: authorEmail,
+              githubAuthorAvatar: commit.author?.avatar_url,
+              ...(contributorId ? { contributor: contributorId } : {}),
+            },
+          },
+          { upsert: true, new: true }
+        );
+        syncedCommits++;
+      }
+    }
+  } catch (err) {
+    console.error('Error syncing commits from GitHub:', err);
+  }
+
+  // 2. Fetch recent pull requests from GitHub
+  let syncedPRs = 0;
+  try {
+    const pullsRes = await fetch(
+      `https://api.github.com/repos/${owner}/${name}/pulls?state=all&per_page=30`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          Accept: 'application/vnd.github+json',
+          'User-Agent': 'TeamProof-Platform',
+        },
+      }
+    );
+    if (pullsRes.ok) {
+      const pulls = await pullsRes.json();
+      for (const pr of pulls) {
+        const prNumber = String(pr.number);
+        const authorLogin = pr.user?.login;
+        const contributorId = await findMappedContributor(project, authorLogin);
+        const state = pr.merged_at ? 'merged' : pr.state;
+
+        await GitHubActivity.findOneAndUpdate(
+          {
+            project: project._id,
+            activityType: 'pull_request',
+            externalId: prNumber,
+          },
+          {
+            $setOnInsert: {
+              project: project._id,
+              activityType: 'pull_request',
+              externalId: prNumber,
+              repository: fullName,
+              isDemoData: false,
+            },
+            $set: {
+              title: pr.title || `Pull Request #${prNumber}`,
+              description: pr.body || '',
+              refNumber: `#${prNumber}`,
+              externalUrl: pr.html_url,
+              branch: pr.head?.ref,
+              state,
+              occurredAt: new Date(pr.updated_at || pr.created_at || Date.now()),
+              githubUsername: authorLogin ? authorLogin.toLowerCase() : undefined,
+              githubAuthorAvatar: pr.user?.avatar_url,
+              ...(contributorId ? { contributor: contributorId } : {}),
+            },
+          },
+          { upsert: true, new: true }
+        );
+        syncedPRs++;
+      }
+    }
+  } catch (err) {
+    console.error('Error syncing pull requests from GitHub:', err);
+  }
+
+  // Clear mock seed records so feed strictly shows genuine repository activity
+  await GitHubActivity.deleteMany({ project: project._id, isDemoData: true });
+
+  return { syncedCommits, syncedPRs };
+}

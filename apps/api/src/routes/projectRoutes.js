@@ -26,6 +26,7 @@ import {
   listAvailableRepositories,
   connectRepository,
   disconnectRepository,
+  syncRepository,
   mapContributor,
   linkActivityToTaskOrEvidence,
 } from '../controllers/githubController.js';
@@ -110,6 +111,12 @@ projectRouter.post(
   requireAuth,
   requireProjectMember(['owner', 'faculty_reviewer']),
   disconnectRepository
+);
+projectRouter.post(
+  '/:projectId/github/sync',
+  requireAuth,
+  requireProjectMember(),
+  syncRepository
 );
 projectRouter.get('/:projectId/github/activity', requireAuth, requireProjectMember(), listGitHubActivity);
 projectRouter.post(

@@ -70,6 +70,14 @@ export const GitHubActivityPage = () => {
         const cur = projRes.data.projects[0];
         setProject(cur);
 
+        if (isRefresh && cur.githubConnection?.fullName) {
+          try {
+            await api.post(`/projects/${cur._id}/github/sync`);
+          } catch {
+            // Ignore non-fatal sync failure on background refresh
+          }
+        }
+
         const [statusRes, actRes] = await Promise.all([
           api.get(`/projects/${cur._id}/github/status`),
           api.get(`/projects/${cur._id}/github/activity?type=${filterType}`),
