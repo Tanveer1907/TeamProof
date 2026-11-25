@@ -5,6 +5,7 @@
 
 ---
 
+
 ## 1. Project Overview
 
 **TeamProof** is an evidence-based academic project collaboration platform designed to eliminate ambiguous group-project marks. It provides student teams and faculty evaluators with a unified workspace connecting:
@@ -96,6 +97,7 @@ The following demonstration accounts are seeded and ready for immediate testing:
 *Quick login buttons are also available directly on the login page for fast switching.*
 
 ---
+
 
 ## 6. Verification and Test Results
 
