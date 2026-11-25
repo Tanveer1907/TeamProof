@@ -58,19 +58,31 @@ export const updateTaskSchema = z.object({
   milestone: z.string().nullable().optional(),
 });
 
+const CATEGORY_MAP = {
+  'Testing & Quality Assurance': 'Testing and Debugging',
+  'System Design & Architecture': 'Research and Planning',
+  'Research & Documentation': 'Documentation',
+  'Data Engineering & Database': 'Code Development',
+  'DevOps & Deployment': 'Deployment and Infrastructure',
+  'UI/UX Prototyping': 'UI/UX Design',
+};
+
 export const createEvidenceSchema = z.object({
   taskId: z.string().optional(),
   title: z.string().min(3, 'Evidence title is required'),
   description: z.string().min(10, 'Detailed contribution description is required'),
-  category: z.enum([
-    'Code Development',
-    'UI/UX Design',
-    'Testing and Debugging',
-    'Documentation',
-    'Research and Planning',
-    'Deployment and Infrastructure',
-    'Other Deliverables',
-  ]),
+  category: z.preprocess(
+    (val) => (typeof val === 'string' && CATEGORY_MAP[val] ? CATEGORY_MAP[val] : val),
+    z.enum([
+      'Code Development',
+      'UI/UX Design',
+      'Testing and Debugging',
+      'Documentation',
+      'Research and Planning',
+      'Deployment and Infrastructure',
+      'Other Deliverables',
+    ])
+  ),
   externalUrl: z.string().url('Must be a valid URL').optional().or(z.literal('')),
   requestedReviewerId: z.string().optional(),
 });

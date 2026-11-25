@@ -149,13 +149,13 @@ export const SubmitContributionPage = () => {
                   onChange={(e) => setCategory(e.target.value)}
                   className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
+                  <option value="Testing and Debugging">Testing and Debugging (QA)</option>
                   <option value="Code Development">Code Development</option>
-                  <option value="System Design & Architecture">System Design & Architecture</option>
-                  <option value="Research & Documentation">Research & Documentation</option>
-                  <option value="Testing & Quality Assurance">Testing & Quality Assurance</option>
-                  <option value="Data Engineering & Database">Data Engineering & Database</option>
-                  <option value="DevOps & Deployment">DevOps & Deployment</option>
-                  <option value="UI/UX Prototyping">UI/UX Prototyping</option>
+                  <option value="UI/UX Design">UI/UX Design</option>
+                  <option value="Documentation">Documentation</option>
+                  <option value="Research and Planning">Research and Planning</option>
+                  <option value="Deployment and Infrastructure">Deployment and Infrastructure</option>
+                  <option value="Other Deliverables">Other Deliverables</option>
                 </select>
               </div>
 
