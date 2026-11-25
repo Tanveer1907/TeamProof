@@ -11,11 +11,11 @@ export const ThemeToggle = ({ className = '' }) => {
       onClick={toggleTheme}
       aria-label="Toggle light and dark theme"
       title={isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode'}
-      className={`flex items-center gap-2 px-2.5 py-1.5 rounded-full hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition-colors cursor-pointer group shrink-0 ${className}`}
+      className={`flex items-center gap-2 px-2.5 py-1.5 rounded-full hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] transition-colors cursor-pointer group shrink-0 ${className}`}
     >
       <Sun
         className={`w-4 h-4 transition-colors shrink-0 ${
-          !isDark ? 'text-[#D69E36]' : 'text-[#84948A] dark:text-[#849A8B]'
+          !isDark ? 'text-[#D69E36]' : 'text-[#84948A] dark:text-[#858F8C]'
         }`}
       />
       <div
@@ -31,7 +31,7 @@ export const ThemeToggle = ({ className = '' }) => {
       </div>
       <Moon
         className={`w-4 h-4 transition-colors shrink-0 ${
-          isDark ? 'text-[#35B982]' : 'text-[#84948A] dark:text-[#849A8B]'
+          isDark ? 'text-[#35B982]' : 'text-[#84948A] dark:text-[#858F8C]'
         }`}
       />
     </button>

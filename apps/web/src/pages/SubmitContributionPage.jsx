@@ -92,15 +92,15 @@ export const SubmitContributionPage = () => {
     <div className="max-w-4xl mx-auto space-y-6">
       {/* Top Header */}
       <div>
-        <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#E8F3EB] tracking-tight">Submit a contribution</h1>
-        <p className="text-sm text-[#52665A] dark:text-[#B0C4B5] mt-0.5">
+        <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#F1F5F3] tracking-tight">Submit a contribution</h1>
+        <p className="text-sm text-[#52665A] dark:text-[#A5AFAB] mt-0.5">
           Record and submit tangible proof of your work for teammate verification and faculty grading.
         </p>
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Form Container (2 columns) */}
-        <div className="lg:col-span-2 bg-white dark:bg-[#17251D] p-6 rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm transition-colors">
+        <div className="lg:col-span-2 bg-white dark:bg-[#1B2022] p-6 rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-sm transition-colors">
           {error && (
             <div className="mb-4 p-3 rounded-lg bg-[#FDEDEC] dark:bg-[#DC5555]/20 text-[#DC5555] dark:text-[#F07878] text-xs flex items-center gap-2">
               <AlertCircle className="w-4 h-4 shrink-0" />
@@ -110,13 +110,13 @@ export const SubmitContributionPage = () => {
 
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
-              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">
+              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] mb-1">
                 Link to Task (Recommended)
               </label>
               <select
                 value={taskId}
                 onChange={(e) => setTaskId(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
               >
                 <option value="">Independent Contribution (No linked task)</option>
                 {tasks.map((t) => (
@@ -128,7 +128,7 @@ export const SubmitContributionPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">
+              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] mb-1">
                 Contribution Title *
               </label>
               <input
@@ -137,17 +137,17 @@ export const SubmitContributionPage = () => {
                 placeholder="e.g. Implemented registration form validation"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
               />
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
-                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">Category *</label>
+                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] mb-1">Category *</label>
                 <select
                   value={category}
                   onChange={(e) => setCategory(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
                   <option value="Code Development">Code Development</option>
                   <option value="System Design & Architecture">System Design & Architecture</option>
@@ -160,13 +160,13 @@ export const SubmitContributionPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">
+                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] mb-1">
                   Requested Teammate Reviewer
                 </label>
                 <select
                   value={requestedReviewerId}
                   onChange={(e) => setRequestedReviewerId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
                   <option value="">Any eligible teammate</option>
                   {eligibleReviewers.map((m) => (
@@ -179,7 +179,7 @@ export const SubmitContributionPage = () => {
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">
+              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] mb-1">
                 Detailed Explanation & Scope of Work *
               </label>
               <textarea
@@ -188,37 +188,37 @@ export const SubmitContributionPage = () => {
                 placeholder="Explain the problem solved, your architectural decisions, trade-offs, and what exactly you contributed..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">
+              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] mb-1">
                 External Artifact Link (GitHub PR, Figma, Doc, Deployment)
               </label>
               <div className="relative">
-                <LinkIcon className="w-4 h-4 text-[#84948A] dark:text-[#849A8B] absolute left-3 top-1/2 -translate-y-1/2" />
+                <LinkIcon className="w-4 h-4 text-[#84948A] dark:text-[#858F8C] absolute left-3 top-1/2 -translate-y-1/2" />
                 <input
                   type="url"
                   placeholder="https://github.com/... or https://figma.com/..."
                   value={externalUrl}
                   onChange={(e) => setExternalUrl(e.target.value)}
-                  className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                  className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 />
               </div>
             </div>
 
             {/* File Upload Zone */}
             <div>
-              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">
+              <label className="block text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] mb-1">
                 Attach Supporting Evidence File (Optional)
               </label>
-              <label className="border-2 border-dashed border-[#DFE9E1] dark:border-[#2D4234] rounded-xl p-5 flex flex-col items-center justify-center cursor-pointer hover:border-[#15966A] dark:hover:border-[#35B982] bg-[#F2F8F4] dark:bg-[#101A15] transition group">
-                <Upload className="w-6 h-6 text-[#84948A] dark:text-[#849A8B] group-hover:text-[#15966A] dark:group-hover:text-[#35B982] mb-2 transition-colors" />
-                <span className="text-xs font-medium text-[#172B21] dark:text-[#E8F3EB]">
+              <label className="border-2 border-dashed border-[#DFE9E1] dark:border-[#30383A] rounded-xl p-5 flex flex-col items-center justify-center cursor-pointer hover:border-[#15966A] dark:hover:border-[#35B982] bg-[#F2F8F4] dark:bg-[#111416] transition group">
+                <Upload className="w-6 h-6 text-[#84948A] dark:text-[#858F8C] group-hover:text-[#15966A] dark:group-hover:text-[#35B982] mb-2 transition-colors" />
+                <span className="text-xs font-medium text-[#172B21] dark:text-[#F1F5F3]">
                   {file ? file.name : 'Upload screenshot, PDF, diagram, or test log'}
                 </span>
-                <span className="text-[11px] text-[#52665A] dark:text-[#B0C4B5] mt-1">PNG, JPG, PDF up to 10MB</span>
+                <span className="text-[11px] text-[#52665A] dark:text-[#A5AFAB] mt-1">PNG, JPG, PDF up to 10MB</span>
                 <input
                   type="file"
                   onChange={(e) => setFile(e.target.files?.[0] || null)}
@@ -227,18 +227,18 @@ export const SubmitContributionPage = () => {
               </label>
             </div>
 
-            <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#DFE9E1] dark:border-[#2D4234]">
+            <div className="pt-4 flex items-center justify-end gap-3 border-t border-[#DFE9E1] dark:border-[#30383A]">
               <button
                 type="button"
                 onClick={() => navigate('/evidence')}
-                className="px-4 py-2 text-xs font-semibold text-[#52665A] dark:text-[#B0C4B5] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] rounded-lg transition"
+                className="px-4 py-2 text-xs font-semibold text-[#52665A] dark:text-[#A5AFAB] hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] rounded-lg transition"
               >
                 Cancel
               </button>
               <button
                 type="submit"
                 disabled={submitting}
-                className="px-5 py-2.5 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition"
+                className="px-5 py-2.5 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold shadow-sm transition"
               >
                 {submitting ? 'Submitting...' : 'Submit Evidence'}
               </button>
@@ -248,12 +248,12 @@ export const SubmitContributionPage = () => {
 
         {/* Side Guidance & Integrity Rules (1 column) */}
         <div className="space-y-5">
-          <div className="bg-white dark:bg-[#17251D] p-5 rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm space-y-3 transition-colors">
-            <div className="flex items-center gap-2 text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider">
+          <div className="bg-white dark:bg-[#1B2022] p-5 rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-sm space-y-3 transition-colors">
+            <div className="flex items-center gap-2 text-xs font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider">
               <ShieldCheck className="w-4 h-4 text-[#15966A] dark:text-[#35B982]" />
               <span>Academic Integrity Rules</span>
             </div>
-            <ul className="text-xs text-[#52665A] dark:text-[#B0C4B5] space-y-2">
+            <ul className="text-xs text-[#52665A] dark:text-[#A5AFAB] space-y-2">
               <li className="flex items-start gap-2">
                 <span className="text-[#15966A] dark:text-[#35B982] font-bold">✓</span>
                 <span>Contributors cannot verify their own submissions.</span>
@@ -269,9 +269,9 @@ export const SubmitContributionPage = () => {
             </ul>
           </div>
 
-          <div className="bg-[#EAF6EE] dark:bg-[#1B3829] p-5 rounded-xl border border-[#15966A]/20 dark:border-[#35B982]/30 text-xs text-[#172B21] dark:text-[#E8F3EB] space-y-2 transition-colors">
+          <div className="bg-[#EAF6EE] dark:bg-[#133827] p-5 rounded-xl border border-[#15966A]/20 dark:border-[#35B982]/30 text-xs text-[#172B21] dark:text-[#F1F5F3] space-y-2 transition-colors">
             <span className="font-bold text-[#15966A] dark:text-[#35B982] block">What makes strong evidence?</span>
-            <p className="text-[#52665A] dark:text-[#B0C4B5] leading-relaxed">
+            <p className="text-[#52665A] dark:text-[#A5AFAB] leading-relaxed">
               Include specific deliverables: commit hashes, pull requests, test reports, or design documents with written explanations of your reasoning.
             </p>
           </div>

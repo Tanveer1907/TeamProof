@@ -94,45 +94,45 @@ export const DashboardLayout = () => {
   };
 
   return (
-    <div className="h-screen flex bg-[#F7FAF8] dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] overflow-hidden transition-colors duration-150">
+    <div className="h-screen flex bg-[#F7FAF8] dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] overflow-hidden transition-colors duration-150">
       {/* Mobile Drawer Overlay */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 z-40 bg-black/40 lg:hidden backdrop-blur-sm"
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden backdrop-blur-sm"
           onClick={() => setMobileMenuOpen(false)}
         />
       )}
 
       {/* LEFT SIDEBAR (Fixed in viewport, fully visible without scrolling) */}
       <aside
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#17251D] border-r border-[#DFE9E1] dark:border-[#2D4234] flex flex-col justify-between shrink-0 h-full transition-transform duration-200 lg:static lg:translate-x-0 ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-white dark:bg-[#171C1E] border-r border-[#DFE9E1] dark:border-[#30383A] flex flex-col justify-between shrink-0 h-full transition-transform duration-200 lg:static lg:translate-x-0 ${
           mobileMenuOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         }`}
       >
         <div>
           {/* Logo & Project Switcher header */}
-          <div className="p-5 border-b border-[#DFE9E1] dark:border-[#2D4234]">
+          <div className="p-5 border-b border-[#DFE9E1] dark:border-[#30383A]">
             <Link
               to="/dashboard"
               className="flex items-center gap-2.5 group cursor-pointer"
               title="TeamProof Dashboard"
             >
-              <div className="w-8 h-8 rounded-lg bg-[#15966A] dark:bg-[#35B982] flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
+              <div className="w-8 h-8 rounded-lg bg-[#15966A] dark:bg-[#15966A] flex items-center justify-center text-white font-bold text-lg shadow-sm group-hover:scale-105 transition-transform">
                 <ShieldCheck className="w-5 h-5 text-white" />
               </div>
               <div>
-                <span className="font-bold text-lg text-[#172B21] dark:text-[#E8F3EB] tracking-tight">TeamProof</span>
-                <span className="block text-[11px] font-medium text-[#52665A] dark:text-[#849A8B] tracking-wider uppercase">Academic Assessment</span>
+                <span className="font-bold text-lg text-[#172B21] dark:text-[#F1F5F3] tracking-tight">TeamProof</span>
+                <span className="block text-[11px] font-medium text-[#52665A] dark:text-[#858F8C] tracking-wider uppercase">Academic Assessment</span>
               </div>
             </Link>
 
             {/* Project / Team Context Pill */}
-            <div className="mt-4 p-2.5 rounded-lg bg-[#EAF6EE] dark:bg-[#1B3829] border border-[#15966A]/20 dark:border-[#35B982]/30 flex items-center justify-between">
+            <div className="mt-4 p-2.5 rounded-lg bg-[#EAF6EE] dark:bg-[#22292B] border border-[#15966A]/20 dark:border-[#30383A] flex items-center justify-between">
               <div className="min-w-0 flex-1 mr-2">
                 <div className="text-xs font-semibold text-[#15966A] dark:text-[#35B982] truncate">
                   {currentProject?.title || 'Academic Workspace'}
                 </div>
-                <div className="text-[11px] text-[#52665A] dark:text-[#849A8B] truncate">
+                <div className="text-[11px] text-[#52665A] dark:text-[#858F8C] truncate">
                   {currentProject ? 'Active Project' : 'No Project Yet'}
                 </div>
               </div>
@@ -142,7 +142,7 @@ export const DashboardLayout = () => {
             {/* Quick button to create or switch project */}
             <Link
               to="/dashboard"
-              className="mt-2 w-full py-1.5 px-2.5 rounded-lg border border-dashed border-[#15966A]/40 dark:border-[#35B982]/40 text-[#15966A] dark:text-[#35B982] text-[11px] font-semibold flex items-center justify-center gap-1.5 hover:bg-[#EAF6EE] dark:hover:bg-[#1B3829] transition"
+              className="mt-2 w-full py-1.5 px-2.5 rounded-lg border border-dashed border-[#15966A]/40 dark:border-[#30383A] text-[#15966A] dark:text-[#35B982] text-[11px] font-semibold flex items-center justify-center gap-1.5 hover:bg-[#EAF6EE] dark:hover:bg-[#22292B] transition"
             >
               <FolderPlus className="w-3.5 h-3.5" />
               <span>+ New Team Project</span>
@@ -151,7 +151,7 @@ export const DashboardLayout = () => {
 
           {/* Navigation Section */}
           <div className="px-3 py-4">
-            <div className="px-3 pb-2 text-[11px] font-semibold tracking-wider text-[#84948A] dark:text-[#849A8B] uppercase">
+            <div className="px-3 pb-2 text-[11px] font-semibold tracking-wider text-[#84948A] dark:text-[#858F8C] uppercase">
               Workspace
             </div>
             <nav className="space-y-1">
@@ -167,11 +167,11 @@ export const DashboardLayout = () => {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-sm font-medium transition-colors ${
                       isActive
-                        ? 'bg-[#15966A] dark:bg-[#35B982] text-white shadow-sm'
-                        : 'text-[#52665A] dark:text-[#B0C4B5] hover:bg-[#EAF6EE] dark:hover:bg-[#1E3025] hover:text-[#15966A] dark:hover:text-[#35B982]'
+                        ? 'bg-[#15966A] dark:bg-[#15966A] text-white shadow-sm'
+                        : 'text-[#52665A] dark:text-[#A5AFAB] hover:bg-[#EAF6EE] dark:hover:bg-[#2A3234] hover:text-[#15966A] dark:hover:text-[#35B982]'
                     }`}
                   >
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#52665A] dark:text-[#B0C4B5]'}`} />
+                    <Icon className={`w-4 h-4 ${isActive ? 'text-white' : 'text-[#52665A] dark:text-[#A5AFAB]'}`} />
                     <span>{item.name}</span>
                   </NavLink>
                 );
@@ -181,21 +181,21 @@ export const DashboardLayout = () => {
         </div>
 
         {/* User Card at bottom of Sidebar */}
-        <div className="p-4 border-t border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#17251D]">
+        <div className="p-4 border-t border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#171C1E]">
           <div className="flex items-center gap-3">
             <button
               onClick={() => navigate('/profile')}
-              className="flex items-center gap-3 flex-1 min-w-0 text-left hover:opacity-85 transition group"
+              className="flex items-center gap-3 flex-1 min-w-0 text-left hover:opacity-85 transition group cursor-pointer"
               title="View & Edit Profile"
             >
-              <div className="w-9 h-9 rounded-full bg-[#15966A] dark:bg-[#35B982] text-white font-semibold flex items-center justify-center text-xs shadow-sm ring-2 ring-transparent group-hover:ring-[#15966A]/40 transition">
+              <div className="w-9 h-9 rounded-full bg-[#15966A] dark:bg-[#15966A] text-white font-semibold flex items-center justify-center text-xs shadow-sm ring-2 ring-transparent group-hover:ring-[#15966A]/40 transition">
                 {user?.avatar || user?.name?.substring(0, 2).toUpperCase() || 'U'}
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold text-[#172B21] dark:text-[#E8F3EB] truncate group-hover:text-[#15966A] dark:group-hover:text-[#35B982]">
+                <div className="text-sm font-semibold text-[#172B21] dark:text-[#F1F5F3] truncate group-hover:text-[#15966A] dark:group-hover:text-[#35B982]">
                   {user?.name}
                 </div>
-                <div className="text-xs text-[#52665A] dark:text-[#849A8B] truncate capitalize">
+                <div className="text-xs text-[#52665A] dark:text-[#858F8C] truncate capitalize">
                   {user?.role === 'faculty' ? 'Faculty Reviewer' : 'Student Contributor'}
                 </div>
               </div>
@@ -203,7 +203,7 @@ export const DashboardLayout = () => {
             <button
               onClick={handleLogout}
               title="Logout"
-              className="text-[#52665A] dark:text-[#849A8B] hover:text-[#DC5555] dark:hover:text-[#F07878] p-1.5 rounded-md hover:bg-red-50 dark:hover:bg-red-950/30 transition shrink-0"
+              className="text-[#52665A] dark:text-[#858F8C] hover:text-[#DC5555] dark:hover:text-[#F07878] p-1.5 rounded-md hover:bg-red-50 dark:hover:bg-red-950/30 transition shrink-0 cursor-pointer"
             >
               <LogOut className="w-4 h-4" />
             </button>
@@ -214,18 +214,18 @@ export const DashboardLayout = () => {
       {/* MAIN CONTENT AREA (Independently scrolls) */}
       <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden">
         {/* Top Navbar - Fixed permanently at top */}
-        <header className="h-16 bg-white dark:bg-[#17251D] border-b border-[#DFE9E1] dark:border-[#2D4234] px-6 flex items-center justify-between shrink-0 z-30 transition-colors sticky top-0 shadow-xs">
+        <header className="h-16 bg-white dark:bg-[#171C1E] border-b border-[#DFE9E1] dark:border-[#30383A] px-6 flex items-center justify-between shrink-0 z-30 transition-colors sticky top-0 shadow-xs">
           <div className="flex items-center gap-3">
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-md text-[#52665A] dark:text-[#849A8B] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025]"
+              className="lg:hidden p-2 rounded-md text-[#52665A] dark:text-[#858F8C] hover:bg-[#F2F8F4] dark:hover:bg-[#2A3234]"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
-            <div className="flex items-center text-xs text-[#52665A] dark:text-[#849A8B]">
+            <div className="flex items-center text-xs text-[#52665A] dark:text-[#858F8C]">
               <span>Workspace</span>
-              <ChevronRight className="w-3.5 h-3.5 mx-1.5 text-[#84948A] dark:text-[#849A8B]" />
-              <span className="font-semibold text-[#172B21] dark:text-[#E8F3EB]">{getBreadcrumb()}</span>
+              <ChevronRight className="w-3.5 h-3.5 mx-1.5 text-[#84948A] dark:text-[#858F8C]" />
+              <span className="font-semibold text-[#172B21] dark:text-[#F1F5F3]">{getBreadcrumb()}</span>
             </div>
           </div>
 
@@ -233,13 +233,13 @@ export const DashboardLayout = () => {
             {/* Quick action: Add contribution */}
             <NavLink
               to="/evidence/new"
-              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white text-xs font-medium shadow-sm transition"
+              className="hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#15966A] dark:hover:bg-[#4AC993] text-white text-xs font-medium shadow-sm transition"
             >
               <Plus className="w-3.5 h-3.5" />
               <span>Add contribution</span>
             </NavLink>
 
-            <div className="w-px h-5 bg-[#DFE9E1] dark:bg-[#2D4234] hidden sm:block"></div>
+            <div className="w-px h-5 bg-[#DFE9E1] dark:bg-[#30383A] hidden sm:block"></div>
 
             {/* Dark Mode Toggle */}
             <ThemeToggle />
@@ -249,7 +249,7 @@ export const DashboardLayout = () => {
               <button
                 onClick={() => setNotificationsOpen(!notificationsOpen)}
                 title="Notifications"
-                className="p-2 rounded-lg text-[#52665A] dark:text-[#849A8B] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] relative transition border border-transparent hover:border-[#DFE9E1] dark:hover:border-[#2D4234]"
+                className="p-2 rounded-lg text-[#52665A] dark:text-[#858F8C] hover:bg-[#F2F8F4] dark:hover:bg-[#2A3234] relative transition border border-transparent hover:border-[#DFE9E1] dark:hover:border-[#30383A] cursor-pointer"
               >
                 <Bell className="w-4 h-4" />
                 {unreadCount > 0 && (
@@ -274,7 +274,7 @@ export const DashboardLayout = () => {
             <Link
               to="/profile"
               title="Go to Account Profile"
-              className="w-8 h-8 rounded-full bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] font-semibold flex items-center justify-center text-xs border border-[#15966A]/30 dark:border-[#35B982]/40 hover:ring-2 hover:ring-[#15966A]/40 transition"
+              className="w-8 h-8 rounded-full bg-[#EAF6EE] dark:bg-[#22292B] text-[#15966A] dark:text-[#35B982] font-semibold flex items-center justify-center text-xs border border-[#15966A]/30 dark:border-[#30383A] hover:ring-2 hover:ring-[#15966A]/40 transition"
             >
               {user?.avatar || user?.name?.substring(0, 2).toUpperCase() || 'U'}
             </Link>
@@ -291,3 +291,5 @@ export const DashboardLayout = () => {
     </div>
   );
 };
+
+export default DashboardLayout;

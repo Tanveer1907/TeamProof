@@ -32,7 +32,7 @@ export const ThemeProvider = ({ children }) => {
         metaThemeColor.setAttribute('name', 'theme-color');
         document.head.appendChild(metaThemeColor);
       }
-      metaThemeColor.setAttribute('content', darkActive ? '#101A15' : '#F7FAF8');
+      metaThemeColor.setAttribute('content', darkActive ? '#111416' : '#F7FAF8');
     };
 
     applyTheme();

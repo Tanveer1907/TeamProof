@@ -23,7 +23,7 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#F7FAF8] dark:bg-[#101A15]">
+      <div className="min-h-screen flex items-center justify-center bg-[#F7FAF8] dark:bg-[#111416]">
         <div className="w-8 h-8 rounded-full border-2 border-[#15966A] dark:border-[#35B982] border-t-transparent animate-spin"></div>
       </div>
     );

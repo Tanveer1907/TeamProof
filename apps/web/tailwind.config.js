@@ -47,22 +47,23 @@ export default {
           tertiary: '#EAF2EC',
           border: '#DFE9E1',
           'border-strong': '#C6D6CA',
-          // Dark Mode Tokens
-          'dark-page': '#101A15',
-          'dark-card': '#17251D',
-          'dark-secondary': '#1E3025',
-          'dark-tertiary': '#263B2E',
-          'dark-border': '#2D4234',
-          'dark-border-strong': '#425C49',
+          // Dark Mode Tokens (Refined Charcoal + Emerald Accent)
+          'dark-page': '#111416',
+          'dark-sidebar': '#171C1E',
+          'dark-card': '#1B2022',
+          'dark-secondary': '#22292B',
+          'dark-tertiary': '#2A3234',
+          'dark-border': '#30383A',
+          'dark-border-strong': '#414B4D',
         },
         content: {
           primary: '#172B21',
           secondary: '#52665A',
           muted: '#84948A',
           // Dark Mode Text
-          'dark-primary': '#E8F3EB',
-          'dark-secondary': '#B0C4B5',
-          'dark-muted': '#849A8B',
+          'dark-primary': '#F1F5F3',
+          'dark-secondary': '#A5AFAB',
+          'dark-muted': '#858F8C',
         },
         status: {
           success: '#15966A',

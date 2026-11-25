@@ -112,13 +112,13 @@ export const DashboardPage = () => {
   if (loading) {
     return (
       <div className="space-y-6 animate-pulse">
-        <div className="h-10 bg-[#EAF2EC] dark:bg-[#1E3025] rounded w-1/3"></div>
+        <div className="h-10 bg-[#EAF2EC] dark:bg-[#22292B] rounded w-1/3"></div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          <div className="h-28 bg-[#EAF2EC] dark:bg-[#1E3025] rounded-xl"></div>
-          <div className="h-28 bg-[#EAF2EC] dark:bg-[#1E3025] rounded-xl"></div>
-          <div className="h-28 bg-[#EAF2EC] dark:bg-[#1E3025] rounded-xl"></div>
+          <div className="h-28 bg-[#EAF2EC] dark:bg-[#22292B] rounded-xl"></div>
+          <div className="h-28 bg-[#EAF2EC] dark:bg-[#22292B] rounded-xl"></div>
+          <div className="h-28 bg-[#EAF2EC] dark:bg-[#22292B] rounded-xl"></div>
         </div>
-        <div className="h-64 bg-[#EAF2EC] dark:bg-[#1E3025] rounded-xl"></div>
+        <div className="h-64 bg-[#EAF2EC] dark:bg-[#22292B] rounded-xl"></div>
       </div>
     );
   }
@@ -130,16 +130,16 @@ export const DashboardPage = () => {
     <div className="space-y-8 font-sans">
       {/* Onboarding Callout if user has no project yet */}
       {!hasActiveProject && (
-        <div className="p-6 bg-emerald-50 dark:bg-[#1B3829]/60 border-2 border-dashed border-[#15966A] dark:border-[#35B982] rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm animate-in fade-in">
+        <div className="p-6 bg-emerald-50 dark:bg-[#133827]/60 border-2 border-dashed border-[#15966A] dark:border-[#35B982] rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 shadow-sm animate-in fade-in">
           <div className="flex items-start gap-4">
             <div className="w-12 h-12 rounded-2xl bg-[#15966A] dark:bg-[#35B982] text-white flex items-center justify-center shrink-0 shadow-md">
               <Sparkles className="w-6 h-6" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
+              <h2 className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">
                 Step 1: Create your Team Project
               </h2>
-              <p className="text-xs text-[#52665A] dark:text-[#849A8B] mt-1 max-w-xl">
+              <p className="text-xs text-[#52665A] dark:text-[#858F8C] mt-1 max-w-xl">
                 You are currently in an unassigned workspace. Create your team project to start planning milestones, adding tasks, inviting teammates, and tracking GitHub commits.
               </p>
             </div>
@@ -157,11 +157,11 @@ export const DashboardPage = () => {
       {/* Top Welcome Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#E8F3EB] tracking-tight">
+          <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#F1F5F3] tracking-tight">
             Good morning, {user?.name?.split(' ')[0] || 'Contributor'}
           </h1>
-          <p className="text-sm text-[#52665A] dark:text-[#849A8B] mt-0.5">
-            Here's what's happening in <span className="font-semibold text-[#172B21] dark:text-[#E8F3EB]">{project?.title || 'your workspace'}</span>.
+          <p className="text-sm text-[#52665A] dark:text-[#858F8C] mt-0.5">
+            Here's what's happening in <span className="font-semibold text-[#172B21] dark:text-[#F1F5F3]">{project?.title || 'your workspace'}</span>.
           </p>
         </div>
 
@@ -180,7 +180,7 @@ export const DashboardPage = () => {
           {hasActiveProject && (
             <button
               onClick={() => setIsAddMemberOpen(true)}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#17251D] text-[#172B21] dark:text-[#E8F3EB] text-xs font-semibold hover:bg-gray-50 dark:hover:bg-[#1E3025] transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#1B2022] text-[#172B21] dark:text-[#F1F5F3] text-xs font-semibold hover:bg-gray-50 dark:hover:bg-[#22292B] transition cursor-pointer"
             >
               <UserPlus className="w-3.5 h-3.5 text-[#15966A] dark:text-[#35B982]" />
               <span>Invite Teammate</span>
@@ -190,7 +190,7 @@ export const DashboardPage = () => {
           {/* Add contribution button */}
           <NavLink
             to="/evidence/new"
-            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#15966A] dark:border-[#35B982] text-[#15966A] dark:text-[#35B982] hover:bg-[#EAF6EE] dark:hover:bg-[#1B3829] text-xs font-semibold transition"
+            className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 rounded-xl border border-[#15966A] dark:border-[#35B982] text-[#15966A] dark:text-[#35B982] hover:bg-[#EAF6EE] dark:hover:bg-[#133827] text-xs font-semibold transition"
           >
             <Plus className="w-4 h-4" />
             <span>Add contribution</span>
@@ -201,17 +201,17 @@ export const DashboardPage = () => {
       {/* 3 Metric Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
         {/* Next Milestone Card */}
-        <div className="bg-white dark:bg-[#17251D] rounded-xl p-5 border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm flex flex-col justify-between transition-colors">
+        <div className="bg-white dark:bg-[#1B2022] rounded-xl p-5 border border-[#DFE9E1] dark:border-[#30383A] shadow-sm flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#52665A] dark:text-[#849A8B]">Next milestone</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#52665A] dark:text-[#858F8C]">Next milestone</span>
             <Calendar className="w-4 h-4 text-[#15966A] dark:text-[#35B982]" />
           </div>
           <div className="mt-3">
-            <div className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
+            <div className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">
               {nextMilestone?.title || 'No active milestone'}
             </div>
-            <div className="text-xs text-[#52665A] dark:text-[#849A8B] mt-1 flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-[#84948A] dark:text-[#849A8B]" />
+            <div className="text-xs text-[#52665A] dark:text-[#858F8C] mt-1 flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-[#84948A] dark:text-[#858F8C]" />
               <span>
                 {nextMilestone?.dueDate
                   ? `Due ${new Date(nextMilestone.dueDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}`
@@ -222,14 +222,14 @@ export const DashboardPage = () => {
         </div>
 
         {/* Awaiting Review Card */}
-        <div className="bg-white dark:bg-[#17251D] rounded-xl p-5 border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm flex flex-col justify-between transition-colors">
+        <div className="bg-white dark:bg-[#1B2022] rounded-xl p-5 border border-[#DFE9E1] dark:border-[#30383A] shadow-sm flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#52665A] dark:text-[#849A8B]">Awaiting review</span>
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#52665A] dark:text-[#858F8C]">Awaiting review</span>
             <Clock className="w-4 h-4 text-[#D69E36] dark:text-[#E7B95D]" />
           </div>
           <div className="mt-3">
-            <div className="text-2xl font-bold text-[#172B21] dark:text-[#E8F3EB]">
-              {awaitingReviewCount ?? 0} <span className="text-sm font-normal text-[#52665A] dark:text-[#849A8B]">submissions</span>
+            <div className="text-2xl font-bold text-[#172B21] dark:text-[#F1F5F3]">
+              {awaitingReviewCount ?? 0} <span className="text-sm font-normal text-[#52665A] dark:text-[#858F8C]">submissions</span>
             </div>
             <NavLink
               to="/evidence?filter=needs_review"
@@ -242,9 +242,9 @@ export const DashboardPage = () => {
         </div>
 
         {/* Team Members Card */}
-        <div className="bg-white dark:bg-[#17251D] rounded-xl p-5 border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm flex flex-col justify-between transition-colors">
+        <div className="bg-white dark:bg-[#1B2022] rounded-xl p-5 border border-[#DFE9E1] dark:border-[#30383A] shadow-sm flex flex-col justify-between transition-colors">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#52665A] dark:text-[#849A8B]">
+            <span className="text-xs font-semibold uppercase tracking-wider text-[#52665A] dark:text-[#858F8C]">
               {hasActiveProject ? 'Project Team' : 'Team Members'}
             </span>
             <div className="flex items-center gap-1">
@@ -252,7 +252,7 @@ export const DashboardPage = () => {
                 <button
                   onClick={() => setIsAddMemberOpen(true)}
                   title="Invite teammate"
-                  className="p-1 text-[#15966A] dark:text-[#35B982] hover:bg-[#EAF6EE] dark:hover:bg-[#1E3025] rounded transition"
+                  className="p-1 text-[#15966A] dark:text-[#35B982] hover:bg-[#EAF6EE] dark:hover:bg-[#22292B] rounded transition"
                 >
                   <UserPlus className="w-4 h-4" />
                 </button>
@@ -261,7 +261,7 @@ export const DashboardPage = () => {
             </div>
           </div>
           <div className="mt-3">
-            <div className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
+            <div className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">
               {members?.length || 0} members
             </div>
             <div className="mt-2">
@@ -271,7 +271,7 @@ export const DashboardPage = () => {
                     <div
                       key={m._id}
                       title={`${m.name} (${m.email}) - ${m.role}`}
-                      className="w-7 h-7 rounded-full bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] font-semibold text-xs flex items-center justify-center border border-white dark:border-[#17251D] shadow-sm"
+                      className="w-7 h-7 rounded-full bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982] font-semibold text-xs flex items-center justify-center border border-white dark:border-[#1B2022] shadow-sm"
                     >
                       {m.avatar || m.name?.substring(0, 2).toUpperCase() || 'U'}
                     </div>
@@ -279,7 +279,7 @@ export const DashboardPage = () => {
                 </div>
               ) : (
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-[#84948A] dark:text-[#849A8B]">No teammates added</span>
+                  <span className="text-xs text-[#84948A] dark:text-[#858F8C]">No teammates added</span>
                   <button
                     onClick={() => (hasActiveProject ? setIsAddMemberOpen(true) : setIsCreateProjectOpen(true))}
                     className="text-xs font-semibold text-[#15966A] dark:text-[#35B982] hover:underline"
@@ -296,9 +296,9 @@ export const DashboardPage = () => {
       {/* Main Grid: Upcoming Tasks & Recent Activity */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Upcoming Tasks Table (2 columns wide) */}
-        <div className="lg:col-span-2 bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm overflow-hidden transition-colors">
-          <div className="px-6 py-4 border-b border-[#DFE9E1] dark:border-[#2D4234] flex items-center justify-between">
-            <h2 className="text-sm font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider">Upcoming tasks</h2>
+        <div className="lg:col-span-2 bg-white dark:bg-[#1B2022] rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-sm overflow-hidden transition-colors">
+          <div className="px-6 py-4 border-b border-[#DFE9E1] dark:border-[#30383A] flex items-center justify-between">
+            <h2 className="text-sm font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider">Upcoming tasks</h2>
             <NavLink
               to="/tasks"
               className="text-xs font-semibold text-[#15966A] dark:text-[#35B982] hover:text-[#117A55] dark:hover:text-[#4AC993] inline-flex items-center gap-1"
@@ -307,31 +307,31 @@ export const DashboardPage = () => {
               <ArrowUpRight className="w-3.5 h-3.5" />
             </NavLink>
           </div>
-          <div className="divide-y divide-[#DFE9E1] dark:divide-[#2D4234] overflow-x-auto">
+          <div className="divide-y divide-[#DFE9E1] dark:divide-[#30383A] overflow-x-auto">
             <table className="w-full text-left text-xs">
-              <thead className="bg-[#F2F8F4] dark:bg-[#1E3025] text-[#52665A] dark:text-[#849A8B] font-semibold uppercase tracking-wider text-[11px]">
+              <thead className="bg-[#F2F8F4] dark:bg-[#22292B] text-[#52665A] dark:text-[#858F8C] font-semibold uppercase tracking-wider text-[11px]">
                 <tr>
                   <th className="px-6 py-3">Task</th>
                   <th className="px-4 py-3">Status</th>
                   <th className="px-6 py-3 text-right">Due</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#DFE9E1] dark:divide-[#2D4234]">
+              <tbody className="divide-y divide-[#DFE9E1] dark:divide-[#30383A]">
                 {upcomingTasks && upcomingTasks.length > 0 ? (
                   upcomingTasks.map((t) => {
                     const statusColor =
                       t.status === 'Verified'
-                        ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
+                        ? 'bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982]'
                         : t.status === 'In Review'
                         ? 'bg-[#FEF7EC] dark:bg-[#332714] text-[#D69E36] dark:text-[#E7B95D]'
                         : t.status === 'In Progress'
                         ? 'bg-[#EEF6FD] dark:bg-[#152C3F] text-[#3985CF] dark:text-[#71B2EC]'
-                        : 'bg-[#F2F8F4] dark:bg-[#1E3025] text-[#52665A] dark:text-[#849A8B]';
+                        : 'bg-[#F2F8F4] dark:bg-[#22292B] text-[#52665A] dark:text-[#858F8C]';
                     return (
-                      <tr key={t._id} className="hover:bg-[#F2F8F4]/50 dark:hover:bg-[#1E3025]/50 transition">
+                      <tr key={t._id} className="hover:bg-[#F2F8F4]/50 dark:hover:bg-[#22292B]/50 transition">
                         <td className="px-6 py-3.5">
-                          <div className="font-semibold text-sm text-[#172B21] dark:text-[#E8F3EB]">{t.title}</div>
-                          <div className="text-[11px] text-[#52665A] dark:text-[#849A8B] mt-0.5 flex items-center gap-1.5">
+                          <div className="font-semibold text-sm text-[#172B21] dark:text-[#F1F5F3]">{t.title}</div>
+                          <div className="text-[11px] text-[#52665A] dark:text-[#858F8C] mt-0.5 flex items-center gap-1.5">
                             <span className="font-medium text-[#15966A] dark:text-[#35B982]">{t.taskIdStr}</span>
                             <span>•</span>
                             <span>{t.assignee?.name || 'Unassigned'}</span>
@@ -342,7 +342,7 @@ export const DashboardPage = () => {
                             • {t.status}
                           </span>
                         </td>
-                        <td className="px-6 py-3.5 text-right font-medium text-[#52665A] dark:text-[#849A8B]">
+                        <td className="px-6 py-3.5 text-right font-medium text-[#52665A] dark:text-[#858F8C]">
                           {t.dueDate ? new Date(t.dueDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : 'Flexible'}
                         </td>
                       </tr>
@@ -351,7 +351,7 @@ export const DashboardPage = () => {
                 ) : (
                   <tr>
                     <td colSpan={3} className="px-6 py-10 text-center">
-                      <div className="flex flex-col items-center justify-center text-[#84948A] dark:text-[#849A8B]">
+                      <div className="flex flex-col items-center justify-center text-[#84948A] dark:text-[#858F8C]">
                         <Inbox className="w-8 h-8 mb-2 stroke-[1.5]" />
                         <span className="text-xs font-medium">No upcoming tasks</span>
                         <NavLink to="/tasks" className="text-xs text-[#15966A] dark:text-[#35B982] hover:underline mt-1">
@@ -367,22 +367,22 @@ export const DashboardPage = () => {
         </div>
 
         {/* Recent Activity Feed (1 column wide) */}
-        <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm flex flex-col transition-colors">
-          <div className="px-6 py-4 border-b border-[#DFE9E1] dark:border-[#2D4234]">
-            <h2 className="text-sm font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider">Recent activity</h2>
+        <div className="bg-white dark:bg-[#1B2022] rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-sm flex flex-col transition-colors">
+          <div className="px-6 py-4 border-b border-[#DFE9E1] dark:border-[#30383A]">
+            <h2 className="text-sm font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider">Recent activity</h2>
           </div>
           <div className="p-5 flex-1 space-y-4">
             {recentActivity && recentActivity.length > 0 ? (
               recentActivity.map((a) => (
                 <div key={a._id} className="flex items-start gap-3">
-                  <div className="w-8 h-8 rounded-full bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] font-semibold text-xs flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-full bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982] font-semibold text-xs flex items-center justify-center shrink-0">
                     {a.user?.avatar || a.user?.name?.substring(0, 2).toUpperCase() || 'U'}
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs text-[#172B21] dark:text-[#E8F3EB] leading-snug">
+                    <p className="text-xs text-[#172B21] dark:text-[#F1F5F3] leading-snug">
                       <span className="font-semibold">{a.user?.name}</span> {a.description.replace(a.user?.name, '')}
                     </p>
-                    <div className="text-[11px] text-[#84948A] dark:text-[#849A8B] mt-1 flex items-center gap-1">
+                    <div className="text-[11px] text-[#84948A] dark:text-[#858F8C] mt-1 flex items-center gap-1">
                       <span>{new Date(a.createdAt).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' })}</span>
                       {a.relatedEvidence && (
                         <>
@@ -395,7 +395,7 @@ export const DashboardPage = () => {
                 </div>
               ))
             ) : (
-              <div className="text-xs text-[#84948A] dark:text-[#849A8B] text-center py-10 flex flex-col items-center">
+              <div className="text-xs text-[#84948A] dark:text-[#858F8C] text-center py-10 flex flex-col items-center">
                 <Clock className="w-8 h-8 mb-2 stroke-[1.5]" />
                 <span>No recent activities recorded yet.</span>
               </div>
@@ -407,20 +407,20 @@ export const DashboardPage = () => {
       {/* CREATE PROJECT MODAL */}
       {isCreateProjectOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 text-left animate-in fade-in">
-          <div className="bg-white dark:bg-[#17251D] rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#DFE9E1] dark:border-[#2D4234] space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#DFE9E1] dark:border-[#2D4234]">
+          <div className="bg-white dark:bg-[#1B2022] rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-[#DFE9E1] dark:border-[#30383A] space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DFE9E1] dark:border-[#30383A]">
               <div className="flex items-center gap-2.5">
                 <div className="w-9 h-9 rounded-xl bg-[#15966A] dark:bg-[#35B982] text-white flex items-center justify-center shadow-sm">
                   <FolderPlus className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">Create Team Project</h3>
-                  <p className="text-[11px] text-[#52665A] dark:text-[#849A8B]">Start an evidence-based academic project</p>
+                  <h3 className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">Create Team Project</h3>
+                  <p className="text-[11px] text-[#52665A] dark:text-[#858F8C]">Start an evidence-based academic project</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsCreateProjectOpen(false)}
-                className="text-[#84948A] hover:text-[#172B21] dark:hover:text-[#E8F3EB] p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#101A15]"
+                className="text-[#84948A] hover:text-[#172B21] dark:hover:text-[#F1F5F3] p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#111416]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -435,7 +435,7 @@ export const DashboardPage = () => {
 
             <form onSubmit={handleCreateProject} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider mb-1.5">
                   Project Title *
                 </label>
                 <input
@@ -444,12 +444,12 @@ export const DashboardPage = () => {
                   placeholder="e.g. CampusConnect or Smart Attendance"
                   value={projTitle}
                   onChange={(e) => setProjTitle(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider mb-1.5">
                   Project Scope & Description *
                 </label>
                 <textarea
@@ -458,12 +458,12 @@ export const DashboardPage = () => {
                   placeholder="Outline the problem statement and technical architecture of this project..."
                   value={projDesc}
                   onChange={(e) => setProjDesc(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider mb-1.5">
                   Course / Academic Category
                 </label>
                 <input
@@ -471,15 +471,15 @@ export const DashboardPage = () => {
                   placeholder="e.g. Back End Engineering-II (BEE)"
                   value={projCategory}
                   onChange={(e) => setProjCategory(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                 />
               </div>
 
-              <div className="pt-3 flex items-center justify-end gap-2.5 border-t border-[#DFE9E1] dark:border-[#2D4234]">
+              <div className="pt-3 flex items-center justify-end gap-2.5 border-t border-[#DFE9E1] dark:border-[#30383A]">
                 <button
                   type="button"
                   onClick={() => setIsCreateProjectOpen(false)}
-                  className="px-4 py-2.5 text-xs font-semibold text-[#52665A] dark:text-[#849A8B] hover:bg-gray-100 dark:hover:bg-[#101A15] rounded-xl transition"
+                  className="px-4 py-2.5 text-xs font-semibold text-[#52665A] dark:text-[#858F8C] hover:bg-gray-100 dark:hover:bg-[#111416] rounded-xl transition"
                 >
                   Cancel
                 </button>
@@ -499,20 +499,20 @@ export const DashboardPage = () => {
       {/* INVITE / ADD TEAM MEMBER MODAL */}
       {isAddMemberOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 text-left animate-in fade-in">
-          <div className="bg-white dark:bg-[#17251D] rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#DFE9E1] dark:border-[#2D4234] space-y-5">
-            <div className="flex items-center justify-between pb-3 border-b border-[#DFE9E1] dark:border-[#2D4234]">
+          <div className="bg-white dark:bg-[#1B2022] rounded-2xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-[#DFE9E1] dark:border-[#30383A] space-y-5">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DFE9E1] dark:border-[#30383A]">
               <div className="flex items-center gap-2.5">
                 <div className="w-9 h-9 rounded-xl bg-[#15966A] dark:bg-[#35B982] text-white flex items-center justify-center shadow-sm">
                   <UserPlus className="w-5 h-5" />
                 </div>
                 <div>
-                  <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">Invite Teammate</h3>
-                  <p className="text-[11px] text-[#52665A] dark:text-[#849A8B]">Add a peer reviewer to {project?.title || 'project'}</p>
+                  <h3 className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">Invite Teammate</h3>
+                  <p className="text-[11px] text-[#52665A] dark:text-[#858F8C]">Add a peer reviewer to {project?.title || 'project'}</p>
                 </div>
               </div>
               <button
                 onClick={() => setIsAddMemberOpen(false)}
-                className="text-[#84948A] hover:text-[#172B21] dark:hover:text-[#E8F3EB] p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#101A15]"
+                className="text-[#84948A] hover:text-[#172B21] dark:hover:text-[#F1F5F3] p-1.5 rounded-lg hover:bg-gray-100 dark:hover:bg-[#111416]"
               >
                 <X className="w-5 h-5" />
               </button>
@@ -534,7 +534,7 @@ export const DashboardPage = () => {
 
             <form onSubmit={handleAddMember} className="space-y-4">
               <div>
-                <label className="block text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider mb-1.5">
                   Teammate Registered Email *
                 </label>
                 <input
@@ -543,32 +543,32 @@ export const DashboardPage = () => {
                   placeholder="e.g. nisha@teamproof.edu or teammate@college.edu"
                   value={memberEmail}
                   onChange={(e) => setMemberEmail(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                 />
-                <p className="text-[11px] text-[#84948A] dark:text-[#849A8B] mt-1.5">
+                <p className="text-[11px] text-[#84948A] dark:text-[#858F8C] mt-1.5">
                   The user must have an active TeamProof account registered with this email.
                 </p>
               </div>
 
               <div>
-                <label className="block text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider mb-1.5">
+                <label className="block text-xs font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider mb-1.5">
                   Team Role
                 </label>
                 <select
                   value={memberRole}
                   onChange={(e) => setMemberRole(e.target.value)}
-                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
+                  className="w-full px-3.5 py-2.5 text-xs rounded-xl border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                 >
                   <option value="member">Student Contributor (Peer Reviewer)</option>
                   <option value="faculty_reviewer">Faculty Reviewer (Academic Evaluator)</option>
                 </select>
               </div>
 
-              <div className="pt-3 flex items-center justify-end gap-2.5 border-t border-[#DFE9E1] dark:border-[#2D4234]">
+              <div className="pt-3 flex items-center justify-end gap-2.5 border-t border-[#DFE9E1] dark:border-[#30383A]">
                 <button
                   type="button"
                   onClick={() => setIsAddMemberOpen(false)}
-                  className="px-4 py-2.5 text-xs font-semibold text-[#52665A] dark:text-[#849A8B] hover:bg-gray-100 dark:hover:bg-[#101A15] rounded-xl transition"
+                  className="px-4 py-2.5 text-xs font-semibold text-[#52665A] dark:text-[#858F8C] hover:bg-gray-100 dark:hover:bg-[#111416] rounded-xl transition"
                 >
                   Cancel
                 </button>
@@ -586,7 +586,7 @@ export const DashboardPage = () => {
       )}
 
       {/* Footer System Notice */}
-      <div className="text-center text-xs text-[#84948A] dark:text-[#849A8B] py-2">
+      <div className="text-center text-xs text-[#84948A] dark:text-[#858F8C] py-2">
         TeamProof Academic Contribution Assessment System • Verified Evidence Ledger
       </div>
     </div>

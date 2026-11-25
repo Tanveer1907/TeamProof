@@ -246,7 +246,7 @@ export const GitHubActivityPage = () => {
         <div
           className={`p-4 rounded-xl flex items-center justify-between text-xs font-semibold ${
             feedback.type === 'success'
-              ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] border border-[#15966A]/30 dark:border-[#35B982]/40'
+              ? 'bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982] border border-[#15966A]/30 dark:border-[#35B982]/40'
               : 'bg-[#FDEDEC] dark:bg-[#DC5555]/20 text-[#DC5555] dark:text-[#F07878] border border-[#DC5555]/30 dark:border-[#F07878]/40'
           }`}
         >
@@ -260,8 +260,8 @@ export const GitHubActivityPage = () => {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#E8F3EB] tracking-tight">GitHub activity</h1>
-          <p className="text-sm text-[#52665A] dark:text-[#B0C4B5] mt-0.5">
+          <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#F1F5F3] tracking-tight">GitHub activity</h1>
+          <p className="text-sm text-[#52665A] dark:text-[#A5AFAB] mt-0.5">
             Real code contributions and pull requests linked to academic evidence.
           </p>
         </div>
@@ -269,7 +269,7 @@ export const GitHubActivityPage = () => {
           <button
             onClick={() => fetchData(true)}
             disabled={refreshing}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#30383A] text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] transition disabled:opacity-50"
             title="Refresh activity feed"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
@@ -277,7 +277,7 @@ export const GitHubActivityPage = () => {
           </button>
 
           {isConnected ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]">
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982]">
               <span className="w-2 h-2 rounded-full bg-[#15966A] dark:bg-[#35B982] animate-pulse"></span>
               <span>Connected Repository</span>
             </span>
@@ -291,22 +291,22 @@ export const GitHubActivityPage = () => {
       </div>
 
       {/* Repo connection bar */}
-      <div className="bg-white dark:bg-[#17251D] p-5 rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
+      <div className="bg-white dark:bg-[#1B2022] p-5 rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
         <div className="flex items-center gap-3">
           <div
             className={`w-10 h-10 rounded-xl flex items-center justify-center ${
               isConnected
-                ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
-                : 'bg-[#F2F8F4] dark:bg-[#1E3025] text-[#84948A] dark:text-[#849A8B]'
+                ? 'bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982]'
+                : 'bg-[#F2F8F4] dark:bg-[#22292B] text-[#84948A] dark:text-[#858F8C]'
             }`}
           >
             <GitBranch className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm font-bold text-[#172B21] dark:text-[#E8F3EB]">
+            <div className="text-sm font-bold text-[#172B21] dark:text-[#F1F5F3]">
               {isConnected ? status.repository : 'No GitHub repository connected'}
             </div>
-            <div className="text-xs text-[#52665A] dark:text-[#B0C4B5]">
+            <div className="text-xs text-[#52665A] dark:text-[#A5AFAB]">
               {isConnected
                 ? `Default branch: ${status.branch || 'main'} • Live Webhook Enabled`
                 : 'Connect your project to a GitHub repository to track commits, PRs, and issues.'}
@@ -322,7 +322,7 @@ export const GitHubActivityPage = () => {
                   href={status.htmlUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#30383A] text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] transition"
                 >
                   <span>View on GitHub</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -333,7 +333,7 @@ export const GitHubActivityPage = () => {
                 <>
                   <button
                     onClick={() => openMappingModal()}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#30383A] text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] transition"
                   >
                     <UserCheck className="w-3.5 h-3.5" />
                     <span>Map Authors</span>
@@ -353,7 +353,7 @@ export const GitHubActivityPage = () => {
             isPrivileged && (
               <button
                 onClick={openConnectModal}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold shadow-sm transition"
               >
                 <Plus className="w-4 h-4" />
                 <span>Connect GitHub Repository</span>
@@ -366,14 +366,14 @@ export const GitHubActivityPage = () => {
       {/* Main Grid: Activity Timeline & Context Card */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Timeline (2 columns) */}
-        <div className="lg:col-span-2 bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm p-6 space-y-4 transition-colors">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#DFE9E1] dark:border-[#2D4234] pb-4">
-            <h2 className="text-sm font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider">
+        <div className="lg:col-span-2 bg-white dark:bg-[#1B2022] rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-sm p-6 space-y-4 transition-colors">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#DFE9E1] dark:border-[#30383A] pb-4">
+            <h2 className="text-sm font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider">
               Activity timeline
             </h2>
 
             {/* Event Filter Tabs */}
-            <div className="flex items-center gap-1 bg-[#F2F8F4] dark:bg-[#1E3025] p-1 rounded-lg">
+            <div className="flex items-center gap-1 bg-[#F2F8F4] dark:bg-[#22292B] p-1 rounded-lg">
               {[
                 { id: 'all', label: 'All' },
                 { id: 'commit', label: 'Commits' },
@@ -385,8 +385,8 @@ export const GitHubActivityPage = () => {
                   onClick={() => setFilterType(tab.id)}
                   className={`px-2.5 py-1 text-xs font-medium rounded-md transition ${
                     filterType === tab.id
-                      ? 'bg-white dark:bg-[#17251D] text-[#15966A] dark:text-[#35B982] shadow-xs'
-                      : 'text-[#52665A] dark:text-[#849A8B] hover:text-[#172B21] dark:hover:text-[#E8F3EB]'
+                      ? 'bg-white dark:bg-[#1B2022] text-[#15966A] dark:text-[#35B982] shadow-xs'
+                      : 'text-[#52665A] dark:text-[#858F8C] hover:text-[#172B21] dark:hover:text-[#F1F5F3]'
                   }`}
                 >
                   {tab.label}
@@ -395,9 +395,9 @@ export const GitHubActivityPage = () => {
             </div>
           </div>
 
-          <div className="divide-y divide-[#DFE9E1] dark:divide-[#2D4234]">
+          <div className="divide-y divide-[#DFE9E1] dark:divide-[#30383A]">
             {loading ? (
-              <div className="text-xs text-[#84948A] dark:text-[#849A8B] py-12 text-center">Loading GitHub activity...</div>
+              <div className="text-xs text-[#84948A] dark:text-[#858F8C] py-12 text-center">Loading GitHub activity...</div>
             ) : activities.length > 0 ? (
               activities.map((act) => {
                 const isPR = act.activityType === 'pull_request';
@@ -409,7 +409,7 @@ export const GitHubActivityPage = () => {
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
                         isPR
-                          ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
+                          ? 'bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982]'
                           : isCommit
                           ? 'bg-blue-50 dark:bg-blue-950/30 text-[#3985CF] dark:text-[#71B2EC]'
                           : 'bg-amber-50 dark:bg-amber-950/30 text-[#D69E36] dark:text-[#E7B95D]'
@@ -423,7 +423,7 @@ export const GitHubActivityPage = () => {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2 min-w-0">
-                          <span className="font-semibold text-xs text-[#172B21] dark:text-[#E8F3EB] truncate">
+                          <span className="font-semibold text-xs text-[#172B21] dark:text-[#F1F5F3] truncate">
                             {act.refNumber ? `${act.refNumber} • ` : ''}
                             {act.title}
                           </span>
@@ -431,10 +431,10 @@ export const GitHubActivityPage = () => {
                             <span
                               className={`px-1.5 py-0.5 text-[10px] font-bold rounded uppercase ${
                                 act.state === 'merged'
-                                  ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
+                                  ? 'bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982]'
                                   : act.state === 'closed'
-                                  ? 'bg-[#F2F8F4] dark:bg-[#1E3025] text-[#52665A] dark:text-[#B0C4B5]'
-                                  : 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
+                                  ? 'bg-[#F2F8F4] dark:bg-[#22292B] text-[#52665A] dark:text-[#A5AFAB]'
+                                  : 'bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982]'
                               }`}
                             >
                               {act.state}
@@ -442,7 +442,7 @@ export const GitHubActivityPage = () => {
                           )}
                         </div>
 
-                        <span className="text-[11px] text-[#84948A] dark:text-[#849A8B] shrink-0">
+                        <span className="text-[11px] text-[#84948A] dark:text-[#858F8C] shrink-0">
                           {new Date(act.occurredAt).toLocaleDateString('en-GB', {
                             day: 'numeric',
                             month: 'short',
@@ -452,9 +452,9 @@ export const GitHubActivityPage = () => {
                       </div>
 
                       {/* Author and branch metadata */}
-                      <div className="text-[11px] text-[#52665A] dark:text-[#B0C4B5] mt-1 flex flex-wrap items-center gap-2">
+                      <div className="text-[11px] text-[#52665A] dark:text-[#A5AFAB] mt-1 flex flex-wrap items-center gap-2">
                         {act.contributor ? (
-                          <span className="inline-flex items-center gap-1 font-medium text-[#172B21] dark:text-[#E8F3EB]">
+                          <span className="inline-flex items-center gap-1 font-medium text-[#172B21] dark:text-[#F1F5F3]">
                             <span className="w-1.5 h-1.5 rounded-full bg-[#15966A] dark:bg-[#35B982]"></span>
                             {act.contributor.name}
                           </span>
@@ -480,7 +480,7 @@ export const GitHubActivityPage = () => {
                         {act.branch && (
                           <>
                             <span>•</span>
-                            <span className="font-mono text-[10px] bg-[#F2F8F4] dark:bg-[#1E3025] px-1.5 py-0.5 rounded text-[#172B21] dark:text-[#E8F3EB]">
+                            <span className="font-mono text-[10px] bg-[#F2F8F4] dark:bg-[#22292B] px-1.5 py-0.5 rounded text-[#172B21] dark:text-[#F1F5F3]">
                               {act.branch}
                             </span>
                           </>
@@ -513,7 +513,7 @@ export const GitHubActivityPage = () => {
                         )}
 
                         {act.relatedEvidence && (
-                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] text-[11px] font-medium border border-[#DFE9E1] dark:border-[#2D4234]">
+                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#EAF6EE] dark:bg-[#133827] text-[#15966A] dark:text-[#35B982] text-[11px] font-medium border border-[#DFE9E1] dark:border-[#30383A]">
                             <span className="font-bold">@{act.relatedEvidence.evidenceIdStr}</span>
                             <span>•</span>
                             <span className="truncate max-w-[150px]">{act.relatedEvidence.title}</span>
@@ -522,7 +522,7 @@ export const GitHubActivityPage = () => {
 
                         <button
                           onClick={() => openLinkModal(act)}
-                          className="text-[11px] text-[#52665A] dark:text-[#B0C4B5] hover:text-[#15966A] dark:hover:text-[#35B982] inline-flex items-center gap-1 opacity-80 hover:opacity-100 transition"
+                          className="text-[11px] text-[#52665A] dark:text-[#A5AFAB] hover:text-[#15966A] dark:hover:text-[#35B982] inline-flex items-center gap-1 opacity-80 hover:opacity-100 transition"
                         >
                           <LinkIcon className="w-3 h-3" />
                           <span>{act.relatedTask || act.relatedEvidence ? 'Edit link' : 'Link to task / evidence'}</span>
@@ -533,12 +533,12 @@ export const GitHubActivityPage = () => {
                 );
               })
             ) : (
-              <div className="py-16 flex flex-col items-center justify-center text-[#84948A] dark:text-[#849A8B]">
+              <div className="py-16 flex flex-col items-center justify-center text-[#84948A] dark:text-[#858F8C]">
                 <Inbox className="w-10 h-10 mb-3 stroke-[1.5]" />
-                <span className="text-sm font-semibold text-[#172B21] dark:text-[#E8F3EB]">
+                <span className="text-sm font-semibold text-[#172B21] dark:text-[#F1F5F3]">
                   {isConnected ? 'No GitHub activities matching filter' : 'No repository connected'}
                 </span>
-                <p className="text-xs text-[#84948A] dark:text-[#849A8B] mt-1 max-w-sm text-center">
+                <p className="text-xs text-[#84948A] dark:text-[#858F8C] mt-1 max-w-sm text-center">
                   {isConnected
                     ? 'Push commits, create pull requests, or file issues on GitHub to see them appear automatically.'
                     : 'Connect a GitHub repository to track authenticated student commits and peer-reviewed code.'}
@@ -546,7 +546,7 @@ export const GitHubActivityPage = () => {
                 {!isConnected && isPrivileged && (
                   <button
                     onClick={openConnectModal}
-                    className="mt-4 px-4 py-2 bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold rounded-lg shadow-sm transition"
+                    className="mt-4 px-4 py-2 bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold rounded-lg shadow-sm transition"
                   >
                     Connect Repository Now
                   </button>
@@ -559,42 +559,42 @@ export const GitHubActivityPage = () => {
         {/* Right Sidebar: Context & Contributor Mapping */}
         <div className="space-y-5">
           {/* Contribution Context Card */}
-          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm p-5 space-y-3 transition-colors">
-            <h3 className="text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider">
+          <div className="bg-white dark:bg-[#1B2022] rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-sm p-5 space-y-3 transition-colors">
+            <h3 className="text-xs font-bold text-[#172B21] dark:text-[#F1F5F3] uppercase tracking-wider">
               Integration status
             </h3>
-            <div className="space-y-2.5 text-xs text-[#52665A] dark:text-[#B0C4B5]">
+            <div className="space-y-2.5 text-xs text-[#52665A] dark:text-[#A5AFAB]">
               <div>
-                <span className="block font-semibold text-[#172B21] dark:text-[#E8F3EB]">Connected Project</span>
+                <span className="block font-semibold text-[#172B21] dark:text-[#F1F5F3]">Connected Project</span>
                 <span>{project?.title || 'Loading...'}</span>
               </div>
               <div>
-                <span className="block font-semibold text-[#172B21] dark:text-[#E8F3EB]">GitHub Repository</span>
+                <span className="block font-semibold text-[#172B21] dark:text-[#F1F5F3]">GitHub Repository</span>
                 <span className="font-mono text-[11px] text-[#15966A] dark:text-[#35B982]">
                   {status?.repository || 'None'}
                 </span>
               </div>
               <div>
-                <span className="block font-semibold text-[#172B21] dark:text-[#E8F3EB]">Event Webhooks</span>
+                <span className="block font-semibold text-[#172B21] dark:text-[#F1F5F3]">Event Webhooks</span>
                 <span>Push (Commits), Pull Requests, Issues</span>
               </div>
               <div>
-                <span className="block font-semibold text-[#172B21] dark:text-[#E8F3EB]">Mapped Contributors</span>
+                <span className="block font-semibold text-[#172B21] dark:text-[#F1F5F3]">Mapped Contributors</span>
                 <span>{status?.contributorMappings?.length || 0} author mapping(s) configured</span>
               </div>
             </div>
           </div>
 
           {/* Academic Integrity Highlight Callout */}
-          <div className="bg-[#FEF7EC] dark:bg-[#D69E36]/10 border border-[#D69E36]/30 dark:border-[#E7B95D]/30 rounded-xl p-5 text-xs text-[#172B21] dark:text-[#E8F3EB] space-y-2.5 transition-colors">
+          <div className="bg-[#FEF7EC] dark:bg-[#D69E36]/10 border border-[#D69E36]/30 dark:border-[#E7B95D]/30 rounded-xl p-5 text-xs text-[#172B21] dark:text-[#F1F5F3] space-y-2.5 transition-colors">
             <div className="flex items-center gap-2 font-bold text-[#D69E36] dark:text-[#E7B95D]">
               <Info className="w-4 h-4 shrink-0" />
               <span>Assessment Principle</span>
             </div>
-            <p className="font-semibold text-[#172B21] dark:text-[#E8F3EB] leading-relaxed">
+            <p className="font-semibold text-[#172B21] dark:text-[#F1F5F3] leading-relaxed">
               "Commit counts alone do not measure contribution quality."
             </p>
-            <p className="text-[11px] text-[#52665A] dark:text-[#B0C4B5] leading-relaxed">
+            <p className="text-[11px] text-[#52665A] dark:text-[#A5AFAB] leading-relaxed">
               TeamProof connects Git events with written explanations, non-code design, documentation, and verified teammate reviews to ensure holistic academic grading.
             </p>
           </div>
@@ -604,12 +604,12 @@ export const GitHubActivityPage = () => {
       {/* CONNECT REPOSITORY MODAL */}
       {isConnectModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-xl max-w-lg w-full p-6 space-y-4">
+          <div className="bg-white dark:bg-[#1B2022] rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-xl max-w-lg w-full p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
+              <h3 className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">
                 Connect GitHub repository
               </h3>
-              <button onClick={() => setIsConnectModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#849A8B] dark:hover:text-[#E8F3EB]">
+              <button onClick={() => setIsConnectModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#858F8C] dark:hover:text-[#F1F5F3]">
                 <X className="w-5 h-5" />
               </button>
             </div>
@@ -622,18 +622,18 @@ export const GitHubActivityPage = () => {
 
             {/* Install GitHub App button if needed */}
             {status?.installUrl && (
-              <div className="p-4 bg-[#EAF6EE] dark:bg-[#1B3829] border border-[#15966A]/20 dark:border-[#35B982]/30 rounded-xl space-y-2">
+              <div className="p-4 bg-[#EAF6EE] dark:bg-[#133827] border border-[#15966A]/20 dark:border-[#35B982]/30 rounded-xl space-y-2">
                 <div className="text-xs font-bold text-[#15966A] dark:text-[#35B982]">
                   Step 1: Install TeamProof GitHub App
                 </div>
-                <p className="text-[11px] text-[#52665A] dark:text-[#B0C4B5]">
+                <p className="text-[11px] text-[#52665A] dark:text-[#A5AFAB]">
                   Install the GitHub App on your GitHub account or organization so TeamProof can securely receive webhooks for your repositories.
                 </p>
                 <a
                   href={status.installUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold transition"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold transition"
                 >
                   <span>Install GitHub App</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -642,21 +642,21 @@ export const GitHubActivityPage = () => {
             )}
 
             <form onSubmit={handleConnectRepo} className="space-y-4 pt-2">
-              <div className="text-xs font-bold text-[#172B21] dark:text-[#E8F3EB]">
+              <div className="text-xs font-bold text-[#172B21] dark:text-[#F1F5F3]">
                 Step 2: Select or specify repository
               </div>
 
               {reposLoading ? (
-                <div className="text-xs text-[#84948A] dark:text-[#849A8B] py-4 text-center">Loading repositories...</div>
+                <div className="text-xs text-[#84948A] dark:text-[#858F8C] py-4 text-center">Loading repositories...</div>
               ) : availableRepos.length > 0 ? (
                 <div>
-                  <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
+                  <label className="block text-xs font-medium text-[#52665A] dark:text-[#A5AFAB] mb-1">
                     Accessible repositories
                   </label>
                   <select
                     value={selectedRepoFullName}
                     onChange={(e) => setSelectedRepoFullName(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                   >
                     {availableRepos.map((repo) => (
                       <option key={repo.id} value={repo.fullName}>
@@ -667,7 +667,7 @@ export const GitHubActivityPage = () => {
                 </div>
               ) : (
                 <div>
-                  <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
+                  <label className="block text-xs font-medium text-[#52665A] dark:text-[#A5AFAB] mb-1">
                     Repository full name (owner/repository)
                   </label>
                   <input
@@ -675,9 +675,9 @@ export const GitHubActivityPage = () => {
                     placeholder="e.g. Tanveer1907/TeamProof"
                     value={manualRepoInput}
                     onChange={(e) => setManualRepoInput(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                   />
-                  <p className="text-[11px] text-[#84948A] dark:text-[#849A8B] mt-1">
+                  <p className="text-[11px] text-[#84948A] dark:text-[#858F8C] mt-1">
                     Enter the GitHub repository name that has the TeamProof App or Webhook configured.
                   </p>
                 </div>
@@ -687,14 +687,14 @@ export const GitHubActivityPage = () => {
                 <button
                   type="button"
                   onClick={() => setIsConnectModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
+                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#30383A] text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={reposLoading}
-                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold shadow-sm transition disabled:opacity-50"
                 >
                   Connect repository
                 </button>
@@ -707,20 +707,20 @@ export const GitHubActivityPage = () => {
       {/* DISCONNECT CONFIRMATION MODAL */}
       {isDisconnectModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-xl max-w-sm w-full p-6 space-y-4">
+          <div className="bg-white dark:bg-[#1B2022] rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-xl max-w-sm w-full p-6 space-y-4">
             <div className="flex items-center gap-3 text-[#DC5555] dark:text-[#F07878]">
               <ShieldAlert className="w-6 h-6 shrink-0" />
-              <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
+              <h3 className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">
                 Disconnect repository?
               </h3>
             </div>
-            <p className="text-xs text-[#52665A] dark:text-[#B0C4B5]">
-              This will unlink <span className="font-bold text-[#172B21] dark:text-[#E8F3EB]">{status?.repository}</span> from this project. Existing verified activity records will remain preserved in the ledger.
+            <p className="text-xs text-[#52665A] dark:text-[#A5AFAB]">
+              This will unlink <span className="font-bold text-[#172B21] dark:text-[#F1F5F3]">{status?.repository}</span> from this project. Existing verified activity records will remain preserved in the ledger.
             </p>
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
                 onClick={() => setIsDisconnectModalOpen(false)}
-                className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
+                className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#30383A] text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] transition"
               >
                 Cancel
               </button>
@@ -738,25 +738,25 @@ export const GitHubActivityPage = () => {
       {/* CONTRIBUTOR MAPPING MODAL */}
       {isMappingModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-xl max-w-md w-full p-6 space-y-4">
+          <div className="bg-white dark:bg-[#1B2022] rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
+              <h3 className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">
                 Map GitHub author to team member
               </h3>
-              <button onClick={() => setIsMappingModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#849A8B] dark:hover:text-[#E8F3EB]">
+              <button onClick={() => setIsMappingModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#858F8C] dark:hover:text-[#F1F5F3]">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {mappingSuccess && (
-              <div className="p-3 bg-[#EAF6EE] dark:bg-[#1B3829] border border-[#15966A]/30 dark:border-[#35B982]/30 rounded-lg text-xs text-[#15966A] dark:text-[#35B982]">
+              <div className="p-3 bg-[#EAF6EE] dark:bg-[#133827] border border-[#15966A]/30 dark:border-[#35B982]/30 rounded-lg text-xs text-[#15966A] dark:text-[#35B982]">
                 {mappingSuccess}
               </div>
             )}
 
             <form onSubmit={handleMapContributor} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
+                <label className="block text-xs font-medium text-[#52665A] dark:text-[#A5AFAB] mb-1">
                   GitHub username
                 </label>
                 <input
@@ -765,18 +765,18 @@ export const GitHubActivityPage = () => {
                   value={mappingUsername}
                   onChange={(e) => setMappingUsername(e.target.value)}
                   required
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
+                <label className="block text-xs font-medium text-[#52665A] dark:text-[#A5AFAB] mb-1">
                   Select TeamProof project member
                 </label>
                 <select
                   value={mappingUserId}
                   onChange={(e) => setMappingUserId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
                   {projectMembers.map((m) => (
                     <option key={m._id} value={m.user?._id}>
@@ -790,14 +790,14 @@ export const GitHubActivityPage = () => {
                 <button
                   type="button"
                   onClick={() => setIsMappingModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
+                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#30383A] text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={mappingLoading}
-                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold shadow-sm transition disabled:opacity-50"
                 >
                   Save mapping
                 </button>
@@ -810,34 +810,34 @@ export const GitHubActivityPage = () => {
       {/* LINK ACTIVITY TO TASK / EVIDENCE MODAL */}
       {isLinkModalOpen && selectedActivity && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-xl max-w-md w-full p-6 space-y-4">
+          <div className="bg-white dark:bg-[#1B2022] rounded-xl border border-[#DFE9E1] dark:border-[#30383A] shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
+              <h3 className="text-base font-bold text-[#172B21] dark:text-[#F1F5F3]">
                 Link activity to task or evidence
               </h3>
-              <button onClick={() => setIsLinkModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#849A8B] dark:hover:text-[#E8F3EB]">
+              <button onClick={() => setIsLinkModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#858F8C] dark:hover:text-[#F1F5F3]">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-3 bg-[#F2F8F4] dark:bg-[#1E3025] rounded-lg text-xs space-y-1">
-              <div className="font-semibold text-[#172B21] dark:text-[#E8F3EB]">
+            <div className="p-3 bg-[#F2F8F4] dark:bg-[#22292B] rounded-lg text-xs space-y-1">
+              <div className="font-semibold text-[#172B21] dark:text-[#F1F5F3]">
                 {selectedActivity.refNumber} • {selectedActivity.title}
               </div>
-              <div className="text-[#84948A] dark:text-[#849A8B]">
+              <div className="text-[#84948A] dark:text-[#858F8C]">
                 {selectedActivity.activityType} • {new Date(selectedActivity.occurredAt).toLocaleDateString()}
               </div>
             </div>
 
             <form onSubmit={handleLinkActivity} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
+                <label className="block text-xs font-medium text-[#52665A] dark:text-[#A5AFAB] mb-1">
                   Connect to project task (optional)
                 </label>
                 <select
                   value={selectedTaskId}
                   onChange={(e) => setSelectedTaskId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
                   <option value="">-- No linked task --</option>
                   {projectTasks.map((t) => (
@@ -849,13 +849,13 @@ export const GitHubActivityPage = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
+                <label className="block text-xs font-medium text-[#52665A] dark:text-[#A5AFAB] mb-1">
                   Connect to submitted evidence (optional)
                 </label>
                 <select
                   value={selectedEvidenceId}
                   onChange={(e) => setSelectedEvidenceId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#30383A] bg-white dark:bg-[#111416] text-[#172B21] dark:text-[#F1F5F3] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
                   <option value="">-- No linked evidence --</option>
                   {projectEvidence.map((ev) => (
@@ -870,14 +870,14 @@ export const GitHubActivityPage = () => {
                 <button
                   type="button"
                   onClick={() => setIsLinkModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
+                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#30383A] text-xs font-semibold text-[#172B21] dark:text-[#F1F5F3] hover:bg-[#F2F8F4] dark:hover:bg-[#22292B] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={linkingLoading}
-                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold shadow-sm transition disabled:opacity-50"
                 >
                   Save links
                 </button>

@@ -34,21 +34,21 @@
   --color-primary-hover: #4AC993;
   --color-primary-active: #249B6A;
   --color-primary-dark: #B4EBD0;
-  --color-primary-light: #214B36;
-  --color-primary-subtle: #1B3829;
+  --color-primary-light: #22292B;
+  --color-primary-subtle: #1B2022;
   --color-accent-gold: #E7B95D;
 
-  --color-bg: #101A15;
-  --color-surface: #17251D;
-  --color-surface-secondary: #1E3025;
-  --color-surface-tertiary: #263B2E;
+  --color-bg: #111416;
+  --color-surface: #1B2022;
+  --color-surface-secondary: #22292B;
+  --color-surface-tertiary: #2A3234;
 
-  --color-text-primary: #E8F3EB;
-  --color-text-secondary: #B0C4B5;
-  --color-text-muted: #849A8B;
+  --color-text-primary: #F1F5F3;
+  --color-text-secondary: #A5AFAB;
+  --color-text-muted: #858F8C;
 
-  --color-border: #2D4234;
-  --color-border-strong: #425C49;
+  --color-border: #30383A;
+  --color-border-strong: #414B4D;
 
   --color-success: #35B982;
   --color-warning: #E7B95D;
