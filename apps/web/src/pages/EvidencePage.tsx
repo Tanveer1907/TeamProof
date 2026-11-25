@@ -3,17 +3,11 @@ import { NavLink } from 'react-router-dom';
 import {
   Plus,
   Search,
-  FileCheck2,
   ExternalLink,
-  Filter,
-  CheckCircle2,
-  AlertCircle,
-  Clock,
-  Eye,
   Check,
   RotateCcw,
   X,
-  FileText,
+  Eye,
   Inbox,
 } from 'lucide-react';
 import { api } from '../services/api';
@@ -105,14 +99,14 @@ export const EvidencePage: React.FC = () => {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#242438] dark:text-[#F0F6FC] tracking-tight">Contribution evidence</h1>
-          <p className="text-sm text-[#62677A] dark:text-[#8E94A5] mt-0.5">
+          <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#E8F3EB] tracking-tight">Contribution evidence</h1>
+          <p className="text-sm text-[#52665A] dark:text-[#B0C4B5] mt-0.5">
             A shared record of technical and non-technical work.
           </p>
         </div>
         <NavLink
           to="/evidence/new"
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#7654DC] hover:bg-[#6543C5] text-white text-xs font-semibold shadow-sm transition"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition"
         >
           <Plus className="w-3.5 h-3.5" />
           <span>Add evidence</span>
@@ -120,14 +114,14 @@ export const EvidencePage: React.FC = () => {
       </div>
 
       {/* Tabs & Search */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E1E4EC] dark:border-[#30363D] pb-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#DFE9E1] dark:border-[#2D4234] pb-3">
         <div className="flex items-center gap-6">
           <button
             onClick={() => setActiveTab('all')}
             className={`text-xs font-semibold pb-2 border-b-2 transition ${
               activeTab === 'all'
-                ? 'border-[#7654DC] text-[#7654DC] dark:text-[#9B7DFF] dark:border-[#9B7DFF]'
-                : 'border-transparent text-[#62677A] dark:text-[#8E94A5] hover:text-[#242438] dark:hover:text-[#F0F6FC]'
+                ? 'border-[#15966A] text-[#15966A] dark:text-[#35B982] dark:border-[#35B982]'
+                : 'border-transparent text-[#52665A] dark:text-[#849A8B] hover:text-[#172B21] dark:hover:text-[#E8F3EB]'
             }`}
           >
             All evidence
@@ -136,8 +130,8 @@ export const EvidencePage: React.FC = () => {
             onClick={() => setActiveTab('my')}
             className={`text-xs font-semibold pb-2 border-b-2 transition ${
               activeTab === 'my'
-                ? 'border-[#7654DC] text-[#7654DC] dark:text-[#9B7DFF] dark:border-[#9B7DFF]'
-                : 'border-transparent text-[#62677A] dark:text-[#8E94A5] hover:text-[#242438] dark:hover:text-[#F0F6FC]'
+                ? 'border-[#15966A] text-[#15966A] dark:text-[#35B982] dark:border-[#35B982]'
+                : 'border-transparent text-[#52665A] dark:text-[#849A8B] hover:text-[#172B21] dark:hover:text-[#E8F3EB]'
             }`}
           >
             My submissions
@@ -146,8 +140,8 @@ export const EvidencePage: React.FC = () => {
             onClick={() => setActiveTab('needs_review')}
             className={`text-xs font-semibold pb-2 border-b-2 transition ${
               activeTab === 'needs_review'
-                ? 'border-[#7654DC] text-[#7654DC] dark:text-[#9B7DFF] dark:border-[#9B7DFF]'
-                : 'border-transparent text-[#62677A] dark:text-[#8E94A5] hover:text-[#242438] dark:hover:text-[#F0F6FC]'
+                ? 'border-[#15966A] text-[#15966A] dark:text-[#35B982] dark:border-[#35B982]'
+                : 'border-transparent text-[#52665A] dark:text-[#849A8B] hover:text-[#172B21] dark:hover:text-[#E8F3EB]'
             }`}
           >
             Needs review
@@ -155,22 +149,22 @@ export const EvidencePage: React.FC = () => {
         </div>
 
         <div className="relative w-full sm:w-64">
-          <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#84948A] dark:text-[#849A8B] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search evidence..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] focus:outline-none focus:border-[#7654DC] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC]"
+            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB]"
           />
         </div>
       </div>
 
       {/* Evidence Table */}
-      <div className="bg-white dark:bg-[#161B22] rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-sm overflow-hidden transition-colors">
+      <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm overflow-hidden transition-colors">
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
-            <thead className="bg-[#F7F8FC] dark:bg-[#21262D] text-[#62677A] dark:text-[#8E94A5] font-semibold uppercase tracking-wider text-[11px] border-b border-[#E1E4EC] dark:border-[#30363D]">
+            <thead className="bg-[#F2F8F4] dark:bg-[#1E3025] text-[#52665A] dark:text-[#B0C4B5] font-semibold uppercase tracking-wider text-[11px] border-b border-[#DFE9E1] dark:border-[#2D4234]">
               <tr>
                 <th className="px-6 py-3.5">Submission</th>
                 <th className="px-4 py-3.5">Linked Task</th>
@@ -179,10 +173,10 @@ export const EvidencePage: React.FC = () => {
                 <th className="px-6 py-3.5 text-right">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#E1E4EC] dark:divide-[#30363D]">
+            <tbody className="divide-y divide-[#DFE9E1] dark:divide-[#2D4234]">
               {loading ? (
                 <tr>
-                  <td colSpan={5} className="px-6 py-10 text-center text-gray-400 dark:text-gray-500">
+                  <td colSpan={5} className="px-6 py-10 text-center text-[#84948A] dark:text-[#849A8B]">
                     Loading evidence records...
                   </td>
                 </tr>
@@ -190,19 +184,19 @@ export const EvidencePage: React.FC = () => {
                 evidenceList.map((ev) => {
                   const statusBadge =
                     ev.status === 'Verified'
-                      ? 'bg-[#E8F5E9] dark:bg-[#16865C]/20 text-[#16865C] dark:text-emerald-400'
+                      ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
                       : ev.status === 'Needs Changes'
-                      ? 'bg-[#FFEBEE] dark:bg-[#D94B4B]/20 text-[#D94B4B] dark:text-red-400'
-                      : 'bg-[#FFF8E1] dark:bg-[#D98B28]/20 text-[#D98B28] dark:text-amber-400';
+                      ? 'bg-[#FDEDEC] dark:bg-[#DC5555]/20 text-[#DC5555] dark:text-[#F07878]'
+                      : 'bg-[#FEF7EC] dark:bg-[#D69E36]/20 text-[#D69E36] dark:text-[#E7B95D]';
 
                   const isOwnSubmission = ev.contributor?._id === user?._id;
 
                   return (
-                    <tr key={ev._id} className="hover:bg-gray-50/70 dark:hover:bg-[#21262D]/50 transition">
+                    <tr key={ev._id} className="hover:bg-[#F2F8F4]/60 dark:hover:bg-[#1E3025]/50 transition">
                       <td className="px-6 py-4">
-                        <div className="font-semibold text-sm text-[#242438] dark:text-[#F0F6FC]">{ev.title}</div>
-                        <div className="text-[11px] text-[#62677A] dark:text-[#8E94A5] mt-0.5 flex items-center gap-1.5 flex-wrap">
-                          <span className="font-semibold text-[#7654DC] dark:text-[#9B7DFF]">{ev.evidenceIdStr}</span>
+                        <div className="font-semibold text-sm text-[#172B21] dark:text-[#E8F3EB]">{ev.title}</div>
+                        <div className="text-[11px] text-[#52665A] dark:text-[#B0C4B5] mt-0.5 flex items-center gap-1.5 flex-wrap">
+                          <span className="font-semibold text-[#15966A] dark:text-[#35B982]">{ev.evidenceIdStr}</span>
                           <span>•</span>
                           <span>{ev.category}</span>
                           {ev.externalUrl && (
@@ -212,7 +206,7 @@ export const EvidencePage: React.FC = () => {
                                 href={ev.externalUrl}
                                 target="_blank"
                                 rel="noreferrer"
-                                className="text-[#3677C7] dark:text-blue-400 hover:underline inline-flex items-center gap-0.5"
+                                className="text-[#3985CF] dark:text-[#71B2EC] hover:underline inline-flex items-center gap-0.5"
                               >
                                 <span>Link</span>
                                 <ExternalLink className="w-3 h-3" />
@@ -224,20 +218,20 @@ export const EvidencePage: React.FC = () => {
 
                       <td className="px-4 py-4">
                         {ev.task ? (
-                          <span className="inline-flex items-center gap-1 font-semibold text-[#7654DC] dark:text-[#9B7DFF] bg-[#F0EAFF] dark:bg-[#7654DC]/20 px-2 py-0.5 rounded text-[11px]">
+                          <span className="inline-flex items-center gap-1 font-semibold text-[#15966A] dark:text-[#35B982] bg-[#EAF6EE] dark:bg-[#1B3829] px-2 py-0.5 rounded text-[11px]">
                             {ev.task.taskIdStr}
                           </span>
                         ) : (
-                          <span className="text-gray-400 dark:text-gray-500 text-[11px]">None</span>
+                          <span className="text-[#84948A] dark:text-[#849A8B] text-[11px]">None</span>
                         )}
                       </td>
 
                       <td className="px-6 py-4">
                         <div className="flex items-center gap-2">
-                          <div className="w-6 h-6 rounded-full bg-[#F0EAFF] dark:bg-[#7654DC]/20 text-[#7654DC] dark:text-[#9B7DFF] font-semibold text-[10px] flex items-center justify-center">
+                          <div className="w-6 h-6 rounded-full bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] font-semibold text-[10px] flex items-center justify-center">
                             {ev.contributor?.avatar || ev.contributor?.name?.substring(0, 2).toUpperCase()}
                           </div>
-                          <span className="font-medium text-[#242438] dark:text-[#F0F6FC]">{ev.contributor?.name}</span>
+                          <span className="font-medium text-[#172B21] dark:text-[#E8F3EB]">{ev.contributor?.name}</span>
                         </div>
                       </td>
 
@@ -250,7 +244,7 @@ export const EvidencePage: React.FC = () => {
                       <td className="px-6 py-4 text-right">
                         <button
                           onClick={() => handleOpenReview(ev)}
-                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] hover:border-[#7654DC] hover:text-[#7654DC] dark:hover:border-[#9B7DFF] dark:hover:text-[#9B7DFF] transition"
+                          className="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:border-[#15966A] hover:text-[#15966A] dark:hover:border-[#35B982] dark:hover:text-[#35B982] transition"
                         >
                           <Eye className="w-3.5 h-3.5" />
                           <span>{isOwnSubmission ? 'View' : 'Review'}</span>
@@ -262,10 +256,10 @@ export const EvidencePage: React.FC = () => {
               ) : (
                 <tr>
                   <td colSpan={5} className="px-6 py-12 text-center">
-                    <div className="flex flex-col items-center justify-center text-gray-400 dark:text-gray-500">
+                    <div className="flex flex-col items-center justify-center text-[#84948A] dark:text-[#849A8B]">
                       <Inbox className="w-9 h-9 mb-2 stroke-[1.5]" />
                       <span className="text-xs font-semibold">No evidence submissions found</span>
-                      <p className="text-[11px] text-[#8E94A5] mt-1">
+                      <p className="text-[11px] text-[#84948A] dark:text-[#849A8B] mt-1">
                         Try switching tabs or submit a new contribution.
                       </p>
                     </div>
@@ -277,39 +271,39 @@ export const EvidencePage: React.FC = () => {
         </div>
       </div>
 
-      <div className="text-center text-xs text-[#8E94A5]">
+      <div className="text-center text-xs text-[#84948A] dark:text-[#849A8B]">
         Files, written explanations, and GitHub activity are preserved for transparent academic review.
       </div>
 
       {/* Review Modal */}
       {reviewModalOpen && selectedEvidence && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-[#161B22] rounded-2xl max-w-xl w-full p-6 shadow-xl border border-[#E1E4EC] dark:border-[#30363D] max-h-[90vh] overflow-y-auto">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E1E4EC] dark:border-[#30363D]">
+          <div className="bg-white dark:bg-[#17251D] rounded-2xl max-w-xl w-full p-6 shadow-xl border border-[#DFE9E1] dark:border-[#2D4234] max-h-[90vh] overflow-y-auto">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DFE9E1] dark:border-[#2D4234]">
               <div>
-                <span className="text-xs font-bold text-[#7654DC] dark:text-[#9B7DFF]">{selectedEvidence.evidenceIdStr}</span>
-                <span className="text-xs text-gray-400 mx-2">•</span>
-                <span className="text-xs font-semibold text-[#242438] dark:text-[#F0F6FC]">{selectedEvidence.category}</span>
+                <span className="text-xs font-bold text-[#15966A] dark:text-[#35B982]">{selectedEvidence.evidenceIdStr}</span>
+                <span className="text-xs text-[#84948A] dark:text-[#849A8B] mx-2">•</span>
+                <span className="text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB]">{selectedEvidence.category}</span>
               </div>
-              <button onClick={() => setReviewModalOpen(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+              <button onClick={() => setReviewModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#849A8B] dark:hover:text-[#E8F3EB]">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div className="mt-4 space-y-4">
               <div>
-                <h3 className="text-base font-bold text-[#242438] dark:text-[#F0F6FC]">{selectedEvidence.title}</h3>
-                <p className="text-xs text-[#62677A] dark:text-[#8E94A5] mt-1 whitespace-pre-wrap">{selectedEvidence.description}</p>
+                <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">{selectedEvidence.title}</h3>
+                <p className="text-xs text-[#52665A] dark:text-[#B0C4B5] mt-1 whitespace-pre-wrap">{selectedEvidence.description}</p>
               </div>
 
               {selectedEvidence.externalUrl && (
-                <div className="p-3 bg-gray-50 dark:bg-[#21262D] rounded-lg border border-gray-100 dark:border-[#30363D] flex items-center justify-between text-xs">
-                  <span className="text-gray-600 dark:text-gray-300 truncate">{selectedEvidence.externalUrl}</span>
+                <div className="p-3 bg-[#F2F8F4] dark:bg-[#1E3025] rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] flex items-center justify-between text-xs">
+                  <span className="text-[#52665A] dark:text-[#B0C4B5] truncate">{selectedEvidence.externalUrl}</span>
                   <a
                     href={selectedEvidence.externalUrl}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-[#7654DC] dark:text-[#9B7DFF] font-semibold hover:underline shrink-0 ml-2 inline-flex items-center gap-1"
+                    className="text-[#15966A] dark:text-[#35B982] font-semibold hover:underline shrink-0 ml-2 inline-flex items-center gap-1"
                   >
                     <span>Open link</span>
                     <ExternalLink className="w-3.5 h-3.5" />
@@ -319,18 +313,18 @@ export const EvidencePage: React.FC = () => {
 
               {/* Review History */}
               {reviews.length > 0 && (
-                <div className="space-y-2 pt-2 border-t border-[#E1E4EC] dark:border-[#30363D]">
-                  <h4 className="text-xs font-bold text-[#242438] dark:text-[#F0F6FC]">Review History</h4>
+                <div className="space-y-2 pt-2 border-t border-[#DFE9E1] dark:border-[#2D4234]">
+                  <h4 className="text-xs font-bold text-[#172B21] dark:text-[#E8F3EB]">Review History</h4>
                   <div className="space-y-2">
                     {reviews.map((r) => (
-                      <div key={r._id} className="p-3 bg-gray-50 dark:bg-[#21262D] rounded-lg text-xs">
+                      <div key={r._id} className="p-3 bg-[#F2F8F4] dark:bg-[#1E3025] rounded-lg text-xs">
                         <div className="flex items-center justify-between font-semibold">
-                          <span className="text-[#242438] dark:text-[#F0F6FC]">{r.reviewer?.name}</span>
-                          <span className={r.decision === 'Verified' ? 'text-[#16865C] dark:text-emerald-400' : 'text-[#D94B4B] dark:text-red-400'}>
+                          <span className="text-[#172B21] dark:text-[#E8F3EB]">{r.reviewer?.name}</span>
+                          <span className={r.decision === 'Verified' ? 'text-[#15966A] dark:text-[#35B982]' : 'text-[#DC5555] dark:text-[#F07878]'}>
                             {r.decision}
                           </span>
                         </div>
-                        <p className="text-gray-600 dark:text-gray-300 mt-1">{r.comment}</p>
+                        <p className="text-[#52665A] dark:text-[#B0C4B5] mt-1">{r.comment}</p>
                       </div>
                     ))}
                   </div>
@@ -339,15 +333,15 @@ export const EvidencePage: React.FC = () => {
 
               {/* Review Form - only if not contributor */}
               {selectedEvidence.contributor?._id === user?._id ? (
-                <div className="p-3 bg-blue-50 dark:bg-blue-950/30 text-[#3677C7] dark:text-blue-300 rounded-lg text-xs">
+                <div className="p-3 bg-[#EAF2EC] dark:bg-[#1E3025] text-[#15966A] dark:text-[#35B982] rounded-lg text-xs border border-[#DFE9E1] dark:border-[#2D4234]">
                   You are the contributor of this evidence. Teammates or faculty will verify this submission.
                 </div>
               ) : (
-                <form onSubmit={handleSubmitReview} className="space-y-3 pt-3 border-t border-[#E1E4EC] dark:border-[#30363D]">
-                  <h4 className="text-xs font-bold text-[#242438] dark:text-[#F0F6FC]">Record Teammate Review Decision</h4>
+                <form onSubmit={handleSubmitReview} className="space-y-3 pt-3 border-t border-[#DFE9E1] dark:border-[#2D4234]">
+                  <h4 className="text-xs font-bold text-[#172B21] dark:text-[#E8F3EB]">Record Teammate Review Decision</h4>
 
                   {reviewError && (
-                    <div className="p-2.5 rounded-lg bg-red-50 dark:bg-red-950/30 text-[#D94B4B] text-xs">
+                    <div className="p-2.5 rounded-lg bg-[#FDEDEC] dark:bg-[#DC5555]/20 text-[#DC5555] dark:text-[#F07878] text-xs">
                       {reviewError}
                     </div>
                   )}
@@ -358,8 +352,8 @@ export const EvidencePage: React.FC = () => {
                       onClick={() => setDecision('Verified')}
                       className={`p-2.5 rounded-lg text-xs font-semibold border flex items-center justify-center gap-2 transition ${
                         decision === 'Verified'
-                          ? 'bg-[#E8F5E9] dark:bg-[#16865C]/20 text-[#16865C] dark:text-emerald-400 border-[#16865C]'
-                          : 'bg-white dark:bg-[#21262D] text-gray-600 dark:text-gray-300 border-gray-200 dark:border-[#30363D]'
+                          ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] border-[#15966A] dark:border-[#35B982]'
+                          : 'bg-white dark:bg-[#1E3025] text-[#52665A] dark:text-[#B0C4B5] border-[#DFE9E1] dark:border-[#2D4234]'
                       }`}
                     >
                       <Check className="w-4 h-4" />
@@ -370,8 +364,8 @@ export const EvidencePage: React.FC = () => {
                       onClick={() => setDecision('Needs Changes')}
                       className={`p-2.5 rounded-lg text-xs font-semibold border flex items-center justify-center gap-2 transition ${
                         decision === 'Needs Changes'
-                          ? 'bg-[#FFEBEE] dark:bg-[#D94B4B]/20 text-[#D94B4B] dark:text-red-400 border-[#D94B4B]'
-                          : 'bg-white dark:bg-[#21262D] text-gray-600 dark:text-gray-300 border-gray-200 dark:border-[#30363D]'
+                          ? 'bg-[#FDEDEC] dark:bg-[#DC5555]/20 text-[#DC5555] dark:text-[#F07878] border-[#DC5555] dark:border-[#F07878]'
+                          : 'bg-white dark:bg-[#1E3025] text-[#52665A] dark:text-[#B0C4B5] border-[#DFE9E1] dark:border-[#2D4234]'
                       }`}
                     >
                       <RotateCcw className="w-4 h-4" />
@@ -380,7 +374,7 @@ export const EvidencePage: React.FC = () => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">
+                    <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">
                       Review Comments / Feedback *
                     </label>
                     <textarea
@@ -389,7 +383,7 @@ export const EvidencePage: React.FC = () => {
                       placeholder="Explain your verification rationale or detail required modifications..."
                       value={comment}
                       onChange={(e) => setComment(e.target.value)}
-                      className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+                      className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                     />
                   </div>
 
@@ -397,14 +391,14 @@ export const EvidencePage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setReviewModalOpen(false)}
-                      className="px-4 py-2 text-xs font-semibold text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-[#21262D] rounded-lg"
+                      className="px-4 py-2 text-xs font-semibold text-[#52665A] dark:text-[#B0C4B5] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] rounded-lg"
                     >
                       Cancel
                     </button>
                     <button
                       type="submit"
                       disabled={submittingReview}
-                      className="px-4 py-2 text-xs font-semibold bg-[#7654DC] hover:bg-[#6543C5] text-white rounded-lg shadow-sm"
+                      className="px-4 py-2 text-xs font-semibold bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] rounded-lg shadow-sm transition"
                     >
                       {submittingReview ? 'Submitting...' : 'Submit Decision'}
                     </button>

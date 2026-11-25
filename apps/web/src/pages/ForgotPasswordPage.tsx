@@ -13,74 +13,78 @@ export const ForgotPasswordPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F7F8FC] dark:bg-[#0E1117] flex flex-col justify-center py-12 sm:px-6 lg:px-8 transition-colors relative">
+    <div className="min-h-screen bg-[#F7FAF8] dark:bg-[#101A15] flex flex-col justify-center py-16 px-4 sm:px-6 lg:px-8 transition-colors relative font-sans">
       {/* Top Bar with Home link and Theme switch */}
-      <div className="absolute top-6 left-6 right-6 flex items-center justify-between max-w-5xl mx-auto">
-        <Link to="/" className="flex items-center gap-2 text-xs font-semibold text-[#62677A] dark:text-[#8E94A5] hover:text-[#7654DC] dark:hover:text-[#9B7DFF] transition">
-          <ShieldCheck className="w-5 h-5 text-[#7654DC]" />
+      <div className="fixed top-6 left-6 right-6 flex items-center justify-between max-w-6xl mx-auto z-20">
+        <Link to="/" className="flex items-center gap-2 text-xs font-semibold text-[#52665A] dark:text-[#849A8B] hover:text-[#15966A] dark:hover:text-[#35B982] transition bg-white/80 dark:bg-[#17251D]/80 backdrop-blur-sm px-3 py-1.5 rounded-full border border-[#DFE9E1] dark:border-[#2D4234] shadow-xs">
+          <ShieldCheck className="w-4 h-4 text-[#15966A] dark:text-[#35B982]" />
           <span>Back to Home</span>
         </Link>
-        <ThemeToggle />
+        <div className="bg-white/80 dark:bg-[#17251D]/80 backdrop-blur-sm p-1 rounded-full border border-[#DFE9E1] dark:border-[#2D4234] shadow-xs">
+          <ThemeToggle />
+        </div>
       </div>
 
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center">
-        <Link to="/" className="inline-block">
-          <div className="w-12 h-12 rounded-2xl bg-[#7654DC] mx-auto flex items-center justify-center text-white shadow-md">
-            <ShieldCheck className="w-7 h-7" />
+      <div className="sm:mx-auto sm:w-full sm:max-w-xl text-center">
+        <Link to="/" className="inline-block group">
+          <div className="w-14 h-14 rounded-2xl bg-[#15966A] dark:bg-[#35B982] mx-auto flex items-center justify-center text-white shadow-lg group-hover:scale-105 transition-transform">
+            <ShieldCheck className="w-8 h-8" />
           </div>
         </Link>
-        <h2 className="mt-4 text-2xl font-bold tracking-tight text-[#242438] dark:text-[#F0F6FC]">
+        <h2 className="mt-5 text-3xl font-extrabold tracking-tight text-[#172B21] dark:text-[#E8F3EB]">
           Reset Password
         </h2>
-        <p className="mt-1 text-xs text-[#62677A] dark:text-[#8E94A5]">
+        <p className="mt-2 text-sm text-[#52665A] dark:text-[#849A8B]">
           Enter your university email to receive recovery instructions
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white dark:bg-[#161B22] py-8 px-6 shadow-sm border border-[#E1E4EC] dark:border-[#30363D] rounded-2xl sm:px-10 transition-colors">
+      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-xl">
+        <div className="bg-white dark:bg-[#17251D] py-10 px-8 sm:px-12 shadow-lg border border-[#DFE9E1] dark:border-[#2D4234] rounded-3xl transition-colors">
           {submitted ? (
-            <div className="text-center space-y-3">
-              <CheckCircle2 className="w-10 h-10 text-[#16865C] mx-auto" />
-              <h3 className="font-bold text-sm text-[#242438] dark:text-[#F0F6FC]">Check your inbox</h3>
-              <p className="text-xs text-[#62677A] dark:text-[#8E94A5]">
-                If an account exists for {email}, a password reset link has been dispatched.
+            <div className="text-center space-y-4 py-4">
+              <CheckCircle2 className="w-12 h-12 text-[#15966A] dark:text-[#35B982] mx-auto" />
+              <h3 className="font-bold text-base text-[#172B21] dark:text-[#E8F3EB]">Check your inbox</h3>
+              <p className="text-sm text-[#52665A] dark:text-[#849A8B]">
+                If an account exists for <strong className="text-[#172B21] dark:text-[#E8F3EB]">{email}</strong>, a password reset link has been dispatched.
               </p>
               <div className="pt-4">
                 <NavLink
                   to="/login"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#7654DC] dark:text-[#9B7DFF] hover:underline"
+                  className="inline-flex items-center gap-2 text-sm font-bold text-[#15966A] dark:text-[#35B982] hover:underline"
                 >
-                  <ArrowLeft className="w-3.5 h-3.5" />
+                  <ArrowLeft className="w-4 h-4" />
                   <span>Return to login</span>
                 </NavLink>
               </div>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-5">
               <div>
-                <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Email address</label>
+                <label className="block text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider mb-1.5">
+                  University Email Address
+                </label>
                 <input
                   type="email"
                   required
                   placeholder="student@university.edu"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+                  className="w-full px-4 py-3 text-sm rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-2 focus:ring-[#15966A]/20 transition"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full py-2.5 px-4 rounded-lg bg-[#7654DC] hover:bg-[#6543C5] text-white text-xs font-bold shadow-sm transition"
+                className="w-full py-3.5 px-6 rounded-xl bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white text-sm font-bold shadow-md transition"
               >
                 Send Reset Link
               </button>
 
-              <div className="text-center pt-2">
+              <div className="text-center pt-4 border-t border-[#DFE9E1] dark:border-[#2D4234]">
                 <NavLink
                   to="/login"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#62677A] dark:text-[#8E94A5] hover:text-[#7654DC] dark:hover:text-[#9B7DFF]"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#52665A] dark:text-[#849A8B] hover:text-[#15966A] dark:hover:text-[#35B982]"
                 >
                   <ArrowLeft className="w-3.5 h-3.5" />
                   <span>Back to login</span>

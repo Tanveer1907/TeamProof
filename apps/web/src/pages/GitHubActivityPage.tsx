@@ -260,8 +260,8 @@ export const GitHubActivityPage: React.FC = () => {
         <div
           className={`p-4 rounded-xl flex items-center justify-between text-xs font-semibold ${
             feedback.type === 'success'
-              ? 'bg-emerald-50 dark:bg-emerald-950/30 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800'
-              : 'bg-rose-50 dark:bg-rose-950/30 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800'
+              ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] border border-[#15966A]/30 dark:border-[#35B982]/40'
+              : 'bg-[#FDEDEC] dark:bg-[#DC5555]/20 text-[#DC5555] dark:text-[#F07878] border border-[#DC5555]/30 dark:border-[#F07878]/40'
           }`}
         >
           <span>{feedback.message}</span>
@@ -274,8 +274,8 @@ export const GitHubActivityPage: React.FC = () => {
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#242438] dark:text-[#F0F6FC] tracking-tight">GitHub activity</h1>
-          <p className="text-sm text-[#62677A] dark:text-[#8E94A5] mt-0.5">
+          <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#E8F3EB] tracking-tight">GitHub activity</h1>
+          <p className="text-sm text-[#52665A] dark:text-[#B0C4B5] mt-0.5">
             Real code contributions and pull requests linked to academic evidence.
           </p>
         </div>
@@ -283,7 +283,7 @@ export const GitHubActivityPage: React.FC = () => {
           <button
             onClick={() => fetchData(true)}
             disabled={refreshing}
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] hover:bg-gray-50 dark:hover:bg-[#21262D] transition disabled:opacity-50"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition disabled:opacity-50"
             title="Refresh activity feed"
           >
             <RefreshCw className={`w-3.5 h-3.5 ${refreshing ? 'animate-spin' : ''}`} />
@@ -291,13 +291,13 @@ export const GitHubActivityPage: React.FC = () => {
           </button>
 
           {isConnected ? (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#E8F5E9] dark:bg-[#16865C]/20 text-[#16865C] dark:text-emerald-400">
-              <span className="w-2 h-2 rounded-full bg-[#16865C] animate-pulse"></span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]">
+              <span className="w-2 h-2 rounded-full bg-[#15966A] dark:bg-[#35B982] animate-pulse"></span>
               <span>Connected Repository</span>
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800">
-              <span className="w-2 h-2 rounded-full bg-amber-500"></span>
+            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#FEF7EC] dark:bg-[#D69E36]/20 text-[#D69E36] dark:text-[#E7B95D] border border-[#D69E36]/30">
+              <span className="w-2 h-2 rounded-full bg-[#D69E36]"></span>
               <span>Not Connected</span>
             </span>
           )}
@@ -305,22 +305,22 @@ export const GitHubActivityPage: React.FC = () => {
       </div>
 
       {/* Repo connection bar */}
-      <div className="bg-white dark:bg-[#161B22] p-5 rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
+      <div className="bg-white dark:bg-[#17251D] p-5 rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4 transition-colors">
         <div className="flex items-center gap-3">
           <div
             className={`w-10 h-10 rounded-xl flex items-center justify-center ${
               isConnected
-                ? 'bg-purple-50 dark:bg-purple-950/30 text-[#7654DC] dark:text-[#9B7DFF]'
-                : 'bg-gray-100 dark:bg-[#21262D] text-gray-500 dark:text-gray-400'
+                ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
+                : 'bg-[#F2F8F4] dark:bg-[#1E3025] text-[#84948A] dark:text-[#849A8B]'
             }`}
           >
             <GitBranch className="w-5 h-5" />
           </div>
           <div>
-            <div className="text-sm font-bold text-[#242438] dark:text-[#F0F6FC]">
+            <div className="text-sm font-bold text-[#172B21] dark:text-[#E8F3EB]">
               {isConnected ? status.repository : 'No GitHub repository connected'}
             </div>
-            <div className="text-xs text-[#62677A] dark:text-[#8E94A5]">
+            <div className="text-xs text-[#52665A] dark:text-[#B0C4B5]">
               {isConnected
                 ? `Default branch: ${status.branch || 'main'} • Live Webhook Enabled`
                 : 'Connect your project to a GitHub repository to track commits, PRs, and issues.'}
@@ -336,7 +336,7 @@ export const GitHubActivityPage: React.FC = () => {
                   href={status.htmlUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] hover:bg-gray-50 dark:hover:bg-[#21262D] transition"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
                 >
                   <span>View on GitHub</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -347,7 +347,7 @@ export const GitHubActivityPage: React.FC = () => {
                 <>
                   <button
                     onClick={() => openMappingModal()}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] hover:bg-gray-50 dark:hover:bg-[#21262D] transition"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
                   >
                     <UserCheck className="w-3.5 h-3.5" />
                     <span>Map Authors</span>
@@ -355,7 +355,7 @@ export const GitHubActivityPage: React.FC = () => {
 
                   <button
                     onClick={() => setIsDisconnectModalOpen(true)}
-                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-rose-200 dark:border-rose-900/40 text-xs font-semibold text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/20 transition"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-[#DC5555]/30 dark:border-[#DC5555]/40 text-xs font-semibold text-[#DC5555] dark:text-[#F07878] hover:bg-[#FDEDEC] dark:hover:bg-[#DC5555]/20 transition"
                   >
                     <Unlink className="w-3.5 h-3.5" />
                     <span>Disconnect</span>
@@ -367,7 +367,7 @@ export const GitHubActivityPage: React.FC = () => {
             isPrivileged && (
               <button
                 onClick={openConnectModal}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#7654DC] hover:bg-[#6342CA] text-white text-xs font-semibold shadow-sm transition"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition"
               >
                 <Plus className="w-4 h-4" />
                 <span>Connect GitHub Repository</span>
@@ -380,14 +380,14 @@ export const GitHubActivityPage: React.FC = () => {
       {/* Main Grid: Activity Timeline & Context Card */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Timeline (2 columns) */}
-        <div className="lg:col-span-2 bg-white dark:bg-[#161B22] rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-sm p-6 space-y-4 transition-colors">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#E1E4EC] dark:border-[#30363D] pb-4">
-            <h2 className="text-sm font-bold text-[#242438] dark:text-[#F0F6FC] uppercase tracking-wider">
+        <div className="lg:col-span-2 bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm p-6 space-y-4 transition-colors">
+          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 border-b border-[#DFE9E1] dark:border-[#2D4234] pb-4">
+            <h2 className="text-sm font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider">
               Activity timeline
             </h2>
 
             {/* Event Filter Tabs */}
-            <div className="flex items-center gap-1 bg-gray-100 dark:bg-[#21262D] p-1 rounded-lg">
+            <div className="flex items-center gap-1 bg-[#F2F8F4] dark:bg-[#1E3025] p-1 rounded-lg">
               {[
                 { id: 'all', label: 'All' },
                 { id: 'commit', label: 'Commits' },
@@ -399,8 +399,8 @@ export const GitHubActivityPage: React.FC = () => {
                   onClick={() => setFilterType(tab.id)}
                   className={`px-2.5 py-1 text-xs font-medium rounded-md transition ${
                     filterType === tab.id
-                      ? 'bg-white dark:bg-[#161B22] text-[#7654DC] dark:text-[#9B7DFF] shadow-xs'
-                      : 'text-[#62677A] dark:text-[#8E94A5] hover:text-[#242438] dark:hover:text-[#F0F6FC]'
+                      ? 'bg-white dark:bg-[#17251D] text-[#15966A] dark:text-[#35B982] shadow-xs'
+                      : 'text-[#52665A] dark:text-[#849A8B] hover:text-[#172B21] dark:hover:text-[#E8F3EB]'
                   }`}
                 >
                   {tab.label}
@@ -409,9 +409,9 @@ export const GitHubActivityPage: React.FC = () => {
             </div>
           </div>
 
-          <div className="divide-y divide-[#E1E4EC] dark:divide-[#30363D]">
+          <div className="divide-y divide-[#DFE9E1] dark:divide-[#2D4234]">
             {loading ? (
-              <div className="text-xs text-gray-400 dark:text-gray-500 py-12 text-center">Loading GitHub activity...</div>
+              <div className="text-xs text-[#84948A] dark:text-[#849A8B] py-12 text-center">Loading GitHub activity...</div>
             ) : activities.length > 0 ? (
               activities.map((act) => {
                 const isPR = act.activityType === 'pull_request';
@@ -423,10 +423,10 @@ export const GitHubActivityPage: React.FC = () => {
                     <div
                       className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 ${
                         isPR
-                          ? 'bg-purple-50 dark:bg-purple-950/30 text-[#7654DC] dark:text-[#9B7DFF]'
+                          ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
                           : isCommit
-                          ? 'bg-blue-50 dark:bg-blue-950/30 text-[#3677C7] dark:text-blue-400'
-                          : 'bg-amber-50 dark:bg-amber-950/30 text-amber-600 dark:text-amber-400'
+                          ? 'bg-blue-50 dark:bg-blue-950/30 text-[#3985CF] dark:text-[#71B2EC]'
+                          : 'bg-amber-50 dark:bg-amber-950/30 text-[#D69E36] dark:text-[#E7B95D]'
                       }`}
                     >
                       {isPR && <GitPullRequest className="w-4 h-4" />}
@@ -437,7 +437,7 @@ export const GitHubActivityPage: React.FC = () => {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2 min-w-0">
-                          <span className="font-semibold text-xs text-[#242438] dark:text-[#F0F6FC] truncate">
+                          <span className="font-semibold text-xs text-[#172B21] dark:text-[#E8F3EB] truncate">
                             {act.refNumber ? `${act.refNumber} • ` : ''}
                             {act.title}
                           </span>
@@ -445,10 +445,10 @@ export const GitHubActivityPage: React.FC = () => {
                             <span
                               className={`px-1.5 py-0.5 text-[10px] font-bold rounded uppercase ${
                                 act.state === 'merged'
-                                  ? 'bg-purple-100 dark:bg-purple-950/40 text-purple-700 dark:text-purple-300'
+                                  ? 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
                                   : act.state === 'closed'
-                                  ? 'bg-gray-100 dark:bg-gray-800 text-gray-600 dark:text-gray-400'
-                                  : 'bg-emerald-100 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300'
+                                  ? 'bg-[#F2F8F4] dark:bg-[#1E3025] text-[#52665A] dark:text-[#B0C4B5]'
+                                  : 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]'
                               }`}
                             >
                               {act.state}
@@ -456,7 +456,7 @@ export const GitHubActivityPage: React.FC = () => {
                           )}
                         </div>
 
-                        <span className="text-[11px] text-[#8E94A5] shrink-0">
+                        <span className="text-[11px] text-[#84948A] dark:text-[#849A8B] shrink-0">
                           {new Date(act.occurredAt).toLocaleDateString('en-GB', {
                             day: 'numeric',
                             month: 'short',
@@ -466,19 +466,19 @@ export const GitHubActivityPage: React.FC = () => {
                       </div>
 
                       {/* Author and branch metadata */}
-                      <div className="text-[11px] text-[#62677A] dark:text-[#8E94A5] mt-1 flex flex-wrap items-center gap-2">
+                      <div className="text-[11px] text-[#52665A] dark:text-[#B0C4B5] mt-1 flex flex-wrap items-center gap-2">
                         {act.contributor ? (
-                          <span className="inline-flex items-center gap-1 font-medium text-[#242438] dark:text-[#F0F6FC]">
-                            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                          <span className="inline-flex items-center gap-1 font-medium text-[#172B21] dark:text-[#E8F3EB]">
+                            <span className="w-1.5 h-1.5 rounded-full bg-[#15966A] dark:bg-[#35B982]"></span>
                             {act.contributor.name}
                           </span>
                         ) : act.githubUsername ? (
-                          <span className="inline-flex items-center gap-1.5 text-amber-600 dark:text-amber-400">
+                          <span className="inline-flex items-center gap-1.5 text-[#D69E36] dark:text-[#E7B95D]">
                             <span>@{act.githubUsername}</span>
                             {isPrivileged && (
                               <button
                                 onClick={() => openMappingModal(act.githubUsername)}
-                                className="text-[10px] underline hover:text-amber-700 dark:hover:text-amber-300"
+                                className="text-[10px] underline hover:text-[#15966A] dark:hover:text-[#35B982]"
                               >
                                 (Map to teammate)
                               </button>
@@ -494,7 +494,7 @@ export const GitHubActivityPage: React.FC = () => {
                         {act.branch && (
                           <>
                             <span>•</span>
-                            <span className="font-mono text-[10px] bg-gray-100 dark:bg-[#21262D] px-1.5 py-0.5 rounded text-[#242438] dark:text-[#F0F6FC]">
+                            <span className="font-mono text-[10px] bg-[#F2F8F4] dark:bg-[#1E3025] px-1.5 py-0.5 rounded text-[#172B21] dark:text-[#E8F3EB]">
                               {act.branch}
                             </span>
                           </>
@@ -507,7 +507,7 @@ export const GitHubActivityPage: React.FC = () => {
                               href={act.externalUrl}
                               target="_blank"
                               rel="noreferrer"
-                              className="inline-flex items-center gap-1 text-[#7654DC] dark:text-[#9B7DFF] hover:underline"
+                              className="inline-flex items-center gap-1 text-[#15966A] dark:text-[#35B982] hover:underline"
                             >
                               <span>View on GitHub</span>
                               <ExternalLink className="w-3 h-3" />
@@ -519,7 +519,7 @@ export const GitHubActivityPage: React.FC = () => {
                       {/* Linked Task & Evidence badges */}
                       <div className="mt-2.5 flex flex-wrap items-center gap-2">
                         {act.relatedTask && (
-                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/20 text-[#3677C7] dark:text-blue-400 text-[11px] font-medium border border-blue-100 dark:border-blue-900/30">
+                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-blue-50 dark:bg-blue-950/20 text-[#3985CF] dark:text-[#71B2EC] text-[11px] font-medium border border-blue-100 dark:border-blue-900/30">
                             <span className="font-bold">{act.relatedTask.taskIdStr}</span>
                             <span>•</span>
                             <span className="truncate max-w-[150px]">{act.relatedTask.title}</span>
@@ -527,7 +527,7 @@ export const GitHubActivityPage: React.FC = () => {
                         )}
 
                         {act.relatedEvidence && (
-                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#F0EAFF] dark:bg-[#7654DC]/20 text-[#7654DC] dark:text-[#9B7DFF] text-[11px] font-medium border border-purple-100 dark:border-purple-900/30">
+                          <div className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] text-[11px] font-medium border border-[#DFE9E1] dark:border-[#2D4234]">
                             <span className="font-bold">@{act.relatedEvidence.evidenceIdStr}</span>
                             <span>•</span>
                             <span className="truncate max-w-[150px]">{act.relatedEvidence.title}</span>
@@ -536,7 +536,7 @@ export const GitHubActivityPage: React.FC = () => {
 
                         <button
                           onClick={() => openLinkModal(act)}
-                          className="text-[11px] text-[#62677A] dark:text-[#8E94A5] hover:text-[#7654DC] dark:hover:text-[#9B7DFF] inline-flex items-center gap-1 opacity-80 hover:opacity-100 transition"
+                          className="text-[11px] text-[#52665A] dark:text-[#B0C4B5] hover:text-[#15966A] dark:hover:text-[#35B982] inline-flex items-center gap-1 opacity-80 hover:opacity-100 transition"
                         >
                           <LinkIcon className="w-3 h-3" />
                           <span>{act.relatedTask || act.relatedEvidence ? 'Edit link' : 'Link to task / evidence'}</span>
@@ -547,12 +547,12 @@ export const GitHubActivityPage: React.FC = () => {
                 );
               })
             ) : (
-              <div className="py-16 flex flex-col items-center justify-center text-gray-400 dark:text-gray-500">
+              <div className="py-16 flex flex-col items-center justify-center text-[#84948A] dark:text-[#849A8B]">
                 <Inbox className="w-10 h-10 mb-3 stroke-[1.5]" />
-                <span className="text-sm font-semibold text-[#242438] dark:text-[#F0F6FC]">
+                <span className="text-sm font-semibold text-[#172B21] dark:text-[#E8F3EB]">
                   {isConnected ? 'No GitHub activities matching filter' : 'No repository connected'}
                 </span>
-                <p className="text-xs text-[#8E94A5] mt-1 max-w-sm text-center">
+                <p className="text-xs text-[#84948A] dark:text-[#849A8B] mt-1 max-w-sm text-center">
                   {isConnected
                     ? 'Push commits, create pull requests, or file issues on GitHub to see them appear automatically.'
                     : 'Connect a GitHub repository to track authenticated student commits and peer-reviewed code.'}
@@ -560,7 +560,7 @@ export const GitHubActivityPage: React.FC = () => {
                 {!isConnected && isPrivileged && (
                   <button
                     onClick={openConnectModal}
-                    className="mt-4 px-4 py-2 bg-[#7654DC] hover:bg-[#6342CA] text-white text-xs font-semibold rounded-lg shadow-sm transition"
+                    className="mt-4 px-4 py-2 bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold rounded-lg shadow-sm transition"
                   >
                     Connect Repository Now
                   </button>
@@ -573,42 +573,42 @@ export const GitHubActivityPage: React.FC = () => {
         {/* Right Sidebar: Context & Contributor Mapping */}
         <div className="space-y-5">
           {/* Contribution Context Card */}
-          <div className="bg-white dark:bg-[#161B22] rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-sm p-5 space-y-3 transition-colors">
-            <h3 className="text-xs font-bold text-[#242438] dark:text-[#F0F6FC] uppercase tracking-wider">
+          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm p-5 space-y-3 transition-colors">
+            <h3 className="text-xs font-bold text-[#172B21] dark:text-[#E8F3EB] uppercase tracking-wider">
               Integration status
             </h3>
-            <div className="space-y-2.5 text-xs text-[#62677A] dark:text-[#8E94A5]">
+            <div className="space-y-2.5 text-xs text-[#52665A] dark:text-[#B0C4B5]">
               <div>
-                <span className="block font-semibold text-[#242438] dark:text-[#F0F6FC]">Connected Project</span>
+                <span className="block font-semibold text-[#172B21] dark:text-[#E8F3EB]">Connected Project</span>
                 <span>{project?.title || 'Loading...'}</span>
               </div>
               <div>
-                <span className="block font-semibold text-[#242438] dark:text-[#F0F6FC]">GitHub Repository</span>
-                <span className="font-mono text-[11px] text-[#7654DC] dark:text-[#9B7DFF]">
+                <span className="block font-semibold text-[#172B21] dark:text-[#E8F3EB]">GitHub Repository</span>
+                <span className="font-mono text-[11px] text-[#15966A] dark:text-[#35B982]">
                   {status?.repository || 'None'}
                 </span>
               </div>
               <div>
-                <span className="block font-semibold text-[#242438] dark:text-[#F0F6FC]">Event Webhooks</span>
+                <span className="block font-semibold text-[#172B21] dark:text-[#E8F3EB]">Event Webhooks</span>
                 <span>Push (Commits), Pull Requests, Issues</span>
               </div>
               <div>
-                <span className="block font-semibold text-[#242438] dark:text-[#F0F6FC]">Mapped Contributors</span>
+                <span className="block font-semibold text-[#172B21] dark:text-[#E8F3EB]">Mapped Contributors</span>
                 <span>{status?.contributorMappings?.length || 0} author mapping(s) configured</span>
               </div>
             </div>
           </div>
 
           {/* Academic Integrity Highlight Callout */}
-          <div className="bg-[#FFF8E1] dark:bg-amber-950/20 border border-[#D98B28]/30 dark:border-amber-600/30 rounded-xl p-5 text-xs text-[#242438] dark:text-[#F0F6FC] space-y-2.5 transition-colors">
-            <div className="flex items-center gap-2 font-bold text-[#D98B28] dark:text-amber-400">
+          <div className="bg-[#FEF7EC] dark:bg-[#D69E36]/10 border border-[#D69E36]/30 dark:border-[#E7B95D]/30 rounded-xl p-5 text-xs text-[#172B21] dark:text-[#E8F3EB] space-y-2.5 transition-colors">
+            <div className="flex items-center gap-2 font-bold text-[#D69E36] dark:text-[#E7B95D]">
               <Info className="w-4 h-4 shrink-0" />
               <span>Assessment Principle</span>
             </div>
-            <p className="font-semibold text-[#242438] dark:text-[#F0F6FC] leading-relaxed">
+            <p className="font-semibold text-[#172B21] dark:text-[#E8F3EB] leading-relaxed">
               "Commit counts alone do not measure contribution quality."
             </p>
-            <p className="text-[11px] text-[#62677A] dark:text-[#8E94A5] leading-relaxed">
+            <p className="text-[11px] text-[#52665A] dark:text-[#B0C4B5] leading-relaxed">
               TeamProof connects Git events with written explanations, non-code design, documentation, and verified teammate reviews to ensure holistic academic grading.
             </p>
           </div>
@@ -618,36 +618,36 @@ export const GitHubActivityPage: React.FC = () => {
       {/* CONNECT REPOSITORY MODAL */}
       {isConnectModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#161B22] rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-xl max-w-lg w-full p-6 space-y-4">
+          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-xl max-w-lg w-full p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-[#242438] dark:text-[#F0F6FC]">
+              <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
                 Connect GitHub repository
               </h3>
-              <button onClick={() => setIsConnectModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setIsConnectModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#849A8B] dark:hover:text-[#E8F3EB]">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {connectError && (
-              <div className="p-3 bg-rose-50 dark:bg-rose-950/30 border border-rose-200 dark:border-rose-800 rounded-lg text-xs text-rose-700 dark:text-rose-300">
+              <div className="p-3 bg-[#FDEDEC] dark:bg-[#DC5555]/20 border border-[#DC5555]/30 dark:border-[#F07878]/30 rounded-lg text-xs text-[#DC5555] dark:text-[#F07878]">
                 {connectError}
               </div>
             )}
 
             {/* Install GitHub App button if needed */}
             {status?.installUrl && (
-              <div className="p-4 bg-purple-50 dark:bg-purple-950/20 border border-purple-200 dark:border-purple-900/40 rounded-xl space-y-2">
-                <div className="text-xs font-bold text-[#7654DC] dark:text-[#9B7DFF]">
+              <div className="p-4 bg-[#EAF6EE] dark:bg-[#1B3829] border border-[#15966A]/20 dark:border-[#35B982]/30 rounded-xl space-y-2">
+                <div className="text-xs font-bold text-[#15966A] dark:text-[#35B982]">
                   Step 1: Install TeamProof GitHub App
                 </div>
-                <p className="text-[11px] text-[#62677A] dark:text-[#8E94A5]">
+                <p className="text-[11px] text-[#52665A] dark:text-[#B0C4B5]">
                   Install the GitHub App on your GitHub account or organization so TeamProof can securely receive webhooks for your repositories.
                 </p>
                 <a
                   href={status.installUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#7654DC] hover:bg-[#6342CA] text-white text-xs font-semibold transition"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold transition"
                 >
                   <span>Install GitHub App</span>
                   <ExternalLink className="w-3.5 h-3.5" />
@@ -656,21 +656,21 @@ export const GitHubActivityPage: React.FC = () => {
             )}
 
             <form onSubmit={handleConnectRepo} className="space-y-4 pt-2">
-              <div className="text-xs font-bold text-[#242438] dark:text-[#F0F6FC]">
+              <div className="text-xs font-bold text-[#172B21] dark:text-[#E8F3EB]">
                 Step 2: Select or specify repository
               </div>
 
               {reposLoading ? (
-                <div className="text-xs text-gray-500 py-4 text-center">Loading repositories...</div>
+                <div className="text-xs text-[#84948A] dark:text-[#849A8B] py-4 text-center">Loading repositories...</div>
               ) : availableRepos.length > 0 ? (
                 <div>
-                  <label className="block text-xs font-medium text-[#62677A] dark:text-[#8E94A5] mb-1">
+                  <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
                     Accessible repositories
                   </label>
                   <select
                     value={selectedRepoFullName}
                     onChange={(e) => setSelectedRepoFullName(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0D1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:ring-2 focus:ring-[#7654DC]"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                   >
                     {availableRepos.map((repo) => (
                       <option key={repo.id} value={repo.fullName}>
@@ -681,7 +681,7 @@ export const GitHubActivityPage: React.FC = () => {
                 </div>
               ) : (
                 <div>
-                  <label className="block text-xs font-medium text-[#62677A] dark:text-[#8E94A5] mb-1">
+                  <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
                     Repository full name (owner/repository)
                   </label>
                   <input
@@ -689,9 +689,9 @@ export const GitHubActivityPage: React.FC = () => {
                     placeholder="e.g. Tanveer1907/TeamProof"
                     value={manualRepoInput}
                     onChange={(e) => setManualRepoInput(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0D1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:ring-2 focus:ring-[#7654DC]"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                   />
-                  <p className="text-[11px] text-[#8E94A5] mt-1">
+                  <p className="text-[11px] text-[#84948A] dark:text-[#849A8B] mt-1">
                     Enter the GitHub repository name that has the TeamProof App or Webhook configured.
                   </p>
                 </div>
@@ -701,14 +701,14 @@ export const GitHubActivityPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsConnectModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-xs font-semibold text-[#242438] dark:text-[#F0F6FC]"
+                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={reposLoading}
-                  className="px-4 py-2 rounded-lg bg-[#7654DC] hover:bg-[#6342CA] text-white text-xs font-semibold shadow-sm transition disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition disabled:opacity-50"
                 >
                   Connect repository
                 </button>
@@ -721,26 +721,26 @@ export const GitHubActivityPage: React.FC = () => {
       {/* DISCONNECT CONFIRMATION MODAL */}
       {isDisconnectModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#161B22] rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-xl max-w-sm w-full p-6 space-y-4">
-            <div className="flex items-center gap-3 text-rose-600 dark:text-rose-400">
+          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-xl max-w-sm w-full p-6 space-y-4">
+            <div className="flex items-center gap-3 text-[#DC5555] dark:text-[#F07878]">
               <ShieldAlert className="w-6 h-6 shrink-0" />
-              <h3 className="text-base font-bold text-[#242438] dark:text-[#F0F6FC]">
+              <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
                 Disconnect repository?
               </h3>
             </div>
-            <p className="text-xs text-[#62677A] dark:text-[#8E94A5]">
-              This will unlink <span className="font-bold text-[#242438] dark:text-[#F0F6FC]">{status?.repository}</span> from this project. Existing verified activity records will remain preserved in the ledger.
+            <p className="text-xs text-[#52665A] dark:text-[#B0C4B5]">
+              This will unlink <span className="font-bold text-[#172B21] dark:text-[#E8F3EB]">{status?.repository}</span> from this project. Existing verified activity records will remain preserved in the ledger.
             </p>
             <div className="flex items-center justify-end gap-3 pt-2">
               <button
                 onClick={() => setIsDisconnectModalOpen(false)}
-                className="px-4 py-2 rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-xs font-semibold text-[#242438] dark:text-[#F0F6FC]"
+                className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
               >
                 Cancel
               </button>
               <button
                 onClick={handleDisconnectRepo}
-                className="px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-700 text-white text-xs font-semibold shadow-sm transition"
+                className="px-4 py-2 rounded-lg bg-[#DC5555] hover:bg-[#C94343] text-white text-xs font-semibold shadow-sm transition"
               >
                 Confirm disconnect
               </button>
@@ -752,25 +752,25 @@ export const GitHubActivityPage: React.FC = () => {
       {/* CONTRIBUTOR MAPPING MODAL */}
       {isMappingModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#161B22] rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-xl max-w-md w-full p-6 space-y-4">
+          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-[#242438] dark:text-[#F0F6FC]">
+              <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
                 Map GitHub author to team member
               </h3>
-              <button onClick={() => setIsMappingModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setIsMappingModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#849A8B] dark:hover:text-[#E8F3EB]">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {mappingSuccess && (
-              <div className="p-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800 rounded-lg text-xs text-emerald-700 dark:text-emerald-300">
+              <div className="p-3 bg-[#EAF6EE] dark:bg-[#1B3829] border border-[#15966A]/30 dark:border-[#35B982]/30 rounded-lg text-xs text-[#15966A] dark:text-[#35B982]">
                 {mappingSuccess}
               </div>
             )}
 
             <form onSubmit={handleMapContributor} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-[#62677A] dark:text-[#8E94A5] mb-1">
+                <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
                   GitHub username
                 </label>
                 <input
@@ -779,18 +779,18 @@ export const GitHubActivityPage: React.FC = () => {
                   value={mappingUsername}
                   onChange={(e) => setMappingUsername(e.target.value)}
                   required
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0D1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:ring-2 focus:ring-[#7654DC]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#62677A] dark:text-[#8E94A5] mb-1">
+                <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
                   Select TeamProof project member
                 </label>
                 <select
                   value={mappingUserId}
                   onChange={(e) => setMappingUserId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0D1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:ring-2 focus:ring-[#7654DC]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
                   {projectMembers.map((m) => (
                     <option key={m._id} value={m.user?._id}>
@@ -804,14 +804,14 @@ export const GitHubActivityPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsMappingModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-xs font-semibold text-[#242438] dark:text-[#F0F6FC]"
+                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={mappingLoading}
-                  className="px-4 py-2 rounded-lg bg-[#7654DC] hover:bg-[#6342CA] text-white text-xs font-semibold shadow-sm transition disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition disabled:opacity-50"
                 >
                   Save mapping
                 </button>
@@ -824,34 +824,34 @@ export const GitHubActivityPage: React.FC = () => {
       {/* LINK ACTIVITY TO TASK / EVIDENCE MODAL */}
       {isLinkModalOpen && selectedActivity && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4">
-          <div className="bg-white dark:bg-[#161B22] rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-xl max-w-md w-full p-6 space-y-4">
+          <div className="bg-white dark:bg-[#17251D] rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-xl max-w-md w-full p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-base font-bold text-[#242438] dark:text-[#F0F6FC]">
+              <h3 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">
                 Link activity to task or evidence
               </h3>
-              <button onClick={() => setIsLinkModalOpen(false)} className="text-gray-400 hover:text-gray-600">
+              <button onClick={() => setIsLinkModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:text-[#849A8B] dark:hover:text-[#E8F3EB]">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
-            <div className="p-3 bg-gray-50 dark:bg-[#21262D] rounded-lg text-xs space-y-1">
-              <div className="font-semibold text-[#242438] dark:text-[#F0F6FC]">
+            <div className="p-3 bg-[#F2F8F4] dark:bg-[#1E3025] rounded-lg text-xs space-y-1">
+              <div className="font-semibold text-[#172B21] dark:text-[#E8F3EB]">
                 {selectedActivity.refNumber} • {selectedActivity.title}
               </div>
-              <div className="text-[#8E94A5]">
+              <div className="text-[#84948A] dark:text-[#849A8B]">
                 {selectedActivity.activityType} • {new Date(selectedActivity.occurredAt).toLocaleDateString()}
               </div>
             </div>
 
             <form onSubmit={handleLinkActivity} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-[#62677A] dark:text-[#8E94A5] mb-1">
+                <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
                   Connect to project task (optional)
                 </label>
                 <select
                   value={selectedTaskId}
                   onChange={(e) => setSelectedTaskId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0D1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:ring-2 focus:ring-[#7654DC]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
                   <option value="">-- No linked task --</option>
                   {projectTasks.map((t) => (
@@ -863,13 +863,13 @@ export const GitHubActivityPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#62677A] dark:text-[#8E94A5] mb-1">
+                <label className="block text-xs font-medium text-[#52665A] dark:text-[#B0C4B5] mb-1">
                   Connect to submitted evidence (optional)
                 </label>
                 <select
                   value={selectedEvidenceId}
                   onChange={(e) => setSelectedEvidenceId(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0D1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:ring-2 focus:ring-[#7654DC]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:ring-2 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 >
                   <option value="">-- No linked evidence --</option>
                   {projectEvidence.map((ev) => (
@@ -884,14 +884,14 @@ export const GitHubActivityPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={() => setIsLinkModalOpen(false)}
-                  className="px-4 py-2 rounded-lg border border-[#E1E4EC] dark:border-[#30363D] text-xs font-semibold text-[#242438] dark:text-[#F0F6FC]"
+                  className="px-4 py-2 rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025] transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={linkingLoading}
-                  className="px-4 py-2 rounded-lg bg-[#7654DC] hover:bg-[#6342CA] text-white text-xs font-semibold shadow-sm transition disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#101A15] text-xs font-semibold shadow-sm transition disabled:opacity-50"
                 >
                   Save links
                 </button>

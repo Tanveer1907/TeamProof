@@ -28,9 +28,20 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
       setIsDark(darkActive);
       if (darkActive) {
         root.classList.add('dark');
+        root.style.colorScheme = 'dark';
       } else {
         root.classList.remove('dark');
+        root.style.colorScheme = 'light';
       }
+
+      // Update theme-color meta tag if present
+      let metaThemeColor = document.querySelector('meta[name="theme-color"]');
+      if (!metaThemeColor) {
+        metaThemeColor = document.createElement('meta');
+        metaThemeColor.setAttribute('name', 'theme-color');
+        document.head.appendChild(metaThemeColor);
+      }
+      metaThemeColor.setAttribute('content', darkActive ? '#101A15' : '#F7FAF8');
     };
 
     applyTheme();

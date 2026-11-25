@@ -3,14 +3,9 @@ import {
   Plus,
   Filter,
   Search,
-  CheckCircle2,
   Clock,
   AlertCircle,
   X,
-  Calendar,
-  User as UserIcon,
-  Layers,
-  ChevronRight,
   Inbox,
 } from 'lucide-react';
 import { api } from '../services/api';
@@ -106,10 +101,10 @@ export const TaskBoardPage: React.FC = () => {
   };
 
   const columns: { title: string; status: string; color: string; count: number }[] = [
-    { title: 'To Do', status: 'To Do', color: 'bg-gray-100 dark:bg-[#21262D] text-gray-700 dark:text-gray-300', count: 0 },
-    { title: 'In Progress', status: 'In Progress', color: 'bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300', count: 0 },
-    { title: 'In Review', status: 'In Review', color: 'bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300', count: 0 },
-    { title: 'Verified', status: 'Verified', color: 'bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-300', count: 0 },
+    { title: 'To Do', status: 'To Do', color: 'bg-[#EAF2EC] dark:bg-[#1E3025] text-[#52665A] dark:text-[#849A8B]', count: 0 },
+    { title: 'In Progress', status: 'In Progress', color: 'bg-[#EEF6FD] dark:bg-[#152C3F] text-[#3985CF] dark:text-[#71B2EC]', count: 0 },
+    { title: 'In Review', status: 'In Review', color: 'bg-[#FEF7EC] dark:bg-[#332714] text-[#D69E36] dark:text-[#E7B95D]', count: 0 },
+    { title: 'Verified', status: 'Verified', color: 'bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982]', count: 0 },
   ];
 
   const filteredTasks = tasks.filter((t) => {
@@ -127,13 +122,13 @@ export const TaskBoardPage: React.FC = () => {
   });
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 font-sans">
       {/* Top Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
         <div>
-          <h1 className="text-2xl font-bold text-[#242438] dark:text-[#F0F6FC] tracking-tight">Tasks & milestones</h1>
-          <p className="text-sm text-[#62677A] dark:text-[#8E94A5] mt-0.5">
-            {project?.title || 'Project Workspace'} • <span className="font-medium text-[#7654DC] dark:text-[#9B7DFF]">{project?.title ? 'Sprint Board' : 'No active project'}</span>
+          <h1 className="text-2xl font-bold text-[#172B21] dark:text-[#E8F3EB] tracking-tight">Tasks & milestones</h1>
+          <p className="text-sm text-[#52665A] dark:text-[#849A8B] mt-0.5">
+            {project?.title || 'Project Workspace'} • <span className="font-medium text-[#15966A] dark:text-[#35B982]">{project?.title ? 'Sprint Board' : 'No active project'}</span>
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -142,7 +137,7 @@ export const TaskBoardPage: React.FC = () => {
               <div
                 key={m._id}
                 title={m.name}
-                className="w-7 h-7 rounded-full bg-[#F0EAFF] dark:bg-[#7654DC]/20 text-[#7654DC] dark:text-[#9B7DFF] font-semibold text-xs flex items-center justify-center border-2 border-white dark:border-[#161B22] shadow-sm"
+                className="w-7 h-7 rounded-full bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] font-semibold text-xs flex items-center justify-center border-2 border-white dark:border-[#17251D] shadow-sm"
               >
                 {m.avatar || m.name.substring(0, 2).toUpperCase()}
               </div>
@@ -150,7 +145,7 @@ export const TaskBoardPage: React.FC = () => {
           </div>
           <button
             onClick={() => setModalOpen(true)}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#7654DC] hover:bg-[#6543C5] text-white text-xs font-semibold shadow-sm transition"
+            className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white text-xs font-semibold shadow-sm transition"
           >
             <Plus className="w-3.5 h-3.5" />
             <span>New task</span>
@@ -159,25 +154,25 @@ export const TaskBoardPage: React.FC = () => {
       </div>
 
       {/* Controls: Search & Filters */}
-      <div className="bg-white dark:bg-[#161B22] p-3 rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors">
+      <div className="bg-white dark:bg-[#17251D] p-3 rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors">
         <div className="relative flex-1 max-w-sm">
-          <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[#84948A] absolute left-3 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             placeholder="Search tasks by ID or name..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+            className="w-full pl-9 pr-3 py-1.5 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
           />
         </div>
 
         <div className="flex items-center gap-2">
-          <Filter className="w-3.5 h-3.5 text-gray-400" />
-          <span className="text-xs text-[#62677A] dark:text-[#8E94A5] font-medium">Priority:</span>
+          <Filter className="w-3.5 h-3.5 text-[#84948A]" />
+          <span className="text-xs text-[#52665A] dark:text-[#849A8B] font-medium">Priority:</span>
           <select
             value={filterPriority}
             onChange={(e) => setFilterPriority(e.target.value)}
-            className="text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] px-2.5 py-1.5 focus:outline-none focus:border-[#7654DC] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC]"
+            className="text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] px-2.5 py-1.5 focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB]"
           >
             <option value="all">All Priorities</option>
             <option value="High">High</option>
@@ -194,18 +189,18 @@ export const TaskBoardPage: React.FC = () => {
           return (
             <div
               key={col.status}
-              className="bg-[#F7F8FC] dark:bg-[#161B22]/60 rounded-xl p-3 border border-[#E1E4EC] dark:border-[#30363D] flex flex-col min-h-[480px] transition-colors"
+              className="bg-[#F2F8F4] dark:bg-[#101A15] rounded-xl p-3 border border-[#DFE9E1] dark:border-[#2D4234] flex flex-col min-h-[480px] transition-colors"
             >
               <div className="flex items-center justify-between px-1 py-1 mb-2">
                 <div className="flex items-center gap-2">
-                  <span className="text-xs font-bold text-[#242438] dark:text-[#F0F6FC]">{col.title}</span>
+                  <span className="text-xs font-bold text-[#172B21] dark:text-[#E8F3EB]">{col.title}</span>
                   <span className={`text-[11px] font-semibold px-2 py-0.5 rounded-full ${col.color}`}>
                     {col.count}
                   </span>
                 </div>
                 <button
                   onClick={() => setModalOpen(true)}
-                  className="text-gray-400 hover:text-[#7654DC] p-1 transition"
+                  className="text-[#84948A] hover:text-[#15966A] dark:hover:text-[#35B982] p-1 transition"
                   title="Add task"
                 >
                   <Plus className="w-3.5 h-3.5" />
@@ -218,10 +213,10 @@ export const TaskBoardPage: React.FC = () => {
                   colTasks.map((t) => {
                     const priorityColor =
                       t.priority === 'High'
-                        ? 'text-[#D94B4B] bg-red-50 dark:bg-red-950/30'
+                        ? 'text-[#DC5555] dark:text-[#F07878] bg-red-50 dark:bg-red-950/30'
                         : t.priority === 'Medium'
-                        ? 'text-[#D98B28] bg-amber-50 dark:bg-amber-950/30'
-                        : 'text-gray-500 dark:text-gray-400 bg-gray-50 dark:bg-gray-800';
+                        ? 'text-[#D69E36] dark:text-[#E7B95D] bg-amber-50 dark:bg-amber-950/30'
+                        : 'text-[#52665A] dark:text-[#849A8B] bg-[#EAF2EC] dark:bg-[#1E3025]';
 
                     return (
                       <div
@@ -230,30 +225,30 @@ export const TaskBoardPage: React.FC = () => {
                           setSelectedTask(t);
                           setDetailModalOpen(true);
                         }}
-                        className="bg-white dark:bg-[#161B22] p-4 rounded-xl border border-[#E1E4EC] dark:border-[#30363D] shadow-sm hover:border-[#7654DC] dark:hover:border-[#9B7DFF] hover:shadow-md cursor-pointer transition flex flex-col justify-between gap-3 group"
+                        className="bg-white dark:bg-[#17251D] p-4 rounded-xl border border-[#DFE9E1] dark:border-[#2D4234] shadow-sm hover:border-[#15966A] dark:hover:border-[#35B982] hover:shadow-md cursor-pointer transition flex flex-col justify-between gap-3 group"
                       >
                         <div>
                           <div className="flex items-center justify-between text-[11px] mb-1">
-                            <span className="font-semibold text-[#7654DC] dark:text-[#9B7DFF]">{t.taskIdStr}</span>
+                            <span className="font-semibold text-[#15966A] dark:text-[#35B982]">{t.taskIdStr}</span>
                             <span className={`px-2 py-0.5 rounded text-[10px] font-medium ${priorityColor}`}>
                               {t.priority}
                             </span>
                           </div>
-                          <h3 className="font-semibold text-xs text-[#242438] dark:text-[#F0F6FC] group-hover:text-[#7654DC] dark:group-hover:text-[#9B7DFF] transition line-clamp-2">
+                          <h3 className="font-semibold text-xs text-[#172B21] dark:text-[#E8F3EB] group-hover:text-[#15966A] dark:group-hover:text-[#35B982] transition line-clamp-2">
                             {t.title}
                           </h3>
                         </div>
 
-                        <div className="flex items-center justify-between pt-2 border-t border-[#F0F2F6] dark:border-[#21262D] text-[11px] text-[#62677A] dark:text-[#8E94A5]">
+                        <div className="flex items-center justify-between pt-2 border-t border-[#DFE9E1] dark:border-[#2D4234] text-[11px] text-[#52665A] dark:text-[#849A8B]">
                           <div className="flex items-center gap-1">
-                            <Clock className="w-3 h-3 text-gray-400" />
+                            <Clock className="w-3 h-3 text-[#84948A]" />
                             <span>
                               {t.dueDate ? new Date(t.dueDate).toLocaleDateString('en-GB', { day: 'numeric', month: 'short' }) : 'No date'}
                             </span>
                           </div>
                           <div
                             title={t.assignee?.name || 'Unassigned'}
-                            className="w-5 h-5 rounded-full bg-[#F0EAFF] dark:bg-[#7654DC]/20 text-[#7654DC] dark:text-[#9B7DFF] font-bold text-[10px] flex items-center justify-center border border-[#7654DC]/20"
+                            className="w-5 h-5 rounded-full bg-[#EAF6EE] dark:bg-[#1B3829] text-[#15966A] dark:text-[#35B982] font-bold text-[10px] flex items-center justify-center border border-[#15966A]/20"
                           >
                             {t.assignee?.avatar || t.assignee?.name?.substring(0, 2).toUpperCase() || '?'}
                           </div>
@@ -262,7 +257,7 @@ export const TaskBoardPage: React.FC = () => {
                     );
                   })
                 ) : (
-                  <div className="h-32 border-2 border-dashed border-[#E1E4EC] dark:border-[#30363D] rounded-xl flex flex-col items-center justify-center text-xs text-gray-400 dark:text-gray-500 gap-1">
+                  <div className="h-32 border-2 border-dashed border-[#DFE9E1] dark:border-[#2D4234] rounded-xl flex flex-col items-center justify-center text-xs text-[#84948A] dark:text-[#849A8B] gap-1">
                     <Inbox className="w-5 h-5 stroke-[1.5]" />
                     <span>No {col.title.toLowerCase()} tasks</span>
                   </div>
@@ -276,16 +271,16 @@ export const TaskBoardPage: React.FC = () => {
       {/* Task Creation Modal */}
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-[#161B22] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-[#E1E4EC] dark:border-[#30363D] animate-in fade-in zoom-in-95">
-            <div className="flex items-center justify-between pb-4 border-b border-[#E1E4EC] dark:border-[#30363D]">
-              <h2 className="text-base font-bold text-[#242438] dark:text-[#F0F6FC]">Create New Project Task</h2>
-              <button onClick={() => setModalOpen(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+          <div className="bg-white dark:bg-[#17251D] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-[#DFE9E1] dark:border-[#2D4234] animate-in fade-in zoom-in-95">
+            <div className="flex items-center justify-between pb-4 border-b border-[#DFE9E1] dark:border-[#2D4234]">
+              <h2 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">Create New Project Task</h2>
+              <button onClick={() => setModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:hover:text-[#E8F3EB]">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {formError && (
-              <div className="mt-4 p-3 rounded-lg bg-red-50 dark:bg-red-950/30 text-[#D94B4B] text-xs flex items-center gap-2">
+              <div className="mt-4 p-3 rounded-lg bg-red-50 dark:bg-red-950/30 text-[#DC5555] dark:text-[#F07878] text-xs flex items-center gap-2">
                 <AlertCircle className="w-4 h-4 shrink-0" />
                 <span>{formError}</span>
               </div>
@@ -293,35 +288,35 @@ export const TaskBoardPage: React.FC = () => {
 
             <form onSubmit={handleCreateTask} className="mt-4 space-y-4">
               <div>
-                <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Task Title *</label>
+                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">Task Title *</label>
                 <input
                   type="text"
                   required
                   placeholder="e.g. Implement input validation"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Description</label>
+                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">Description</label>
                 <textarea
                   rows={3}
                   placeholder="Outline the responsibilities and scope of this task..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982] focus:ring-1 focus:ring-[#15966A] dark:focus:ring-[#35B982]"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Assignee</label>
+                  <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">Assignee</label>
                   <select
                     value={assignee}
                     onChange={(e) => setAssignee(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                   >
                     <option value="">Unassigned</option>
                     {members.map((m) => (
@@ -333,11 +328,11 @@ export const TaskBoardPage: React.FC = () => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Priority</label>
+                  <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">Priority</label>
                   <select
                     value={priority}
                     onChange={(e: any) => setPriority(e.target.value)}
-                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+                    className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                   >
                     <option value="Low">Low</option>
                     <option value="Medium">Medium</option>
@@ -347,37 +342,37 @@ export const TaskBoardPage: React.FC = () => {
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Due Date</label>
+                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">Due Date</label>
                 <input
                   type="date"
                   value={dueDate}
                   onChange={(e) => setDueDate(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                 />
               </div>
 
               <div>
-                <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1">Acceptance Criteria</label>
+                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1">Acceptance Criteria</label>
                 <input
                   type="text"
                   placeholder="e.g. Unit tests pass, PR reviewed, design matches token spec"
                   value={acceptanceCriteria}
                   onChange={(e) => setAcceptanceCriteria(e.target.value)}
-                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#E1E4EC] dark:border-[#30363D] bg-white dark:bg-[#0E1117] text-[#242438] dark:text-[#F0F6FC] focus:outline-none focus:border-[#7654DC]"
+                  className="w-full px-3 py-2 text-xs rounded-lg border border-[#DFE9E1] dark:border-[#2D4234] bg-white dark:bg-[#101A15] text-[#172B21] dark:text-[#E8F3EB] focus:outline-none focus:border-[#15966A] dark:focus:border-[#35B982]"
                 />
               </div>
 
-              <div className="pt-3 flex items-center justify-end gap-2 border-t border-[#E1E4EC] dark:border-[#30363D]">
+              <div className="pt-3 flex items-center justify-end gap-2 border-t border-[#DFE9E1] dark:border-[#2D4234]">
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-4 py-2 rounded-lg text-xs font-semibold text-[#62677A] dark:text-[#8E94A5] hover:bg-gray-100 dark:hover:bg-[#21262D]"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold text-[#52665A] dark:text-[#849A8B] hover:bg-[#F2F8F4] dark:hover:bg-[#1E3025]"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#7654DC] hover:bg-[#6543C5] text-white shadow-sm"
+                  className="px-4 py-2 rounded-lg text-xs font-semibold bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white shadow-sm"
                 >
                   Create Task
                 </button>
@@ -390,45 +385,45 @@ export const TaskBoardPage: React.FC = () => {
       {/* Task Detail Modal */}
       {detailModalOpen && selectedTask && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm">
-          <div className="bg-white dark:bg-[#161B22] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-[#E1E4EC] dark:border-[#30363D]">
-            <div className="flex items-center justify-between pb-3 border-b border-[#E1E4EC] dark:border-[#30363D]">
+          <div className="bg-white dark:bg-[#17251D] rounded-2xl max-w-lg w-full p-6 shadow-xl border border-[#DFE9E1] dark:border-[#2D4234]">
+            <div className="flex items-center justify-between pb-3 border-b border-[#DFE9E1] dark:border-[#2D4234]">
               <div className="flex items-center gap-2">
-                <span className="text-xs font-bold text-[#7654DC] dark:text-[#9B7DFF]">{selectedTask.taskIdStr}</span>
-                <span className="text-xs text-gray-400">•</span>
-                <span className="text-xs font-semibold text-[#242438] dark:text-[#F0F6FC]">{selectedTask.status}</span>
+                <span className="text-xs font-bold text-[#15966A] dark:text-[#35B982]">{selectedTask.taskIdStr}</span>
+                <span className="text-xs text-[#84948A]">•</span>
+                <span className="text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB]">{selectedTask.status}</span>
               </div>
-              <button onClick={() => setDetailModalOpen(false)} className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-300">
+              <button onClick={() => setDetailModalOpen(false)} className="text-[#84948A] hover:text-[#172B21] dark:hover:text-[#E8F3EB]">
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             <div className="mt-4 space-y-4 text-xs">
               <div>
-                <h2 className="text-base font-bold text-[#242438] dark:text-[#F0F6FC]">{selectedTask.title}</h2>
-                <p className="text-gray-600 dark:text-gray-300 mt-1 whitespace-pre-wrap">{selectedTask.description || 'No description provided.'}</p>
+                <h2 className="text-base font-bold text-[#172B21] dark:text-[#E8F3EB]">{selectedTask.title}</h2>
+                <p className="text-[#52665A] dark:text-[#B0C4B5] mt-1 whitespace-pre-wrap">{selectedTask.description || 'No description provided.'}</p>
               </div>
 
               {selectedTask.acceptanceCriteria && (
-                <div className="p-3 bg-gray-50 dark:bg-[#21262D] rounded-lg border border-gray-100 dark:border-[#30363D]">
-                  <span className="font-semibold text-gray-700 dark:text-gray-200 block mb-1">Acceptance Criteria</span>
-                  <p className="text-gray-600 dark:text-gray-300">{selectedTask.acceptanceCriteria}</p>
+                <div className="p-3 bg-[#F2F8F4] dark:bg-[#1E3025] rounded-lg border border-[#DFE9E1] dark:border-[#2D4234]">
+                  <span className="font-semibold text-[#172B21] dark:text-[#E8F3EB] block mb-1">Acceptance Criteria</span>
+                  <p className="text-[#52665A] dark:text-[#B0C4B5]">{selectedTask.acceptanceCriteria}</p>
                 </div>
               )}
 
-              <div className="grid grid-cols-2 gap-3 text-gray-600 dark:text-gray-300">
+              <div className="grid grid-cols-2 gap-3 text-[#52665A] dark:text-[#B0C4B5]">
                 <div>
-                  <span className="font-semibold block text-gray-700 dark:text-gray-200">Assignee</span>
+                  <span className="font-semibold block text-[#172B21] dark:text-[#E8F3EB]">Assignee</span>
                   <span>{selectedTask.assignee?.name || 'Unassigned'}</span>
                 </div>
                 <div>
-                  <span className="font-semibold block text-gray-700 dark:text-gray-200">Due Date</span>
+                  <span className="font-semibold block text-[#172B21] dark:text-[#E8F3EB]">Due Date</span>
                   <span>{selectedTask.dueDate ? new Date(selectedTask.dueDate).toLocaleDateString() : 'None'}</span>
                 </div>
               </div>
 
               {/* Status Update Control */}
-              <div className="pt-3 border-t border-[#E1E4EC] dark:border-[#30363D]">
-                <label className="block text-xs font-semibold text-[#242438] dark:text-[#F0F6FC] mb-1.5">Change Task Status</label>
+              <div className="pt-3 border-t border-[#DFE9E1] dark:border-[#2D4234]">
+                <label className="block text-xs font-semibold text-[#172B21] dark:text-[#E8F3EB] mb-1.5">Change Task Status</label>
                 <div className="flex flex-wrap gap-2">
                   {['To Do', 'In Progress', 'In Review'].map((st) => (
                     <button
@@ -437,15 +432,15 @@ export const TaskBoardPage: React.FC = () => {
                       disabled={selectedTask.status === st}
                       className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition ${
                         selectedTask.status === st
-                          ? 'bg-[#7654DC] text-white border-[#7654DC]'
-                          : 'bg-white dark:bg-[#21262D] text-gray-700 dark:text-gray-200 border-gray-200 dark:border-[#30363D] hover:bg-gray-50 dark:hover:bg-[#30363D]'
+                          ? 'bg-[#15966A] dark:bg-[#35B982] text-white border-[#15966A] dark:border-[#35B982]'
+                          : 'bg-white dark:bg-[#1E3025] text-[#52665A] dark:text-[#B0C4B5] border-[#DFE9E1] dark:border-[#2D4234] hover:bg-[#F2F8F4] dark:hover:bg-[#263B2E]'
                       }`}
                     >
                       {st}
                     </button>
                   ))}
                 </div>
-                <p className="text-[11px] text-gray-400 dark:text-gray-500 mt-2">
+                <p className="text-[11px] text-[#84948A] dark:text-[#849A8B] mt-2">
                   * Note: Moving to 'Verified' is strictly governed by Evidence Verification per academic integrity rules.
                 </p>
               </div>
