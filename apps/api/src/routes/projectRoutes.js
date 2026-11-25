@@ -97,19 +97,19 @@ projectRouter.get('/:projectId/github/status', requireAuth, requireProjectMember
 projectRouter.get(
   '/:projectId/github/repositories',
   requireAuth,
-  requireProjectMember(['owner', 'faculty_reviewer']),
+  requireProjectMember(['owner', 'faculty_reviewer', 'member']),
   listAvailableRepositories
 );
 projectRouter.post(
   '/:projectId/github/connect',
   requireAuth,
-  requireProjectMember(['owner', 'faculty_reviewer']),
+  requireProjectMember(['owner', 'faculty_reviewer', 'member']),
   connectRepository
 );
 projectRouter.post(
   '/:projectId/github/disconnect',
   requireAuth,
-  requireProjectMember(['owner', 'faculty_reviewer']),
+  requireProjectMember(['owner', 'faculty_reviewer', 'member']),
   disconnectRepository
 );
 projectRouter.post(
@@ -122,7 +122,7 @@ projectRouter.get('/:projectId/github/activity', requireAuth, requireProjectMemb
 projectRouter.post(
   '/:projectId/github/map-contributor',
   requireAuth,
-  requireProjectMember(['owner', 'faculty_reviewer']),
+  requireProjectMember(['owner', 'faculty_reviewer', 'member']),
   mapContributor
 );
 projectRouter.post(

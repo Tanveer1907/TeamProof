@@ -1,6 +1,7 @@
 import { Session } from '../models/Session.js';
 import { User } from '../models/User.js';
 import { Membership } from '../models/Membership.js';
+import { Project } from '../models/Project.js';
 
 /**
  * Enforces authentication strictly based on secure HTTP-only cookies.
@@ -54,15 +55,21 @@ export function requireProjectMember(allowedRoles) {
         return;
       }
 
-      const membership = await Membership.findOne({
+      let membership = await Membership.findOne({
         project: projectId,
         user: req.user._id,
         status: 'active',
       });
 
       if (!membership) {
-        res.status(403).json({ error: 'You are not an authorized member of this project.' });
-        return;
+        // Fallback: Check if the user is the owner of the project
+        const project = await Project.findById(projectId);
+        if (project && String(project.owner) === String(req.user._id)) {
+          membership = { project: projectId, user: req.user._id, role: 'owner', status: 'active' };
+        } else {
+          res.status(403).json({ error: 'You are not an authorized member of this project.' });
+          return;
+        }
       }
 
       if (allowedRoles && allowedRoles.length > 0 && !allowedRoles.includes(membership.role)) {

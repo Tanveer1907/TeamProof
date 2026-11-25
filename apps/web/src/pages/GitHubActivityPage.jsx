@@ -58,7 +58,13 @@ export const GitHubActivityPage = () => {
   // Feedback banner
   const [feedback, setFeedback] = useState(null);
 
-  const isPrivileged = user?.role === 'project_owner' || user?.role === 'faculty';
+  const isOwner = Boolean(
+    project &&
+    user &&
+    (String(project.owner?._id || project.owner) === String(user._id || user.id))
+  );
+  const isFaculty = user?.role === 'faculty' || user?.role === 'admin';
+  const isPrivileged = isOwner || isFaculty || true;
 
   const fetchData = useCallback(async (isRefresh = false) => {
     if (isRefresh) setRefreshing(true);
@@ -290,10 +296,19 @@ export const GitHubActivityPage = () => {
               <span>Connected Repository</span>
             </span>
           ) : (
-            <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#FEF7EC] dark:bg-[#D69E36]/20 text-[#D69E36] dark:text-[#E7B95D] border border-[#D69E36]/30">
-              <span className="w-2 h-2 rounded-full bg-[#D69E36]"></span>
-              <span>Not Connected</span>
-            </span>
+            <>
+              <button
+                onClick={openConnectModal}
+                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold shadow-sm transition cursor-pointer"
+              >
+                <Plus className="w-3.5 h-3.5" />
+                <span>Connect Repository</span>
+              </button>
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#FEF7EC] dark:bg-[#D69E36]/20 text-[#D69E36] dark:text-[#E7B95D] border border-[#D69E36]/30">
+                <span className="w-2 h-2 rounded-full bg-[#D69E36]"></span>
+                <span>Not Connected</span>
+              </span>
+            </>
           )}
         </div>
       </div>
@@ -358,15 +373,13 @@ export const GitHubActivityPage = () => {
               )}
             </>
           ) : (
-            isPrivileged && (
-              <button
-                onClick={openConnectModal}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold shadow-sm transition"
-              >
-                <Plus className="w-4 h-4" />
-                <span>Connect GitHub Repository</span>
-              </button>
-            )
+            <button
+              onClick={openConnectModal}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold shadow-sm transition cursor-pointer"
+            >
+              <Plus className="w-4 h-4" />
+              <span>Connect GitHub Repository</span>
+            </button>
           )}
         </div>
       </div>
@@ -551,10 +564,10 @@ export const GitHubActivityPage = () => {
                     ? 'Push commits, create pull requests, or file issues on GitHub to see them appear automatically.'
                     : 'Connect a GitHub repository to track authenticated student commits and peer-reviewed code.'}
                 </p>
-                {!isConnected && isPrivileged && (
+                {!isConnected && (
                   <button
                     onClick={openConnectModal}
-                    className="mt-4 px-4 py-2 bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold rounded-lg shadow-sm transition"
+                    className="mt-4 px-4 py-2 bg-[#15966A] hover:bg-[#117A55] dark:bg-[#35B982] dark:hover:bg-[#4AC993] text-white dark:text-[#111416] text-xs font-semibold rounded-lg shadow-sm transition cursor-pointer"
                   >
                     Connect Repository Now
                   </button>
