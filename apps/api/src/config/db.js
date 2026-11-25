@@ -43,7 +43,7 @@ export async function connectDB(uri) {
     console.log(`[MongoDB] Connecting to cluster: ${masked}...`);
     
     await mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 4000,
+      serverSelectionTimeoutMS: 15000,
       socketTimeoutMS: 45000,
     });
 
