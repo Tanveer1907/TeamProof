@@ -79,9 +79,16 @@ app.use((err, req, res, next) => {
 export { app };
 
 if (process.env.NODE_ENV !== 'test') {
-  connectDB().then(() => {
-    app.listen(PORT, () => {
-      console.log(`[TeamProof Server] Running on http://localhost:${PORT}`);
+  connectDB()
+    .then(() => {
+      app.listen(PORT, () => {
+        console.log(`[TeamProof Server] Running on http://localhost:${PORT}`);
+      });
+    })
+    .catch((err) => {
+      console.error('[TeamProof Server] Startup database connection warning:', err?.message || err);
+      app.listen(PORT, () => {
+        console.warn(`[TeamProof Server] Running on http://localhost:${PORT} (offline database mode)`);
+      });
     });
-  });
 }

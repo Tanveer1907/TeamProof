@@ -43,7 +43,7 @@ export async function connectDB(uri) {
     console.log(`[MongoDB] Connecting to cluster: ${masked}...`);
     
     await mongoose.connect(mongoUri, {
-      serverSelectionTimeoutMS: 10000,
+      serverSelectionTimeoutMS: 4000,
       socketTimeoutMS: 45000,
     });
 
@@ -51,6 +51,22 @@ export async function connectDB(uri) {
     isConnecting = false;
     return mongoose;
   } catch (error) {
+    const localFallbackUri = process.env.MONGODB_LOCAL_URI || 'mongodb://127.0.0.1:27017/teamproof';
+    if (mongoUri !== localFallbackUri) {
+      console.warn(`[MongoDB] Primary connection failed to ${masked} (${error.message}). Attempting automatic fallback to local MongoDB (${localFallbackUri})...`);
+      try {
+        await mongoose.connect(localFallbackUri, {
+          serverSelectionTimeoutMS: 3000,
+          socketTimeoutMS: 45000,
+        });
+        console.log(`[MongoDB] Successfully connected to fallback local database: ${mongoose.connection.name || 'default'}`);
+        isConnecting = false;
+        return mongoose;
+      } catch (localErr) {
+        console.error(`[MongoDB] Local MongoDB fallback connection also failed: ${localErr.message}`);
+      }
+    }
+
     isConnecting = false;
     console.error(`[MongoDB] Connection failed to ${masked}. Reason:`, error?.message || error);
     throw error;

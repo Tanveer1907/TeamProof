@@ -13,6 +13,11 @@ export const LoginPage = () => {
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
+  const setDemoCredentials = (userEmail) => {
+    setEmail(userEmail);
+    setPassword('DemoPass123!');
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -22,7 +27,7 @@ export const LoginPage = () => {
       await login(email, password);
       navigate('/dashboard');
     } catch (err) {
-      setError(err.message || 'Login failed. Please verify credentials.');
+      setError(err.response?.data?.error || err.message || 'Login failed. Please verify credentials.');
     } finally {
       setLoading(false);
     }
@@ -108,7 +113,48 @@ export const LoginPage = () => {
             </button>
           </form>
 
-          <div className="mt-8 pt-6 border-t border-[#DFE9E1] dark:border-[#2D4234] text-center text-sm text-[#52665A] dark:text-[#849A8B]">
+          {/* Quick Demonstration Switcher */}
+          <div className="mt-8 pt-6 border-t border-[#DFE9E1] dark:border-[#2D4234]">
+            <span className="text-[11px] font-bold text-[#84948A] dark:text-[#849A8B] uppercase tracking-wider block mb-3 text-center">
+              Quick Test Accounts (Password: DemoPass123!)
+            </span>
+            <div className="grid grid-cols-2 gap-2 text-xs">
+              <button
+                type="button"
+                onClick={() => setDemoCredentials('tanveer0566.becse24@chitkara.edu.in')}
+                className="p-2.5 border border-[#DFE9E1] dark:border-[#2D4234] rounded-xl hover:border-[#15966A] dark:hover:border-[#35B982] text-left transition bg-[#F7FAF8] dark:bg-[#101A15] cursor-pointer"
+              >
+                <div className="font-bold text-[#172B21] dark:text-[#E8F3EB] truncate">Tanveer Singh</div>
+                <div className="text-[10px] text-[#52665A] dark:text-[#849A8B] truncate">Chitkara University</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setDemoCredentials('aarav@teamproof.edu')}
+                className="p-2.5 border border-[#DFE9E1] dark:border-[#2D4234] rounded-xl hover:border-[#15966A] dark:hover:border-[#35B982] text-left transition bg-[#F7FAF8] dark:bg-[#101A15] cursor-pointer"
+              >
+                <div className="font-bold text-[#172B21] dark:text-[#E8F3EB] truncate">Aarav Mehta</div>
+                <div className="text-[10px] text-[#52665A] dark:text-[#849A8B] truncate">Student Lead • Team Atlas</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setDemoCredentials('nisha@teamproof.edu')}
+                className="p-2.5 border border-[#DFE9E1] dark:border-[#2D4234] rounded-xl hover:border-[#15966A] dark:hover:border-[#35B982] text-left transition bg-[#F7FAF8] dark:bg-[#101A15] cursor-pointer"
+              >
+                <div className="font-bold text-[#172B21] dark:text-[#E8F3EB] truncate">Nisha Rao</div>
+                <div className="text-[10px] text-[#52665A] dark:text-[#849A8B] truncate">Student Contributor</div>
+              </button>
+              <button
+                type="button"
+                onClick={() => setDemoCredentials('faculty@teamproof.edu')}
+                className="p-2.5 border border-[#DFE9E1] dark:border-[#2D4234] rounded-xl hover:border-[#15966A] dark:hover:border-[#35B982] text-left transition bg-[#F7FAF8] dark:bg-[#101A15] cursor-pointer"
+              >
+                <div className="font-bold text-[#172B21] dark:text-[#E8F3EB] truncate">Dr. Neelam Kumari</div>
+                <div className="text-[10px] text-[#15966A] dark:text-[#35B982] font-semibold truncate">Faculty Reviewer</div>
+              </button>
+            </div>
+          </div>
+
+          <div className="mt-6 text-center text-sm text-[#52665A] dark:text-[#849A8B]">
             Don't have an account yet?{' '}
             <NavLink to="/register" className="font-bold text-[#15966A] dark:text-[#35B982] hover:underline ml-1">
               Create student account
