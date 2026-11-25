@@ -29,6 +29,7 @@ yarn-error.log*
 # Uploads & Temp
 apps/api/uploads/*
 !apps/api/uploads/.gitkeep
+backups/
 /tmp/
 
 # OS files
